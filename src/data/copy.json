@@ -1,0 +1,61 @@
+{
+    "title": "Youtube Politics",
+    "standfirst": [
+        {
+            "type": "text",
+            "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?"
+        }
+    ],
+    "section-one": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus [1] architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam [2] delectus debitis ab corrupti hic praesentium?"
+            },
+            {
+                "type": "text",
+                "value": "Iusto minus quae temporibus deleniti vel exercitationem, repellat recusandae quam totam laboriosam!"
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ]
+    },
+    "section-two": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+            },
+            {
+                "type": "text",
+                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+            },
+            {
+                "type": "text",
+                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
+            },
+            {
+                "type": "text",
+                "value": "Democracy, 2015"
+            }
+        ]
+    }
+}

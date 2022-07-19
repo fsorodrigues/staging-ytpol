@@ -1,0 +1,26 @@
+// colors
+$black: #2b2b2b;
+$light-grey: #d3d3d3;
+$white: #fff;
+$css-lab-dark-blue: #011f5b;
+$css-lab-dark-blue-transparent: rgba(5,40,137,0.8);
+$css-lab-dark-red: #990000;
+
+// layout
+$column-width: 960px;
+
+@mixin fs-sm {
+    font-size: 12px;
+    line-height: 1.45;
+}
+@mixin fs-base {
+    font-size: 14px;
+    line-height: 1.6;
+}
+@mixin fs-md {
+    font-size: 18px;
+    line-height: 1.6;
+}
+@mixin fs-lg {
+    font-size: 20px;
+}

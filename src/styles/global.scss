@@ -1,0 +1,19 @@
+@import './variables.scss'; 
+
+// // GRID
+// @function gridder(rows, cols) {
+    
+// }
+
+@mixin grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 5px;
+    grid-template-rows: auto auto repeat(5, 1fr);
+    row-gap: 5px;
+}
+
+@mixin centerH {
+    margin-left: auto;
+    margin-right: auto;
+}
