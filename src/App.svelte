@@ -18,14 +18,14 @@
 </script>
 
 <Header />
-<!-- <Main title={ title } authors={ authors } />
+<Main title={ title } authors={ authors } />
 <Section1 once={ true } />
 <Section2 once={ true } />
 <Section3 once={ true } />
 <Section4 once={ true } />
 <Section5 once={ true } />
 <Section6 once={ true } />
-<Supplementary once={ true } /> -->
+<Supplementary once={ true } />
 <Footer />
 
 <style lang='scss' global>
