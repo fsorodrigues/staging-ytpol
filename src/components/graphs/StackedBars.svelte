@@ -21,8 +21,8 @@
 	import { formatPct } from '../../utils/format-numbers';
 
 	// // props declaration
-    export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
 	export let data : any[];
+	export let url : string;
 	export let yKey : string;
 	export let xKey : number[];
 	export let zKey : string;
@@ -31,17 +31,11 @@
 	export let keyLabelMap : Map<string,string> = labelMap
 	export let clusterColorMap : Map<string,string> = colorMap
 	export let keyColorMap : Map<string,string> = colorMap
-	// export let activeChart : string;
-	// export let groupedData : [];
-	// export let xKey : string;
-	// export let zKey : string;
-	// export let yDomain : number[] = [0, null];
-	// export let formatTickX : Function = timeFormat('%b %Y');
-	// export let formatTickY : Function = (d : number) => d.toFixed(0);
+	export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
+    export let includeCaption : boolean = true;
+	export let spanCol : number = 12;
 
 	// // variable declaration
-	// let seriesNames = Array.from(colorMap).map(d => d[0])
-	// let seriesColors = Array.from(colorMap).map(d => d[1])
 	const columns = data.columns.filter(d => d !== yKey);
 	const stacker = stack()
 		.keys(columns)
@@ -55,10 +49,13 @@
 	let hideTooltip : boolean|CustomEvent<any> = true;
 </script>
 
-<div class='chart-wrapper'>
+<div 
+	class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
+	style={`--spanCol: ${spanCol}`}
+>
 	<div class="chart stacked-bar-chart">
 		<LayerCake
-			padding={{ top: 0, right: 0, bottom: 10, left: 45 }}
+			padding={{ top: 0, right: 0, bottom: 15, left: 45 }}
 			flatData={ flatten(stackedData) }
 			data={ stackedData }
 			x={ xKey }
@@ -116,20 +113,31 @@
 			</Html>
 		</LayerCake>
 	</div>
-	<!-- <div class="caption">{ caption }</div> -->
+	{#if includeCaption}
+        <div class="caption">{ caption } <a class="download-button" href={url} download>Download data</a></div>
+    {/if}
 </div>
 
 <style lang='scss'>
 	.chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;
+		row-gap: 10px;
         column-gap: 10px;
         grid-row: 4 / span 1;
-        grid-column: span 6;
+        grid-column: span var(--spanCol);
     }
 
 	.cluster-label {
         color: var(--color);
         font-weight: 700;
 	}
+
+	.split-cols {
+        grid-template-columns: 10fr 2fr;
+    }
+
+    .single-cols {
+        grid-template-columns: 1fr;
+    }
 </style>

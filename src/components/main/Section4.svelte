@@ -2,19 +2,18 @@
     // node_modules
     import { onMount } from "svelte";
     import { csv } from "d3-fetch";
-    import { group } from 'd3-array';
     import { autoType } from "d3-dsv";
     import { flatten } from "layercake";
 
     // import types
     import type Node from '../../types/Node'
     import type Link from '../../types/Link'
-
+    
     // actions
     import inView from "../../actions/inView";
 
     // components
-    import RangePlot from "../graphs/RangePlot.svelte";
+    import StackedBars from "../graphs/StackedBars.svelte";
     import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
 
     // local data
@@ -22,58 +21,52 @@
 
     // utils
     import enforceOrder from "../../utils/order";
+    import { formatPct } from '../../utils/format-numbers';
 
     // props
     let loaded : boolean = false;
     export let once : boolean;
 
     // variable declaration
-    let data_fig5 : any[]
-    let groupedData_fig5 : any[]
-    let xKey : string = 'mean'
+    let url_fig1 : string = 'assets/data/fig1_ledwich.csv'
+    let data_fig1 : any[]
+    let xKey : number[] = [0,1]
     let yKey : string = 'cluster'
-    let zKey : string = 'cluster'
-    let data_fig6 : any[]
+    let zKey : string = 'key'
+    let url_fig4 : string = 'assets/data/fig4.csv'
+    let data_fig4 : any[]
     let nodes : Node[]
     let links : Link[]
-    let cols : string[]
-    
-    const sankeyTooltipFormatter = d => {
-        if (d === 1) return 'Just as likely as average user'
-        if (d > 1) return `${d} times more likely to consume compared to average user`
-        return `${d} times less likely to consume than average user`
-    }
+    let cols : string[];
 
     onMount(async () => {
-        const res_fig5 = await csv('assets/data/fig5.csv', autoType)
-        data_fig5 = res_fig5
-        groupedData_fig5 = group(data_fig5, d => d[yKey])
-
-        const res_fig6 = await csv('assets/data/fig6.csv', autoType)
-        data_fig6 = res_fig6
-        cols = enforceOrder(data_fig6.columns, ['fR', 'R', 'C', 'L', 'fL'])
+        const res_fig4 = await csv(url_fig4, autoType)
+        data_fig4 = enforceOrder(res_fig4, ['fR', 'R', 'AW', 'C', 'L', 'fL'], 'from')
+        cols = enforceOrder(res_fig4.columns, ['fR', 'R', 'AW', 'C', 'L', 'fL'])
 
         nodes = [ 
-            ...data_fig6.map(d => ({ id: `source_${d.from}` })), 
+            ...data_fig4.map(d => ({ id: `source_${d.from}` })), 
             ...cols.map(d => ({ id: `target_${d}` }))
         ]
 
         links = flatten(
-            data_fig6.map((d, i) => 
+            data_fig4.map((d, i) => 
                 cols.map((e, l) => ({ sourceName: d.from, targetName: e, source: i, target: l + 6, value: d[e] }))
             )
         )
-        
 	})
 </script>
 
 <div class="section section-4" use:inView={{ once }} on:enter={() => loaded = true }>
-    {#if loaded && data_fig5}
-        <RangePlot data={ data_fig5 } groupedData={ groupedData_fig5 } { yKey } { xKey } { zKey } formatter={(d) => d.toFixed(2)}/>
-        {:else} <div class='chart-placeholder'></div>
-    {/if}
-    {#if loaded && data_fig6}
-        <SankeyDiagram { nodes } { links } formatter={sankeyTooltipFormatter}/>
+    <h2 class="section-title">Subtitle 2</h2>
+    {#if loaded && data_fig4}
+        <SankeyDiagram 
+            { nodes } 
+            { links } 
+            url={ url_fig4 }
+            sourceLabel={ 'Month' }
+            targetLabel={ 'Month + 1' }
+        />
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
@@ -95,7 +88,7 @@
 <style lang='scss'>
     .section-4 {
         grid-template-columns: repeat(12, 1fr);
-        column-gap: 5px;
+        column-gap: 50px;
         grid-template-rows: auto auto auto 1fr auto;
     }
 
@@ -103,7 +96,6 @@
         height: 500px;
         background-color: lightgrey;
     }
-
 
     .section-title {
         border-bottom: 1pt solid black;

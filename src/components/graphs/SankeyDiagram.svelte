@@ -8,6 +8,7 @@
     // import components
     import Sankey from './atoms/Sankey.svelte';
     import Tooltip from './tooltips/Tooltip.svelte'
+    import SankeyLabels from './atoms/SankeyLabels.svelte'
 
     // import utils
     import colorMap from '../../utils/colors';
@@ -17,7 +18,13 @@
     // props declaration
     export let nodes : Node[]
     export let links : Link[]
+    export let url : string;
     export let formatter : Function = formatPct(0)
+    export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
+    export let includeCaption : boolean = true;
+    export let spanCol : number = 12;
+    export let sourceLabel : string = 'Source';
+    export let targetLabel : string = 'Target';
 
     // variable declaration
 	let evt;
@@ -25,10 +32,18 @@
     
 </script>
 
-<div class='chart-wrapper'>
+<div 
+    class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
+    style={`--spanCol: ${spanCol}`}
+>
     <div class="chart sankey-diagram">
         <LayerCake
             data={{ nodes, links }}
+            padding={{
+                top: 30,
+                bottom: 30
+            }}
+            position={'relative'}
         >
             <Svg>
                 <defs>
@@ -48,6 +63,7 @@
             <Html
                 pointerEvents={false}
             >
+                <SankeyLabels source={ sourceLabel } target={ targetLabel } />
                 {#if hideTooltip !== true}
                     <Tooltip
                         {evt}
@@ -77,20 +93,33 @@
                 {/if}
             </Html>
         </LayerCake>
-  </div>
+    </div>
+    {#if includeCaption}
+        <div class="caption">{ caption } <a class="download-button" href={url} download>Download data</a></div>
+    {/if}
 </div>
 
 <style lang='scss'>
     .chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;
+        row-gap: 10px;
         column-gap: 10px;
         grid-row: 4 / span 1;
         grid-column: span 6;
+        grid-column: span var(--spanCol);
     }
 
     .cluster-label {
         color: var(--color);
         font-weight: 700;
+    }
+
+    .split-cols {
+        grid-template-columns: 10fr 2fr;
+    }
+
+    .single-cols {
+        grid-template-columns: 1fr;
     }
 </style>

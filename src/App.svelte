@@ -10,6 +10,7 @@
 	import Section3 from './components/main/Section3.svelte';
 	import Section4 from './components/main/Section4.svelte';
 	import Section5 from './components/main/Section5.svelte';
+	import Section6 from './components/main/Section6.svelte';
 	import Supplementary from './components/main/Supplementary.svelte';
 
 	export let title : string = 'Your title goes here';
@@ -17,13 +18,14 @@
 </script>
 
 <Header />
-<Main title={ title } authors={ authors } />
+<!-- <Main title={ title } authors={ authors } />
 <Section1 once={ true } />
 <Section2 once={ true } />
 <Section3 once={ true } />
 <Section4 once={ true } />
 <Section5 once={ true } />
-<Supplementary once={ true } />
+<Section6 once={ true } />
+<Supplementary once={ true } /> -->
 <Footer />
 
 <style lang='scss' global>

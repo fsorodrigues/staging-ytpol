@@ -22,9 +22,11 @@
 
 	// // props declaration
     export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
+    export let includeCaption : boolean = true;
 	// export let activeChart : string;
 	export let data : any[];
 	export let groupedData : any[];
+    export let url : string;
 	export let xKey : string;
 	export let yKey : string;
 	export let zKey : string;
@@ -43,7 +45,7 @@
 <div class='chart-wrapper'>
     <div class="chart range-plot">
         <LayerCake
-            padding={{ top: 20, right: 10, bottom: 20, left: 45 }}
+            padding={{ top: 0, right: 10, bottom: 20, left: 45 }}
             flatData = { data }
             data = { Array.from(groupedData) }
             x={ xKey }
@@ -77,6 +79,7 @@
                     <Tooltip
                         {evt}
                         let:detail
+                        offset={-15}
                     >
                         {@const tooltipData = { ...detail.props }}
                         <div>
@@ -97,13 +100,16 @@
             </Html>
         </LayerCake>
     </div>
-    <!-- <div class="caption">{ caption }</div> -->
+    {#if includeCaption}
+        <div class="caption">{ caption } <a class="download-button" href={url} download>Download data</a></div>
+    {/if}
 </div>
 
 <style lang='scss'>
 	.chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;
+        row-gap: 10px;
         column-gap: 10px;
         grid-row: 4 / span 1;
         grid-column: span 6;

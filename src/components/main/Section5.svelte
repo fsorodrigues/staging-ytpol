@@ -14,70 +14,83 @@
     import inView from "../../actions/inView";
 
     // components
-    import StackedBars from "../graphs/StackedBars.svelte";
-    import ChartWrapper from "../graphs/ChartWrapper.svelte";
-
-    // utils
-    import { youTubeMap as labelMap } from "../../utils/labels";
-    import { youTubeMap as colorMap } from "../../utils/colors";
-    import { formatPct } from '../../utils/format-numbers';
+    import RangePlot from "../graphs/RangePlot.svelte";
+    import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
 
     // local data
     import copy from '../../data/copy';
+
+    // utils
+    import enforceOrder from "../../utils/order";
 
     // props
     let loaded : boolean = false;
     export let once : boolean;
 
     // variable declaration
-    let data_table2 : any[]
-    let xKey : number[] = [0,1]
+    const url_fig5 = 'assets/data/fig5.csv'
+    const url_fig6 = 'assets/data/fig6.csv'
+    let data_fig5 : any[]
+    let groupedData_fig5 : any[]
+    let xKey : string = 'mean'
     let yKey : string = 'cluster'
-    let zKey : string = 'key'
+    let zKey : string = 'cluster'
+    let data_fig6 : any[]
+    let nodes : Node[]
+    let links : Link[]
+    let cols : string[]
+    
+    const sankeyTooltipFormatter = d => {
+        if (d === 1) return 'Just as likely as average user'
+        if (d > 1) return `${d} times more likely to consume compared to average user`
+        return `${d} times less likely to consume than average user`
+    }
 
     onMount(async () => {
-        const res = await csv('assets/data/table2.csv', autoType)
-        data_table2 = res
-	})
+        const res_fig5 = await csv(url_fig5, autoType)
+        data_fig5 = res_fig5
+        groupedData_fig5 = group(data_fig5, d => d[yKey])
 
+        const res_fig6 = await csv(url_fig6, autoType)
+        data_fig6 = res_fig6
+        cols = enforceOrder(data_fig6.columns, ['fR', 'R', 'C', 'L', 'fL'])
+
+        nodes = [ 
+            ...data_fig6.map(d => ({ id: `source_${d.from}` })), 
+            ...cols.map(d => ({ id: `target_${d}` }))
+        ]
+
+        links = flatten(
+            data_fig6.map((d, i) => 
+                cols.map((e, l) => ({ sourceName: d.from, targetName: e, source: i, target: l + 6, value: d[e] }))
+            )
+        )
+        
+	})
 </script>
 
 <div class="section section-5" use:inView={{ once }} on:enter={() => loaded = true }>
-    {#if loaded}
-        <ChartWrapper config={[{
-                    url: 'assets/data/fig7a.csv',
-                    description: 'Fraction of videos by session length',
-                    type: 'line',
-                    xKey: 'index',
-                    yKey: 'fraction',
-                    zKey: 'cluster',
-                    formatTickX: (d) => d,
-                    formatTickY: (d) => d.toFixed(2)
-                },
-                {
-                    url: 'assets/data/fig7b.csv',
-                    description: 'Frequency by session length',
-                    type: 'line',
-                    xKey: 'length',
-                    yKey: 'mean',
-                    zKey: 'cluster',
-                    formatTickX: (d) => d,
-                    formatTickY: (d) => d.toFixed(2)
-                }
-            ]} 
-            spanCol={6}
-        />
-    {:else} <div class='chart-placeholder'></div>
-    {/if}
-    {#if loaded && data_table2}
-        <StackedBars 
-            data={ data_table2 } 
+    {#if loaded && data_fig5}
+        <RangePlot 
+            data={ data_fig5 }
+            groupedData={ groupedData_fig5 } 
             { yKey } 
             { xKey } 
             { zKey } 
-            formatter={formatPct(2)}
-            keyColorMap={ colorMap }
-            keyLabelMap={ labelMap }
+            formatter={(d) => d.toFixed(2)}
+            url={ url_fig5 }
+        />
+        {:else} <div class='chart-placeholder'></div>
+    {/if}
+    {#if loaded && data_fig6}
+        <SankeyDiagram 
+            { nodes } 
+            { links } 
+            formatter={sankeyTooltipFormatter}
+            url={ url_fig6 }
+            spanCol={6}
+            sourceLabel={ 'YouTube' }
+            targetLabel={ 'News media' }
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -126,4 +139,3 @@
         grid-column: span 4;
     }
 </style>
-
