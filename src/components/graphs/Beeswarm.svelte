@@ -32,7 +32,7 @@
 	export let zRange : any[] = zDomain.map(d => colorMap.get(d));
 	// r scale
 	export let rKey : string = 'subscribers';
-	export let rRange : number[] = [2, 25];
+	export let rRange : number[] = [5, 28];
 
 	// variable declaration
 	let evt;
@@ -60,6 +60,7 @@
         xStrength={0.1}
         yStrength={0.05}
 		collideStrength={1}
+		{ currentStep }
 		on:mousemove={event => evt = hideTooltip = event}
 		on:mouseout={() => hideTooltip = true}
       />
@@ -77,7 +78,7 @@
 				let:detail
 			>
 				{@const tooltipData = { ...detail.props }}
-				<div>{tooltipData.channel}</div>
+				<div>{tooltipData.channel_name}</div>
 				<div>{tooltipData.cluster}</div>
 				{#each ['total_videos', 'subscribers'] as key}
 					{@const keyCapitalized = key.replace(/^\w/, d => d.toUpperCase())}

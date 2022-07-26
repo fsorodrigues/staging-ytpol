@@ -20,6 +20,7 @@
     export let yStrength = 0.075;
 
     export let collideStrength = 0.075;
+    export let currentStep;
 
     // /** @type {Function} [getTitle] — An accessor function to get the field on the data element to display as a hover label using a `<title>` tag. */
     // export let getTitle = undefined;
@@ -40,34 +41,50 @@
   
     $: {
       simulation = simulation
-      .force('collide', forceCollide(d => $rGet(d)+0.5).strength(collideStrength).iterations(3))
+      .force('collide', forceCollide(d => $rGet(d)+0.5).strength(collideStrength).iterations(2))
       .force('x', forceX().x(d => $xGet(d)).strength(xStrength))
       .force('y', forceY().y($height / 2).strength(yStrength))
       .force('charge', forceManyBody().strength(-1))
       .alpha(1)
 			.restart();
     }
-  </script>
+
+    function handleMouseOver(e, d) {
+      if (currentStep === 3) {
+        const { target } = e
+        dispatch('mousemove', { e, props: d })
+
+        target.classList.add('active-node')
+      }
+    }
+
+    function handleMouseOut(e) {
+      if (currentStep === 3) {
+        const { target } = e
+        dispatch('mouseout')
+
+        target.classList.remove('active-node')
+      }
+    }
+</script>
   
-  <g 
-    class='bee-group'
-    on:mouseout={() => dispatch('mouseout')}
-    on:blur={() => dispatch('mouseout')}
-  >
-    {#each nodes as node}
-      <circle
-        fill={$zGet(node)}
-        stroke={stroke}
-        stroke-width={strokeWidth}
-        cx={node.x}
-        cy={node.y}
-        r={$rGet(node)}
-        on:mouseover={(e) => dispatch('mousemove', { e, props: node })}
-        on:focus={(e) => dispatch('mousemove', { e, props: node })}
-      >
-        <!-- {#if getTitle}
-          <title>{getTitle(node)}</title>
-        {/if} -->
-      </circle>
-    {/each}
-  </g>
+<g 
+  class='bee-group'
+  on:mouseout={(e) => handleMouseOut(e)}
+  on:blur={(e) => handleMouseOut(e)}
+>
+  {#each nodes as node}
+    <circle
+      class='node'
+      fill={$zGet(node)}
+      stroke={stroke}
+      stroke-width={strokeWidth}
+      cx={node.x}
+      cy={node.y}
+      r={$rGet(node)}
+      on:mouseover={(e) => handleMouseOver(e, node)}
+      on:focus={(e) => handleMouseOver(e, node)}
+    >
+    </circle>
+  {/each}
+</g>

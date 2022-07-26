@@ -9,6 +9,7 @@
     import Sankey from './atoms/Sankey.svelte';
     import Tooltip from './tooltips/Tooltip.svelte'
     import SankeyLabels from './atoms/SankeyLabels.svelte'
+    import Caption from './atoms/Caption.svelte';
 
     // import utils
     import colorMap from '../../utils/colors';
@@ -95,7 +96,7 @@
         </LayerCake>
     </div>
     {#if includeCaption}
-        <div class="caption">{ caption } <a class="download-button" href={url} download>Download data</a></div>
+        <Caption { caption } { url} type={spanCol === 12 ? 'split-cols' : 'single-cols'}/>
     {/if}
 </div>
 

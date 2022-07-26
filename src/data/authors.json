@@ -1,8 +1,43 @@
 [
-    { "name": "Homa Hosseinmardia", "detail": "Affiliation detail goes here" },
-    { "name": "Amir Ghasemianb", "detail": "Affiliation detail goes here" },
-    { "name": "Aaron Clauset", "detail": "Affiliation detail goes here" },
-    { "name": "Markus Mobius", "detail": "Affiliation detail goes here" },
-    { "name": "David M. Rothschildh", "detail": "Affiliation detail goes here" },
-    { "name": "Duncan J. Watts", "detail": "Affiliation detail goes here" }
+    {
+        "name": "Homa Hosseinmardia",
+        "detail": [
+            "Department of Computer and Information Science, University of Pennsylvania, Philadelphia, PA 19104"
+        ]
+    },
+    {
+        "name": "Amir Ghasemian",
+        "detail": [
+            "Department of Statistics, Harvard University, Cambridge, MA 02138",
+            "Department of Statistical Science, Fox School of Business, Temple University, Philadelphia, PA 19122"
+        ]
+    },
+    {
+        "name": "Aaron Clauset",
+        "detail": [
+            "Department of Computer Science, University of Colorado Boulder, Boulder, CO 80309",
+            "BioFrontiers Institute, University of Colorado Boulder, Boulder, CO 80303",
+            "Santa Fe Institute, Santa Fe, NM 87501"
+        ]
+    },
+    {
+        "name": "Markus Mobius",
+        "detail": [
+            "Microsoft Research New England, Cambridge, MA 02142"
+        ]
+    },
+    {
+        "name": "David M. Rothschildh",
+        "detail": [
+            "Microsoft Research New York, New York, NY 10012"
+        ]
+    },
+    {
+        "name": "Duncan J. Watts",
+        "detail": [
+            "Department of Computer and Information Science, University of Pennsylvania, Philadelphia, PA 19104",
+            "The Annenberg School of Communication, University of Pennsylvania, Philadelphia, PA 19104",
+            "Operations, Information, and Decisions Department, University of Pennsylvania, Philadelphia, PA 19104"
+        ]
+    }
 ]

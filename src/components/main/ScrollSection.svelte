@@ -39,9 +39,10 @@
     const spectrum = comparator('cluster', leftRightScale);
 
     onMount(async () => {
-		const res = await csv('assets/data/channels.csv', autoType);
+		const res = await csv('assets/data/channels_top250.csv', autoType);
 		channelData = res
         channelData.sort(spectrum)
+        channelData = channelData.map((d, i) => ({...d, channel: i}))
 	})
 
     $: if (currentStep == 0) {

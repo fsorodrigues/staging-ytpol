@@ -14,6 +14,7 @@
 	import AxisY from './atoms/AxisY.svelte';
     import Range from './atoms/Range.svelte';
     import Tooltip from './tooltips/Tooltip.svelte';
+    import Caption from './atoms/Caption.svelte';
 
 	// import utils
 	import colorMap from '../../utils/colors';
@@ -101,7 +102,7 @@
         </LayerCake>
     </div>
     {#if includeCaption}
-        <div class="caption">{ caption } <a class="download-button" href={url} download>Download data</a></div>
+        <Caption { caption } { url} type={'single-cols'}/>
     {/if}
 </div>
 

@@ -7,11 +7,11 @@
 	import type Row from '../../types/TimeSeriesRow';
 
 	// components & molecules & atoms
-	// import Line from './atoms/Line.svelte';
 	import Multiline from './atoms/Multiline.svelte';
 	import AxisX from './atoms/AxisX.svelte';
 	import AxisY from './atoms/AxisY.svelte';
 	import SharedTooltip from './tooltips/SharedTooltip.svelte';
+	import Caption from './atoms/Caption.svelte';
 
 	// import utils
 	import colorMap from '../../utils/colors';
@@ -21,6 +21,7 @@
     export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
 	export let activeChart : string;
 	export let data : Row[];
+	export let url : string;
 	export let groupedData : [];
 	export let xKey : string;
 	export let yKey : string;
@@ -29,6 +30,7 @@
 	export let formatTickX : Function;
 	export let formatTickY : Function = (d : number) => d.toFixed(0);
 	export let includeCaption : boolean = true;
+	export let spanCol : number
 
 	// variable declaration
 	let seriesNames = Array.from(colorMap).map(d => d[0])
@@ -77,5 +79,5 @@
 	</LayerCake>
 </div>
 {#if includeCaption}
-	<div class="caption">{ caption }</div>
+	<Caption { caption } { url } type={spanCol === 12 ? 'split-cols' : 'single-cols'} />
 {/if}

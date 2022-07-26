@@ -43,7 +43,6 @@
         })
 	})
 
-
     $: activeData = data ? data[activeChart] : []
     $: activeFig = Array.isArray(config) ? config.filter((x) => x.url === activeChart)[0] : config
     $: groupedData = activeData ? groups(activeData, d => d[activeFig.zKey]) : []
@@ -71,8 +70,9 @@
         class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
         style={`--spanCol: ${spanCol}`}
     >
-        <LineChart 
+        <LineChart
             data={ activeData }
+            url={activeChart}
             { groupedData }
             xKey={ activeFig.xKey }
             yKey={ activeFig.yKey }
@@ -80,7 +80,8 @@
             activeChart={ activeChart }
             includeCaption={ activeFig.includeCaption }
             formatTickX={ activeFig.formatTickX }
-            formatTickY= { activeFig.formatTickY }
+            formatTickY={ activeFig.formatTickY }
+            { spanCol }
         />
     </div>
 {/if}

@@ -3,13 +3,32 @@
 	import type Author from '../../types/Authors';
 
 	export let authors : Author[];
+
+	function handleMouseOver(e) {
+		e.target.classList.add('active')
+	}
+	function handleMouseOut(e) {
+		e.target.classList.remove('active')
+	}
 </script>
 
 <div class='authors'>
 	{#each authors as author, i}
-		<div class='author-container'>
-			<p>{author.name}</p>
-			<div></div>
+		<div 
+			class='author-container'
+			on:mouseover={handleMouseOver}
+			on:focus={handleMouseOver}
+			on:mouseout={handleMouseOut}
+			on:blur={handleMouseOut}
+		>
+			<p class='author-name'>{author.name}</p>
+			<div class='detail'>
+				<div class='detail-list'>
+					{#each author.detail as aff}
+						<p class='detail-list-value'>{aff}</p>
+					{/each}
+				</div>
+			</div>
 		</div>
 	{/each}
 </div>
@@ -20,21 +39,48 @@
 		grid-row: 1 / span 1;
 		display: flex;
 		flex-wrap: wrap;
+		gap: 5px;
 
 		.author-container {
 			display: inline-flex;
 			align-items: baseline;
 			margin: 0 0 5px 0;
+			position: relative;
 
-			p {
+			.author-name {
 				font-weight: 300;
 				display: inline;
+				pointer-events: none;
 			}
 
-			div {
-				width: 8px;
-				height: 8px;
-				border: 1pt solid $black;
+			.detail {
+
+				.detail-list {
+					@include fs-sm;
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					z-index: 100;
+					width: 250px;
+					padding: 5px;
+					background-color: $white;
+				}
+			}
+			
+			.detail:before {
+				content: "\25BE";
+				@include fs-lg;
+				line-height: 0.5;
+			}
+		}
+
+		
+		.author-container.active {
+			.detail {
+				.detail-list {
+					display: block;
+				}
 			}
 		}
 	}

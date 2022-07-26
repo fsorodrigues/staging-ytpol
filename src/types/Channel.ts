@@ -1,5 +1,6 @@
 export default interface Channel {
-    channel: string;
+    channel?: number;
+    channel_name: string;
     cluster: string;
     total_videos: number;
     subscribers: number;

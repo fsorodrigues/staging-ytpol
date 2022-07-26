@@ -79,4 +79,9 @@
 	.range-circle.active {
         opacity: 1 !important;
     }
+
+	.active-node {
+		stroke: black;
+		stroke-width: 2pt; 
+	}
 </style>
