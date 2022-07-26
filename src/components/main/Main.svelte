@@ -39,7 +39,7 @@
 	<Title title={ title }></Title>
 	<Description text={ text }></Description>
 	<Authors authors={ authors }></Authors>
-	<!-- <ScrollSection /> -->
+	<ScrollSection />
 </main>
 
 
@@ -56,9 +56,8 @@
 	main {
 		@include grid;
 		@include centerH;
-		// align-items: baseline;
+		align-items: center;
 		max-width: $column-width;
-		// height: 500px;
 		margin: 120px auto 0 auto;
 	}
 </style>

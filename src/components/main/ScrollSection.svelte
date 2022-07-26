@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
     import { csv } from 'd3-fetch'
     import { autoType } from 'd3-dsv'
-    import { scaleLinear, scaleOrdinal, scaleBand, scaleThreshold } from 'd3-scale';
+    import { scaleLinear, scaleOrdinal, scaleBand, scaleLog } from 'd3-scale';
     
     // types
     import type Channel from '../../types/Channel';
@@ -49,7 +49,7 @@
         // console.log('step 0');
     } else if (currentStep == 1) {
         xKey = 'subscribers'
-        xScale = scaleLinear()
+        xScale = scaleLog()
         xDomain = [null, null]
     } else if (currentStep == 2) {
         xKey = 'cluster'

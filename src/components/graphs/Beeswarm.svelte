@@ -3,7 +3,6 @@
 	import { group } from 'd3-array'
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleLinear, scaleOrdinal } from 'd3-scale';
-	// import { line } from 'd3-shape'
 
 	// types
 	import type Channel from '../../types/Channel';

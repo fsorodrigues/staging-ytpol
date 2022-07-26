@@ -65,6 +65,10 @@
 					width: 250px;
 					padding: 5px;
 					background-color: $white;
+
+					.detail-list-value {
+						margin-bottom: 2.5px
+					}
 				}
 			}
 			
