@@ -1,7 +1,9 @@
 import { format } from 'd3-format'
 
 const formatPct = (n) => {
-    return format(`.${n}%`)
+    return format(`.${n}~%`)
 }
 
-export { formatPct }
+const formatThousands = format(',.0s')
+
+export { formatPct, formatThousands }

@@ -27,6 +27,7 @@
                     yKey: 'median_duration',
                     zKey: 'label',
                     includeCaption: true,
+                    caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
                     formatTickX: timeFormat('%b %Y'),
                     formatTickY: (d) => d.toFixed(0)
                 },
@@ -38,10 +39,13 @@
                     yKey: 'median_user_watchtime',
                     zKey: 'label',
                     includeCaption: true,
+                    caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
                     formatTickX: timeFormat('%b %Y'),
                     formatTickY: (d) => d.toFixed(0)
                 }
-            ]} />
+            ]} 
+            
+            />
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
@@ -52,9 +56,9 @@
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-one']['references'] as d, i}
+        {#each copy['section-one']['references'] as d}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+                {d.value}
             </p>
         {/each}
     </div>

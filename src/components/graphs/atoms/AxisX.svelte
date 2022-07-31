@@ -70,7 +70,7 @@
   {/if}
 </g>
 
-<style>
+<style lang="scss">
   .tick {
     font-size: .725em;
     font-weight: 200;
@@ -83,7 +83,7 @@
   }
 
   .tick text {
-    fill: #666;
+    fill: $dark-grey;
   }
 
   .tick .tick-mark,

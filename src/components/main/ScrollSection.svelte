@@ -24,8 +24,8 @@
     let currentStep : number;
     const steps : string[] = [
         "<p>Here are the top 200 YouTube channels we monitor.</p>",
-        "<p>Some are bigger than others. The number of subscribers ranges from X to Z</p>",
-        "<p>The far right has more channels than the other groups.</p>",
+        "<p>Organized by their size.</p>",
+        "<p>Clustered together</p>",
         "<p>Explore the data before we dive deeper into the politics of YouTube.</p>"
     ];
 
@@ -87,6 +87,14 @@
         .step {
             height: 1000px;
             pointer-events: none;
+
+            &-content {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: $white;
+                box-shadow: 1px 1px 10px $light-grey;
+            }
         }
     }
 </style>

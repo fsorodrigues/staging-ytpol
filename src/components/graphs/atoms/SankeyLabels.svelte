@@ -10,10 +10,10 @@
 
 </script>
 
-<div class='source' style="--padding-top: -{$padding.top}px">
+<div class='sankey-label source' style="--padding-top: -{$padding.top}px">
     { source }
 </div>
-<div class='target' style="--padding-bottom: -{$padding.bottom}px">
+<div class='sankey-label target' style="--padding-bottom: -{$padding.bottom}px">
     { target }
 </div>
 
@@ -29,5 +29,10 @@
 
     .target {
         bottom: var(--padding-bottom);
+    }
+
+    .sankey-label {
+        color: $dark-grey;
+        font-weight: 300 !important;
     }
 </style>

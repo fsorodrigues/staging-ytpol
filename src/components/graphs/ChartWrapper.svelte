@@ -79,6 +79,7 @@
             zKey={ activeFig.zKey }
             activeChart={ activeChart }
             includeCaption={ activeFig.includeCaption }
+            caption={ activeFig.caption }
             formatTickX={ activeFig.formatTickX }
             formatTickY={ activeFig.formatTickY }
             { spanCol }
@@ -92,6 +93,7 @@
         display: grid;
         grid-template-columns: 10fr 2fr;
         column-gap: 10px;
+        row-gap: 10px;
         grid-row: 4 / span 1;
         grid-column: span var(--spanCol);
     }

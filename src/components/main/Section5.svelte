@@ -42,8 +42,8 @@
     
     const sankeyTooltipFormatter = d => {
         if (d === 1) return 'Just as likely as average user'
-        if (d > 1) return `${d} times more likely to consume compared to average user`
-        return `${d} times less likely to consume than average user`
+        if (d > 1) return `More likely to consume than average user. Probability: ${d}`
+        return `Less likely to consume than average user. Probability: ${d}`
     }
 
     onMount(async () => {
@@ -79,6 +79,7 @@
             { zKey } 
             formatter={(d) => d.toFixed(2)}
             url={ url_fig5 }
+            caption={'Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption group in the event of watching 2 to 4 videos, or to a control group, if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources.'}
         />
         {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -91,6 +92,7 @@
             spanCol={6}
             sourceLabel={ 'YouTube' }
             targetLabel={ 'News media' }
+            caption={'Risk ratio of consumption of polical content on YouTube from news content of politcal categories on the web.'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -104,7 +106,7 @@
     <div class='references'>
         {#each copy['section-two']['references'] as d, i}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+                {d.value}
             </p>
         {/each}
     </div>

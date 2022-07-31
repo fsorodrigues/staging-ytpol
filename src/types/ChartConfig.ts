@@ -8,4 +8,5 @@ export default interface ChartConfig {
     formatTickX?: Function,
     formatTickY?: Function,
     includeCaption?: boolean,
+    caption?: string,
   }

@@ -32,9 +32,11 @@
 	export let keyLabelMap : Map<string,string> = labelMap
 	export let clusterColorMap : Map<string,string> = colorMap
 	export let keyColorMap : Map<string,string> = colorMap
-	export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
+	export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';;
     export let includeCaption : boolean = true;
 	export let spanCol : number = 12;
+	export let customClass : string = 'chart-large';
+	export let tooltipType : string = 'arrow';
 
 	// // variable declaration
 	const columns = data.columns.filter(d => d !== yKey);
@@ -54,14 +56,14 @@
 	class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
 	style={`--spanCol: ${spanCol}`}
 >
-	<div class="chart stacked-bar-chart">
+	<div class={`chart stacked-bar-chart ${customClass}`}>
 		<LayerCake
 			padding={{ top: 0, right: 0, bottom: 15, left: 45 }}
 			flatData={ flatten(stackedData) }
 			data={ stackedData }
 			x={ xKey }
 			y={ d => d.data[yKey] }
-			yScale={ scaleBand().paddingInner([0.25]).paddingOuter([0.01]).round(true) }
+			yScale={ scaleBand().paddingInner([0.35]).paddingOuter([0.01]).round(true) }
 			{ yDomain }
 			z={ zKey }
 			zScale={ scaleOrdinal() }
@@ -89,26 +91,50 @@
 						{evt}
 						offset={-10}
 						let:detail
-					>
-						{@const tooltipData = { ...detail.props }}
-						<div>
-							<span 
-								class='cluster-label' 
-								style="--color: {clusterColorMap.get(tooltipData.cluster)}"
-							>
-								{clusterLabelMap.get(tooltipData.cluster)}
-							</span> ➞
-							<span
-								class='cluster-label'
-								style="--color: {keyColorMap.get(tooltipData.key)}"
-							>
-								{keyLabelMap.get(tooltipData.key)}
-							</span>
-						</div>
-						{#each ['value'] as key}
-							{@const value = tooltipData[tooltipData.key]}
-							<div class="row">{formatter(value)}</div>
-						{/each}
+					>	
+						{#if tooltipType === 'arrow'}
+							{@const tooltipData = { ...detail.props }}
+							<div>
+								<span
+									class='cluster-label'
+									style="--color: {keyColorMap.get(tooltipData.key)}"
+								>
+									{keyLabelMap.get(tooltipData.key)}
+								</span> ➞
+								<span 
+									class='cluster-label' 
+									style="--color: {clusterColorMap.get(tooltipData.cluster)}"
+								>
+									{clusterLabelMap.get(tooltipData.cluster)}
+								</span>
+							</div>
+							{#each ['value'] as key}
+								{@const value = tooltipData[tooltipData.key]}
+								<div class="row">{formatter(value)}</div>
+							{/each}
+
+							{:else}
+								{@const tooltipData = { ...detail.props }}
+								<div>
+									<p>Community: <span 
+										class='cluster-label' 
+										style="--color: {clusterColorMap.get(tooltipData.cluster)}"
+									>
+										{clusterLabelMap.get(tooltipData.cluster)}
+									</span></p>
+									<p>Content: <span
+										class='cluster-label'
+										style="--color: {keyColorMap.get(tooltipData.key)}"
+									>
+										{keyLabelMap.get(tooltipData.key)}
+									</span></p>
+									
+								</div>
+								{#each ['value'] as key}
+									{@const value = tooltipData[tooltipData.key]}
+									<div class="row">Share: {formatter(value)}</div>
+								{/each}
+						{/if}
 					</Tooltip>
 				{/if}
 			</Html>
@@ -140,5 +166,6 @@
 
     .single-cols {
         grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
     }
 </style>

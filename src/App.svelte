@@ -39,6 +39,10 @@
 		height: 500px;
 	}
 
+	.chart-medium {
+		height: 400px;
+	}
+
 	.caption {
 		@include fs-sm;
 		font-weight: 300;

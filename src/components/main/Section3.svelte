@@ -28,16 +28,16 @@
     export let once : boolean;
 
     // variable declaration
-    let url_fig1 : string = 'assets/data/fig1_ledwich.csv'
+    let url_fig1 : string = 'assets/data/fig1_pnas_mean.csv'
     let data_fig1 : any[]
     let xKey : number[] = [0,1]
     let yKey : string = 'cluster'
     let zKey : string = 'key'
-    let url_fig4 : string = 'assets/data/fig4.csv'
-    let data_fig4 : any[]
-    let nodes : Node[]
-    let links : Link[]
-    let cols : string[];
+    // let url_fig4 : string = 'assets/data/fig4.csv'
+    // let data_fig4 : any[]
+    // let nodes : Node[]
+    // let links : Link[]
+    // let cols : string[];
 
     onMount(async () => {
         const res_fig1 = await csv(url_fig1, autoType)
@@ -56,6 +56,9 @@
             formatter={formatPct(2)}
             url={ url_fig1 }
             spanCol={12}
+            customClass={'chart-medium'}
+            tooltipType={'community'}
+            caption={'The archetypes of news consumption behavior on YouTube for each political category.'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -69,7 +72,7 @@
     <div class='references'>
         {#each copy['section-two']['references'] as d, i}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+               {d.value}
             </p>
         {/each}
     </div>

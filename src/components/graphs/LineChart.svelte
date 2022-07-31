@@ -18,7 +18,7 @@
 	import labelMap from '../../utils/labels';
 
 	// // props declaration
-    export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
+    export let caption: string;
 	export let activeChart : string;
 	export let data : Row[];
 	export let url : string;
@@ -58,7 +58,7 @@
 				gridlines={false}
 				ticks={3}
 				formatTick={formatTickX}
-				snapTicks={true}
+				snapTicks={false}
 				tickMarks={false}
 			/>
 			<AxisY

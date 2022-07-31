@@ -26,6 +26,8 @@
                 xKey: 'date',
                 yKey: 'user_percent',
                 zKey: 'label',
+                includeCaption: true,
+                caption: 'Percent of users falling into the six political categories.',
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => format('.1%')(d).replace(/[.,]0+/, "")
                 
@@ -37,10 +39,13 @@
                 xKey: 'date',
                 yKey: 'percentage_duration',
                 zKey: 'label',
+                includeCaption: true,
+                caption: 'Consumption share of the six political channel categories.',
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
             }
-        ]} />
+        ]}
+        />
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
@@ -51,9 +56,9 @@
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-two']['references'] as d, i}
+        {#each copy['section-two']['references'] as d}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+                {d.value}
             </p>
         {/each}
     </div>
@@ -70,7 +75,6 @@
         height: 500px;
         background-color: lightgrey;
     }
-
 
     .section-title {
         border-bottom: 1pt solid black;

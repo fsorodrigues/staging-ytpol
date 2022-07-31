@@ -53,7 +53,9 @@
                     yKey: 'fraction',
                     zKey: 'cluster',
                     formatTickX: (d) => d,
-                    formatTickY: (d) => d.toFixed(2)
+                    formatTickY: (d) => d.toFixed(2),
+                    includeCaption: true,
+                    caption: 'Mean fractions of videos as a function of normalized relative indices across session definitions for each political category, for sessions with length 20 or more videos.'
                 },
                 {
                     url: 'assets/data/fig7b.csv',
@@ -63,7 +65,9 @@
                     yKey: 'mean',
                     zKey: 'cluster',
                     formatTickX: (d) => d,
-                    formatTickY: (d) => d.toFixed(2)
+                    formatTickY: (d) => d.toFixed(2),
+                    includeCaption: true,
+                    caption: 'Average fraction of videos of a political category by numbers of videos in sessions. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped.'
                 }
             ]} 
             spanCol={6}
@@ -81,6 +85,7 @@
             keyLabelMap={ labelMap }
             url={ url_fig1 }
             spanCol={6}
+            caption={'Distribution of the entry points of videos within each political category'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -94,7 +99,7 @@
     <div class='references'>
         {#each copy['section-two']['references'] as d, i}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+                {d.value}
             </p>
         {/each}
     </div>

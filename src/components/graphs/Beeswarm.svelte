@@ -14,6 +14,7 @@
 
 	// utils
 	import colorMap from '../../utils/colors';
+	import labelMap from '../../utils/labels';
 
 
 	// props declaration
@@ -77,12 +78,17 @@
 				let:detail
 			>
 				{@const tooltipData = { ...detail.props }}
-				<div>{tooltipData.channel_name}</div>
-				<div>{tooltipData.cluster}</div>
+				<div class='channel-label'>{tooltipData.channel_name}</div>
+				<div
+					class='cluster-label'
+					style="--color: {colorMap.get(tooltipData.cluster)}"
+				>{labelMap.get(tooltipData.cluster)}</div>
 				{#each ['total_videos', 'subscribers'] as key}
-					{@const keyCapitalized = key.replace(/^\w/, d => d.toUpperCase())}
+					{@const keyCapitalized = key.replace(/^\w/, d => d.toUpperCase()).replace('_', ' ')}
 					{@const value = tooltipData[key]}
-					<div class="row"><span>{keyCapitalized}:</span> {value}</div>
+					{#if value}
+						<div class="row"><span>{keyCapitalized}:</span> {value.toLocaleString()}</div>
+					{/if}
 				{/each}
 			</Tooltip>
 		{/if}
@@ -96,5 +102,14 @@
 		height: 500px;
 		position: sticky;
 		top: 10px;
+	}
+
+	.channel-label {
+		font-weight: 700;
+	}
+
+	.cluster-label {
+        color: var(--color);
+        font-weight: 700;
 	}
 </style>

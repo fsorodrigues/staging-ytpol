@@ -66,6 +66,7 @@
             url={ url_fig4 }
             sourceLabel={ 'Month' }
             targetLabel={ 'Month + 1' }
+            caption={'Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month.'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -79,7 +80,7 @@
     <div class='references'>
         {#each copy['section-two']['references'] as d, i}
             <p>
-                <span>[{i + 1}]</span> {d.value}
+                {d.value}
             </p>
         {/each}
     </div>

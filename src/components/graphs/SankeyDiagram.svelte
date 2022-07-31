@@ -122,5 +122,6 @@
 
     .single-cols {
         grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
     }
 </style>

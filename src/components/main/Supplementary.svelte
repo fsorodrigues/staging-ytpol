@@ -2,23 +2,19 @@
     // node_modules
     import { onMount } from "svelte";
     import { csv } from "d3-fetch";
-    import { group } from 'd3-array';
     import { autoType } from "d3-dsv";
-    import { flatten } from "layercake";
+    import { timeFormat } from 'd3-time-format'
 
     // import types
-    import type Node from '../../types/Node'
-    import type Link from '../../types/Link'
 
     // actions
     import inView from "../../actions/inView";
 
     // components
-    import StackedBars from "../graphs/StackedBars.svelte";
-    import ChartWrapper from "../graphs/ChartWrapper.svelte";
+    import SingleLineChart from "../graphs/SingleLineChart.svelte";
 
     // utils
-    import enforceOrder, { prefOrder } from "../../utils/order";
+    import { formatThousands } from '../../utils/format-numbers'
 
     // local data
     import copy from '../../data/copy';
@@ -28,14 +24,14 @@
     export let once : boolean;
 
     // variable declaration
-    let data_table2 : any[]
-    let xKey : number[] = [0,1]
-    let yKey : string = 'cluster'
-    let zKey : string = 'key'
+    let videos_url : string = 'assets/data/video_count.csv'
+    let data_videos : any[]
+    let xKey : string = 'date'
+    let yKey : string = 'count'
 
     onMount(async () => {
-        const res = await csv('assets/data/table2.csv', autoType)
-        data_table2 = res
+        const res = await csv(videos_url, autoType)
+        data_videos = res
 	})
 
 </script>
@@ -44,17 +40,16 @@
     <div class="section section-supplementary" use:inView={{ once }} on:enter={() => loaded = true }>
         <h2 class="section-title">Supplementary information appendix</h2>
         {#if loaded}
-            <ChartWrapper config={[{
-                        url: 'assets/data/fig7a.csv',
-                        description: 'Fraction of videos by session length',
-                        type: 'line',
-                        xKey: 'index',
-                        yKey: 'fraction',
-                        zKey: 'cluster',
-                        formatTickX: (d) => d,
-                    },
-                ]} 
-                spanCol={12}
+            <SingleLineChart
+                data={ data_videos }
+                url={ videos_url }
+                { xKey }
+                { yKey }
+                formatTickX={ timeFormat('%b %Y') }
+                formatTickY={ formatThousands }
+                caption={ 'Montly videos crawled.' }
+                spanCol={ 12 }
+                stroke={ '#E08A00' }
             />
         {:else} <div class='chart-placeholder'></div>
         {/if}
@@ -78,7 +73,7 @@
         <div class='references'>
             {#each copy['section-two']['references'] as d, i}
                 <p>
-                    <span>[{i + 1}]</span> {d.value}
+                    {d.value}
                 </p>
             {/each}
         </div>
