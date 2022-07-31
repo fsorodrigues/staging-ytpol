@@ -39,7 +39,7 @@
 	<Title title={ title }></Title>
 	<Description text={ text }></Description>
 	<Authors authors={ authors }></Authors>
-	<!-- <ScrollSection /> -->
+	<ScrollSection />
 </main>
 
 
