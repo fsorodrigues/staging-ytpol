@@ -10895,9 +10895,9 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			t = space();
-    			attr_dev(div0, "class", "step-content svelte-1vjm4tq");
+    			attr_dev(div0, "class", "step-content svelte-ccug5c");
     			add_location(div0, file$q, 55, 16, 1938);
-    			attr_dev(div1, "class", "step svelte-1vjm4tq");
+    			attr_dev(div1, "class", "step svelte-ccug5c");
     			toggle_class(div1, "active", /*currentStep*/ ctx[1] === /*i*/ ctx[11]);
     			add_location(div1, file$q, 54, 12, 1870);
     		},
@@ -11026,7 +11026,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t = space();
     			create_component(scroller.$$.fragment);
-    			attr_dev(div, "class", "scroller-wrapper svelte-1vjm4tq");
+    			attr_dev(div, "class", "scroller-wrapper svelte-ccug5c");
     			add_location(div, file$q, 48, 0, 1602);
     		},
     		l: function claim(nodes) {
