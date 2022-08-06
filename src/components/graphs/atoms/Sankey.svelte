@@ -84,20 +84,20 @@
     </g>
     <g class='rect-group'>
         {#each nodes as d, i}
-            {@const cluster = d.id.split('_')[1]}
+            {@const [ type, cluster ] = d.id.split('_')}
             <g class='node-group'>
                 <rect
-                    class='node'
+                    class={`node node-${type}`}
                     x={d.x}
-                    y={d.y}
-                    height={sankeyGen.nodeWidth()}
+                    y={d.y + (type === 'source' ? sankeyGen.nodeWidth() - 7.5 : 0)}
+                    height={7.5}
                     width={d.dy}
                     fill={colorNodes(cluster)} 
                 />
                 <text 
                     class='label'
                     x={d.x + (d.dy / 2)}
-                    y={d.y}
+                    y={d.y + (type === 'source' ? -2.5 : 2.5)}
                     dy="{sankeyGen.nodeWidth() / 2 + (fontSize / 2) - 2}"
                     style="fill: {colorText(d)};
                     font-size: {fontSize}px;">
@@ -124,3 +124,4 @@
 
 <!-- stroke={colorLinks(d.sourceName)}
 stroke-opacity=0.25 -->
+<!-- height={sankeyGen.nodeWidth()} -->

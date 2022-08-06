@@ -37,6 +37,7 @@
 	export let spanCol : number = 12;
 	export let customClass : string = 'chart-large';
 	export let tooltipType : string = 'arrow';
+	export let showLegend : boolean = false;
 
 	// // variable declaration
 	const columns = data.columns.filter(d => d !== yKey);
@@ -52,6 +53,13 @@
 	let hideTooltip : boolean|CustomEvent<any> = true;
 </script>
 
+<div class='legend-container'>
+	{#each data.columns.filter(d => d !== 'cluster') as group, i}
+		<div class='legend-group'>
+			<span class='legend-label' style={`--color: ${keyColorMap.get(group)}`}>{keyLabelMap.get(group)}</span>
+		</div>
+	{/each}
+</div>
 <div 
 	class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
 	style={`--spanCol: ${spanCol}`}
@@ -153,6 +161,29 @@
         column-gap: 10px;
         grid-row: 4 / span 1;
         grid-column: span var(--spanCol);
+    }
+
+	.legend-container {
+        grid-row: 3 / span 1;
+        grid-column: span 6;
+        display: flex;
+        justify-content: start;
+        margin: 15px 0;
+
+        .legend-group {
+            display: flex;
+            align-items: baseline;
+            margin: 0 5px;
+
+            .legend-label {
+                background-color: var(--color);
+                color: white;
+                padding: 2.5px 5px;
+                border-radius: 3px;
+                font-weight: 700;
+				text-align: center;
+            }
+        }
     }
 
 	.cluster-label {

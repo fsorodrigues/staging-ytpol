@@ -5,5 +5,6 @@ const formatPct = (n) => {
 }
 
 const formatThousands = format(',.0s')
+const formatThousandsComma = format(',.0f')
 
-export { formatPct, formatThousands }
+export { formatPct, formatThousands, formatThousandsComma }

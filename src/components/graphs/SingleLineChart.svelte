@@ -1,21 +1,23 @@
 <script lang="ts">
 	// node_modules
 	import { Html, LayerCake, Svg } from 'layercake';
-	import { scaleOrdinal, scaleTime, scaleLinear } from 'd3-scale'
+	import { scaleTime, scaleLinear } from 'd3-scale'
 
 	// types
-	import type Row from '../../types/TimeSeriesRow';
+	// import type Row from '../../types/TimeSeriesRow';
 
 	// components & molecules & atoms
 	import Line from './atoms/Line.svelte';
 	import AxisX from './atoms/AxisX.svelte';
 	import AxisY from './atoms/AxisY.svelte';
-	import SharedTooltip from './tooltips/SharedTooltip.svelte';
+	import SingleLineTooltip from './tooltips/SingleLineTooltip.svelte';
 	import Caption from './atoms/Caption.svelte';
 
 	// import utils
-	import colorMap from '../../utils/colors';
+	// import colorMap from '../../utils/colors';
 	import labelMap from '../../utils/labels';
+	import { formatThousandsComma } from '../../utils/format-numbers'
+
 
 	// // props declaration
     export let caption: string;
@@ -30,9 +32,9 @@
 	export let spanCol : number
 	export let stroke : string
 
-	// variable declaration
-	let seriesNames = Array.from(colorMap).map(d => d[0])
-	let seriesColors = Array.from(colorMap).map(d => d[1])
+	// // variable declaration
+	// let seriesNames = Array.from(colorMap).map(d => d[0])
+	// let seriesColors = Array.from(colorMap).map(d => d[1])
 
 </script>
 
@@ -65,14 +67,14 @@
 				<Line { stroke } />
 			</Svg>
 	
-			<!-- <Html>
-				<SharedTooltip
+			<Html>
+				<SingleLineTooltip
 					dataset={data}
 					formatTitle={formatTickX}
 					formatKey={(d) => labelMap.get(d)}
-					formatValue={formatTickY}
+					formatValue={formatThousandsComma}
 				/>
-			</Html> -->
+			</Html>
 		</LayerCake>
 	</div>
 	{#if includeCaption}

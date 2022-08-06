@@ -85,7 +85,7 @@
 		grid-row: 3 / span last-line;
         
         .step {
-            height: 1000px;
+            height: 1200px;
             pointer-events: none;
 
             &-content {
