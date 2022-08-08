@@ -16,5 +16,13 @@ const youTubeMap : Map<string, string> = new Map([
     ["Video", "Video"]
 ])
 
+const channelMap :  Map<string, string> = new Map([
+    ['channel_name', "Channel"],
+    ['cluster', "Cluster"],
+    ['subscribers', "Subscribers"],
+    ['total_views', "Views"],
+    ['total_videos', "Videos"]
+])
+
 export default labelMap;
-export { youTubeMap };
+export { youTubeMap, channelMap };

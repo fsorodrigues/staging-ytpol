@@ -39,12 +39,13 @@
 		grid-row: 1 / span 1;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 5px;
+		column-gap: 10px;
+		row-gap: 5px;
 
 		.author-container {
 			display: inline-flex;
 			align-items: baseline;
-			margin: 0 0 5px 0;
+			margin: 0;
 			position: relative;
 
 			.author-name {
@@ -60,7 +61,7 @@
 					display: none;
 					position: absolute;
 					top: 100%;
-					left: 0;
+					left: -5px;
 					z-index: 100;
 					width: 250px;
 					padding: 5px;

@@ -12,6 +12,7 @@
 
     // components
     import SingleLineChart from "../graphs/SingleLineChart.svelte";
+    import TableWrapper from "../table/TableWrapper.svelte";
 
     // utils
     import { formatThousands } from '../../utils/format-numbers'
@@ -26,12 +27,17 @@
     // variable declaration
     let videos_url : string = 'assets/data/video_count.csv'
     let data_videos : any[]
+    let channels_url : string = 'assets/data/channels_top250.csv'
+    let data_channels : any[]
     let xKey : string = 'date'
     let yKey : string = 'count'
 
     onMount(async () => {
-        const res = await csv(videos_url, autoType)
-        data_videos = res
+        const res_videos = await csv(videos_url, autoType)
+        data_videos = res_videos
+
+        const res_channels = await csv(channels_url, autoType)
+        data_channels = res_channels
 	})
 
 </script>
@@ -53,7 +59,7 @@
             />
         {:else} <div class='chart-placeholder'></div>
         {/if}
-        <div class='copy'>
+        <div class='copy copy-part1'>
             {#each copy['section-two']['copy'] as d, i}
                 <p>
                     {d.value}
@@ -64,6 +70,13 @@
                     {d.value}
                 </p>
             {/each}
+        </div>
+        {#if loaded}
+            <div class='table-wrapper'>
+                <TableWrapper data={data_channels} pageSize={20} />
+            </div>
+        {/if}
+        <div class='copy copy-part2'>
             {#each copy['section-two']['copy'] as d, i}
                 <p>
                     {d.value}
@@ -88,7 +101,7 @@
     .section-supplementary {
         grid-template-columns: repeat(12, 1fr);
         column-gap: 50px;
-        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-rows: auto auto auto 1fr auto auto auto;
     }
 
     .chart-placeholder {
@@ -104,13 +117,25 @@
     }
 
     .copy {
-        grid-row: 5 / span 1;
         grid-column: span 7;
     }
 
+    .copy-part1 {
+        grid-row: 5 / span 1;    
+    }
+
+    .copy-part2 {
+        grid-row: 7 / span 1; 
+    }
+    
     .references {
         grid-row: 5 / span 1;
         grid-column: span 4;
+    }
+
+    .table-wrapper {
+        grid-row: 6 / span 1;
+        grid-column: 1 / span 10;
     }
 
     .copy {
