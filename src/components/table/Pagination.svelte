@@ -43,10 +43,10 @@
     }
   </script>
   
-  <style>
+  <style lang='scss'>
     .active {
-      background-color: rgb(150, 150, 235);
-      color: white;
+      background-color: $css-lab-dark-blue-transparent;
+      color: $white;
     }
   
     ul {
@@ -63,7 +63,7 @@
   
     button {
       background: transparent;
-      border: 1px solid #ccc;
+      border: 1px solid $light-grey;
       padding: 5px 10px;
       margin: 0;
       float: left;

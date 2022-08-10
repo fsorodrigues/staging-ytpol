@@ -18,7 +18,7 @@
 	import labelMap from '../../utils/labels';
 
 	// // props declaration
-    export let caption: string;
+    export let caption : string;
 	export let activeChart : string;
 	export let data : Row[];
 	export let url : string;

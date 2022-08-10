@@ -12,6 +12,9 @@
     import Scroller from '../scroller/scrolly.svelte';
     import Beeswarm from '../graphs/Beeswarm.svelte';
 
+    // local data
+    import copy from '../../data/copy';
+
     // utils import
     import comparator from '../../utils/comparator';
 
@@ -22,12 +25,7 @@
     // variable declaration
     let channelData : Channel[];
     let currentStep : number;
-    const steps : string[] = [
-        "<p>Here are the top 200 YouTube channels we monitor.</p>",
-        "<p>Organized by their size.</p>",
-        "<p>Clustered together</p>",
-        "<p>Explore the data before we dive deeper into the politics of YouTube.</p>"
-    ];
+    // const steps : string[] = copy.scroller;
 
     let xKey : string = 'channel';
 	let xScale : Function = scaleLinear();
@@ -68,10 +66,10 @@
         <Beeswarm { currentStep } { xKey } { xScale } { xDomain } data={channelData} ></Beeswarm>
     {/if}
     <Scroller bind:value={currentStep}>
-        {#each steps as text, i}
+        {#each copy.scroller as d, i}
             <div class="step" class:active={currentStep === i}>
                 <div class="step-content">
-                    {@html text}
+                    <p>{d.value}</p>
                 </div>
             </div>
         {/each}

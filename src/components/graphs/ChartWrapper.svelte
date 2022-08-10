@@ -20,6 +20,7 @@
     // property declaration
     export let config : ChartConfig[]|ChartConfig;
     export let spanCol : number = 12;
+    export let title : string;
 
     // variable declaration
     let data : {} = {};
@@ -49,7 +50,7 @@
 </script>
 
 {#if activeChart && activeFig }
-    <h3 class="chart-title">YouTube consumption:
+    <h3 class="chart-title">{title}
         {#if Array.isArray(config) && config.length >= 2}
             <select type="select" bind:value={activeChart}>
                 {#each config as file, i}
@@ -83,6 +84,7 @@
             formatTickX={ activeFig.formatTickX }
             formatTickY={ activeFig.formatTickY }
             { spanCol }
+            { title }
         />
     </div>
 {/if}

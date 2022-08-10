@@ -73,6 +73,7 @@
         </div>
         {#if loaded}
             <div class='table-wrapper'>
+                <h3 class="chart-title">All monitored channels</h3>
                 <TableWrapper data={data_channels} pageSize={20} />
             </div>
         {/if}

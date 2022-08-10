@@ -29,6 +29,14 @@
 <Footer />
 
 <style lang='scss' global>
+	main, .section {
+		padding: 0 1em;
+	}
+	@media (min-width: $column-width) {
+		main, .section {
+			padding: 0
+		}
+	}
 	.section {
 		max-width: $column-width;
 		margin: 1em auto;

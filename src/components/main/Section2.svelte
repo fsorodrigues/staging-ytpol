@@ -45,6 +45,7 @@
                 formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
             }
         ]}
+        title='Community engagement'
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

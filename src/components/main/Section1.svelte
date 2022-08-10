@@ -44,7 +44,7 @@
                     formatTickY: (d) => d.toFixed(0)
                 }
             ]} 
-            
+            title='YouTube consumption'
             />
     {:else} <div class='chart-placeholder'></div>
     {/if}

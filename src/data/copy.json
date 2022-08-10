@@ -6,6 +6,24 @@
             "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?"
         }
     ],
+    "scroller": [
+        {
+            "type": "text",
+            "value": "Here are the top 200 YouTube channels we monitor."
+        },
+        {
+            "type": "text",
+            "value": "Organized by their size."
+        },
+        {
+            "type": "text",
+            "value": "Clustered together."
+        },
+        {
+            "type": "text",
+            "value": "Explore the data before we dive deeper into the politics of YouTube."
+        }
+    ],
     "section-one": {
         "copy": [
             {

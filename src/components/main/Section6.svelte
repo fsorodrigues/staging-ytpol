@@ -71,6 +71,7 @@
                 }
             ]} 
             spanCol={6}
+            title='Session Analysis'
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
