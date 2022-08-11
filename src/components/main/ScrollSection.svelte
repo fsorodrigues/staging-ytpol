@@ -12,15 +12,15 @@
     import Scroller from '../scroller/scrolly.svelte';
     import Beeswarm from '../graphs/Beeswarm.svelte';
 
-    // local data
-    import copy from '../../data/copy';
+    // // local data
+    // import copy from '../../data/copy';
 
     // utils import
     import comparator from '../../utils/comparator';
 
     // // props
     // let loaded : boolean = false;
-    // export let once : boolean;
+    export let steps : any[];
 	
     // variable declaration
     let channelData : Channel[];
@@ -66,10 +66,12 @@
         <Beeswarm { currentStep } { xKey } { xScale } { xDomain } data={channelData} ></Beeswarm>
     {/if}
     <Scroller bind:value={currentStep}>
-        {#each copy.scroller as d, i}
-            <div class="step" class:active={currentStep === i}>
+        {#each steps as d, i}
+            <div class="step {d.type}" class:active={currentStep === i}>
                 <div class="step-content">
-                    <p>{d.value}</p>
+                    {#each d.value as e, l}
+                        <p>{e}</p>
+                    {/each}
                 </div>
             </div>
         {/each}
@@ -92,6 +94,14 @@
                 padding: 20px;
                 background-color: $white;
                 box-shadow: 1px 1px 10px $light-grey;
+            }
+
+            p {
+                margin-bottom: 1em;
+            }
+
+            p:last-of-type {
+                margin-bottom: 0;
             }
         }
     }

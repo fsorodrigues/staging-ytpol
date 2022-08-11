@@ -1,11 +1,21 @@
 <script lang="ts">
-	export let text : string;
+	export let standfirst : any[];
+
 </script>
 
-<p>{ text }</p>
+<div class='standfirst-wrapper'>
+	{#each standfirst as text}
+		<p>{ text.value }</p>
+	{/each}
+</div>
+
 
 <style lang='scss'>
-	p {
+	.standfirst-wrapper {
 		grid-column: 1 / span 6;
+
+		p {
+			margin-bottom: 1em;
+		}
 	}
 </style>

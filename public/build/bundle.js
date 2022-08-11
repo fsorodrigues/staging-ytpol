@@ -1705,31 +1705,109 @@ var app = (function () {
 
     const file$G = "src/components/copy/Description.svelte";
 
-    function create_fragment$H(ctx) {
+    function get_each_context$p(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[1] = list[i];
+    	return child_ctx;
+    }
+
+    // (5:1) {#each standfirst as text}
+    function create_each_block$p(ctx) {
     	let p;
+    	let t_value = /*text*/ ctx[1].value + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			p = element("p");
-    			t = text$1(/*text*/ ctx[0]);
-    			attr_dev(p, "class", "svelte-1pqfof3");
-    			add_location(p, file$G, 3, 0, 46);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			t = text$1(t_value);
+    			attr_dev(p, "class", "svelte-2myhc1");
+    			add_location(p, file$G, 5, 2, 115);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t);
     		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*standfirst*/ 1 && t_value !== (t_value = /*text*/ ctx[1].value + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$p.name,
+    		type: "each",
+    		source: "(5:1) {#each standfirst as text}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$H(ctx) {
+    	let div;
+    	let each_value = /*standfirst*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$p(get_each_context$p(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "class", "standfirst-wrapper svelte-2myhc1");
+    			add_location(div, file$G, 3, 0, 52);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div, null);
+    			}
+    		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*text*/ 1) set_data_dev(t, /*text*/ ctx[0]);
+    			if (dirty & /*standfirst*/ 1) {
+    				each_value = /*standfirst*/ ctx[0];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$p(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$p(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
     		},
     		i: noop$1,
     		o: noop$1,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
     		}
     	};
 
@@ -1747,34 +1825,34 @@ var app = (function () {
     function instance$H($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Description', slots, []);
-    	let { text } = $$props;
-    	const writable_props = ['text'];
+    	let { standfirst } = $$props;
+    	const writable_props = ['standfirst'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Description> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('text' in $$props) $$invalidate(0, text = $$props.text);
+    		if ('standfirst' in $$props) $$invalidate(0, standfirst = $$props.standfirst);
     	};
 
-    	$$self.$capture_state = () => ({ text });
+    	$$self.$capture_state = () => ({ standfirst });
 
     	$$self.$inject_state = $$props => {
-    		if ('text' in $$props) $$invalidate(0, text = $$props.text);
+    		if ('standfirst' in $$props) $$invalidate(0, standfirst = $$props.standfirst);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [text];
+    	return [standfirst];
     }
 
     class Description extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$H, create_fragment$H, safe_not_equal, { text: 0 });
+    		init(this, options, instance$H, create_fragment$H, safe_not_equal, { standfirst: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1786,16 +1864,16 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*text*/ ctx[0] === undefined && !('text' in props)) {
-    			console.warn("<Description> was created without expected prop 'text'");
+    		if (/*standfirst*/ ctx[0] === undefined && !('standfirst' in props)) {
+    			console.warn("<Description> was created without expected prop 'standfirst'");
     		}
     	}
 
-    	get text() {
+    	get standfirst() {
     		throw new Error("<Description>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set text(value) {
+    	set standfirst(value) {
     		throw new Error("<Description>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -1811,14 +1889,14 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_1$d(ctx, list, i) {
+    function get_each_context_1$e(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[4] = list[i];
     	return child_ctx;
     }
 
     // (22:5) {#each author.detail as aff}
-    function create_each_block_1$d(ctx) {
+    function create_each_block_1$e(ctx) {
     	let p;
     	let t_value = /*aff*/ ctx[4] + "";
     	let t;
@@ -1844,7 +1922,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1$d.name,
+    		id: create_each_block_1$e.name,
     		type: "each",
     		source: "(22:5) {#each author.detail as aff}",
     		ctx
@@ -1870,7 +1948,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1$d(get_each_context_1$d(ctx, each_value_1, i));
+    		each_blocks[i] = create_each_block_1$e(get_each_context_1$e(ctx, each_value_1, i));
     	}
 
     	const block = {
@@ -1930,12 +2008,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1$d(ctx, each_value_1, i);
+    					const child_ctx = get_each_context_1$e(ctx, each_value_1, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1$d(child_ctx);
+    						each_blocks[i] = create_each_block_1$e(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div0, null);
     					}
@@ -10916,179 +10994,6 @@ var app = (function () {
     	}
     }
 
-    var title = "Youtube Politics";
-    var standfirst = [
-    	{
-    		type: "text",
-    		value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?"
-    	}
-    ];
-    var scroller = [
-    	{
-    		type: "text",
-    		value: "Here are the top 200 YouTube channels we monitor."
-    	},
-    	{
-    		type: "text",
-    		value: "Organized by their size."
-    	},
-    	{
-    		type: "text",
-    		value: "Clustered together."
-    	},
-    	{
-    		type: "text",
-    		value: "Explore the data before we dive deeper into the politics of YouTube."
-    	}
-    ];
-    var data = {
-    	title: title,
-    	standfirst: standfirst,
-    	scroller: scroller,
-    	"section-one": {
-    	copy: [
-    		{
-    			type: "text",
-    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus[1] architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam[2] delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Iusto minus quae temporibus deleniti vel exercitationem, repellat recusandae quam totam laboriosam!"
-    		}
-    	],
-    	references: [
-    		{
-    			type: "text",
-    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-    		},
-    		{
-    			type: "text",
-    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
-    		}
-    	]
-    },
-    	"section-two": {
-    	copy: [
-    		{
-    			type: "text",
-    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-    		}
-    	],
-    	references: [
-    		{
-    			type: "text",
-    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-    		},
-    		{
-    			type: "text",
-    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
-    		},
-    		{
-    			type: "text",
-    			value: "Democracy, 2015"
-    		}
-    	]
-    },
-    	"section-three": {
-    	copy: [
-    		{
-    			type: "text",
-    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-    		}
-    	],
-    	references: [
-    		{
-    			type: "text",
-    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-    		},
-    		{
-    			type: "text",
-    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
-    		},
-    		{
-    			type: "text",
-    			value: "Democracy, 2015"
-    		}
-    	]
-    },
-    	"section-four": {
-    	copy: [
-    		{
-    			type: "text",
-    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-    		}
-    	],
-    	references: [
-    		{
-    			type: "text",
-    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-    		},
-    		{
-    			type: "text",
-    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
-    		},
-    		{
-    			type: "text",
-    			value: "Democracy, 2015"
-    		}
-    	]
-    },
-    	"section-five": {
-    	copy: [
-    		{
-    			type: "text",
-    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-    		},
-    		{
-    			type: "text",
-    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-    		}
-    	],
-    	references: [
-    		{
-    			type: "text",
-    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-    		},
-    		{
-    			type: "text",
-    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
-    		},
-    		{
-    			type: "text",
-    			value: "Democracy, 2015"
-    		}
-    	]
-    }
-    };
-
     function comparator(val, scaler) {
         return function (a, b) { return scaler(a[val]) - scaler(b[val]); };
     }
@@ -11100,8 +11005,15 @@ var app = (function () {
 
     function get_each_context$k(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[10] = i;
+    	child_ctx[9] = list[i];
+    	child_ctx[11] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_1$d(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[12] = list[i];
+    	child_ctx[14] = i;
     	return child_ctx;
     }
 
@@ -11112,11 +11024,11 @@ var app = (function () {
 
     	beeswarm = new Beeswarm({
     			props: {
-    				currentStep: /*currentStep*/ ctx[1],
-    				xKey: /*xKey*/ ctx[2],
-    				xScale: /*xScale*/ ctx[3],
-    				xDomain: /*xDomain*/ ctx[4],
-    				data: /*channelData*/ ctx[0]
+    				currentStep: /*currentStep*/ ctx[2],
+    				xKey: /*xKey*/ ctx[3],
+    				xScale: /*xScale*/ ctx[4],
+    				xDomain: /*xDomain*/ ctx[5],
+    				data: /*channelData*/ ctx[1]
     			},
     			$$inline: true
     		});
@@ -11131,11 +11043,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const beeswarm_changes = {};
-    			if (dirty & /*currentStep*/ 2) beeswarm_changes.currentStep = /*currentStep*/ ctx[1];
-    			if (dirty & /*xKey*/ 4) beeswarm_changes.xKey = /*xKey*/ ctx[2];
-    			if (dirty & /*xScale*/ 8) beeswarm_changes.xScale = /*xScale*/ ctx[3];
-    			if (dirty & /*xDomain*/ 16) beeswarm_changes.xDomain = /*xDomain*/ ctx[4];
-    			if (dirty & /*channelData*/ 1) beeswarm_changes.data = /*channelData*/ ctx[0];
+    			if (dirty & /*currentStep*/ 4) beeswarm_changes.currentStep = /*currentStep*/ ctx[2];
+    			if (dirty & /*xKey*/ 8) beeswarm_changes.xKey = /*xKey*/ ctx[3];
+    			if (dirty & /*xScale*/ 16) beeswarm_changes.xScale = /*xScale*/ ctx[4];
+    			if (dirty & /*xDomain*/ 32) beeswarm_changes.xDomain = /*xDomain*/ ctx[5];
+    			if (dirty & /*channelData*/ 2) beeswarm_changes.data = /*channelData*/ ctx[1];
     			beeswarm.$set(beeswarm_changes);
     		},
     		i: function intro(local) {
@@ -11163,43 +11075,118 @@ var app = (function () {
     	return block;
     }
 
-    // (49:8) {#each copy.scroller as d, i}
+    // (52:20) {#each d.value as e, l}
+    function create_each_block_1$d(ctx) {
+    	let p;
+    	let t_value = /*e*/ ctx[12] + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text$1(t_value);
+    			attr_dev(p, "class", "svelte-cdul2e");
+    			add_location(p, file$w, 52, 24, 1820);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*steps*/ 1 && t_value !== (t_value = /*e*/ ctx[12] + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1$d.name,
+    		type: "each",
+    		source: "(52:20) {#each d.value as e, l}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (49:8) {#each steps as d, i}
     function create_each_block$k(ctx) {
     	let div1;
     	let div0;
-    	let p;
-    	let t0_value = /*d*/ ctx[8].value + "";
-    	let t0;
-    	let t1;
+    	let t;
+    	let div1_class_value;
+    	let each_value_1 = /*d*/ ctx[9].value;
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1$d(get_each_context_1$d(ctx, each_value_1, i));
+    	}
 
     	const block = {
     		c: function create() {
     			div1 = element("div");
     			div0 = element("div");
-    			p = element("p");
-    			t0 = text$1(t0_value);
-    			t1 = space();
-    			add_location(p, file$w, 51, 20, 1789);
-    			attr_dev(div0, "class", "step-content svelte-ccug5c");
-    			add_location(div0, file$w, 50, 16, 1742);
-    			attr_dev(div1, "class", "step svelte-ccug5c");
-    			toggle_class(div1, "active", /*currentStep*/ ctx[1] === /*i*/ ctx[10]);
-    			add_location(div1, file$w, 49, 12, 1674);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t = space();
+    			attr_dev(div0, "class", "step-content svelte-cdul2e");
+    			add_location(div0, file$w, 50, 16, 1725);
+    			attr_dev(div1, "class", div1_class_value = "step " + /*d*/ ctx[9].type + " svelte-cdul2e");
+    			toggle_class(div1, "active", /*currentStep*/ ctx[2] === /*i*/ ctx[11]);
+    			add_location(div1, file$w, 49, 12, 1648);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
     			append_dev(div1, div0);
-    			append_dev(div0, p);
-    			append_dev(p, t0);
-    			append_dev(div1, t1);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div0, null);
+    			}
+
+    			append_dev(div1, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*currentStep*/ 2) {
-    				toggle_class(div1, "active", /*currentStep*/ ctx[1] === /*i*/ ctx[10]);
+    			if (dirty & /*steps*/ 1) {
+    				each_value_1 = /*d*/ ctx[9].value;
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1$d(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1$d(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div0, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+
+    			if (dirty & /*steps*/ 1 && div1_class_value !== (div1_class_value = "step " + /*d*/ ctx[9].type + " svelte-cdul2e")) {
+    				attr_dev(div1, "class", div1_class_value);
+    			}
+
+    			if (dirty & /*steps, currentStep*/ 5) {
+    				toggle_class(div1, "active", /*currentStep*/ ctx[2] === /*i*/ ctx[11]);
     			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div1);
+    			destroy_each(each_blocks, detaching);
     		}
     	};
 
@@ -11207,7 +11194,7 @@ var app = (function () {
     		block,
     		id: create_each_block$k.name,
     		type: "each",
-    		source: "(49:8) {#each copy.scroller as d, i}",
+    		source: "(49:8) {#each steps as d, i}",
     		ctx
     	});
 
@@ -11217,7 +11204,7 @@ var app = (function () {
     // (48:4) <Scroller bind:value={currentStep}>
     function create_default_slot$8(ctx) {
     	let each_1_anchor;
-    	let each_value = data.scroller;
+    	let each_value = /*steps*/ ctx[0];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -11241,8 +11228,8 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*currentStep, copy*/ 2) {
-    				each_value = data.scroller;
+    			if (dirty & /*steps, currentStep*/ 5) {
+    				each_value = /*steps*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
 
@@ -11288,10 +11275,10 @@ var app = (function () {
     	let scroller;
     	let updating_value;
     	let current;
-    	let if_block = /*channelData*/ ctx[0] && /*channelData*/ ctx[0].length && create_if_block$l(ctx);
+    	let if_block = /*channelData*/ ctx[1] && /*channelData*/ ctx[1].length && create_if_block$l(ctx);
 
     	function scroller_value_binding(value) {
-    		/*scroller_value_binding*/ ctx[5](value);
+    		/*scroller_value_binding*/ ctx[6](value);
     	}
 
     	let scroller_props = {
@@ -11299,8 +11286,8 @@ var app = (function () {
     		$$scope: { ctx }
     	};
 
-    	if (/*currentStep*/ ctx[1] !== void 0) {
-    		scroller_props.value = /*currentStep*/ ctx[1];
+    	if (/*currentStep*/ ctx[2] !== void 0) {
+    		scroller_props.value = /*currentStep*/ ctx[2];
     	}
 
     	scroller = new Scrolly({ props: scroller_props, $$inline: true });
@@ -11312,8 +11299,8 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t = space();
     			create_component(scroller.$$.fragment);
-    			attr_dev(div, "class", "scroller-wrapper svelte-ccug5c");
-    			add_location(div, file$w, 43, 0, 1401);
+    			attr_dev(div, "class", "scroller-wrapper svelte-cdul2e");
+    			add_location(div, file$w, 43, 0, 1383);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -11326,11 +11313,11 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*channelData*/ ctx[0] && /*channelData*/ ctx[0].length) {
+    			if (/*channelData*/ ctx[1] && /*channelData*/ ctx[1].length) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
-    					if (dirty & /*channelData*/ 1) {
+    					if (dirty & /*channelData*/ 2) {
     						transition_in(if_block, 1);
     					}
     				} else {
@@ -11351,13 +11338,13 @@ var app = (function () {
 
     			const scroller_changes = {};
 
-    			if (dirty & /*$$scope, currentStep*/ 2050) {
+    			if (dirty & /*$$scope, steps, currentStep*/ 32773) {
     				scroller_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_value && dirty & /*currentStep*/ 2) {
+    			if (!updating_value && dirty & /*currentStep*/ 4) {
     				updating_value = true;
-    				scroller_changes.value = /*currentStep*/ ctx[1];
+    				scroller_changes.value = /*currentStep*/ ctx[2];
     				add_flush_callback(() => updating_value = false);
     			}
 
@@ -11395,6 +11382,7 @@ var app = (function () {
     function instance$x($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('ScrollSection', slots, []);
+    	let { steps } = $$props;
     	let channelData;
     	let currentStep;
     	let xKey = 'channel';
@@ -11405,12 +11393,12 @@ var app = (function () {
 
     	onMount(async () => {
     		const res = await csv('assets/data/channels_top250.csv', autoType);
-    		$$invalidate(0, channelData = res);
+    		$$invalidate(1, channelData = res);
     		channelData.sort(spectrum);
-    		$$invalidate(0, channelData = channelData.map((d, i) => Object.assign(Object.assign({}, d), { channel: i })));
+    		$$invalidate(1, channelData = channelData.map((d, i) => Object.assign(Object.assign({}, d), { channel: i })));
     	});
 
-    	const writable_props = [];
+    	const writable_props = ['steps'];
 
     	Object_1$4.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<ScrollSection> was created with unknown prop '${key}'`);
@@ -11418,8 +11406,12 @@ var app = (function () {
 
     	function scroller_value_binding(value) {
     		currentStep = value;
-    		$$invalidate(1, currentStep);
+    		$$invalidate(2, currentStep);
     	}
+
+    	$$self.$$set = $$props => {
+    		if ('steps' in $$props) $$invalidate(0, steps = $$props.steps);
+    	};
 
     	$$self.$capture_state = () => ({
     		onMount,
@@ -11431,8 +11423,8 @@ var app = (function () {
     		scaleLog: log$1,
     		Scroller: Scrolly,
     		Beeswarm,
-    		copy: data,
     		comparator,
+    		steps,
     		channelData,
     		currentStep,
     		xKey,
@@ -11443,11 +11435,12 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('channelData' in $$props) $$invalidate(0, channelData = $$props.channelData);
-    		if ('currentStep' in $$props) $$invalidate(1, currentStep = $$props.currentStep);
-    		if ('xKey' in $$props) $$invalidate(2, xKey = $$props.xKey);
-    		if ('xScale' in $$props) $$invalidate(3, xScale = $$props.xScale);
-    		if ('xDomain' in $$props) $$invalidate(4, xDomain = $$props.xDomain);
+    		if ('steps' in $$props) $$invalidate(0, steps = $$props.steps);
+    		if ('channelData' in $$props) $$invalidate(1, channelData = $$props.channelData);
+    		if ('currentStep' in $$props) $$invalidate(2, currentStep = $$props.currentStep);
+    		if ('xKey' in $$props) $$invalidate(3, xKey = $$props.xKey);
+    		if ('xScale' in $$props) $$invalidate(4, xScale = $$props.xScale);
+    		if ('xDomain' in $$props) $$invalidate(5, xDomain = $$props.xDomain);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -11455,31 +11448,31 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*currentStep, channelData*/ 3) {
+    		if ($$self.$$.dirty & /*currentStep, channelData*/ 6) {
     			if (currentStep == 0) ; else if (currentStep == 1) {
-    				$$invalidate(2, xKey = 'subscribers');
-    				$$invalidate(3, xScale = log$1());
-    				$$invalidate(4, xDomain = [null, null]);
+    				$$invalidate(3, xKey = 'subscribers');
+    				$$invalidate(4, xScale = log$1());
+    				$$invalidate(5, xDomain = [null, null]);
     			} else if (currentStep == 2) {
-    				$$invalidate(2, xKey = 'cluster');
-    				$$invalidate(3, xScale = band());
-    				$$invalidate(4, xDomain = ['fL', 'L', 'C', 'AW', 'R', 'fR']);
+    				$$invalidate(3, xKey = 'cluster');
+    				$$invalidate(4, xScale = band());
+    				$$invalidate(5, xDomain = ['fL', 'L', 'C', 'AW', 'R', 'fR']);
     			} else if (currentStep == 3) {
-    				$$invalidate(2, xKey = 'index');
-    				$$invalidate(3, xScale = linear());
-    				$$invalidate(4, xDomain = [null, null]);
-    				$$invalidate(0, channelData = channelData.map((d, i) => Object.assign(Object.assign({}, d), { index: i })));
+    				$$invalidate(3, xKey = 'index');
+    				$$invalidate(4, xScale = linear());
+    				$$invalidate(5, xDomain = [null, null]);
+    				$$invalidate(1, channelData = channelData.map((d, i) => Object.assign(Object.assign({}, d), { index: i })));
     			}
     		}
     	};
 
-    	return [channelData, currentStep, xKey, xScale, xDomain, scroller_value_binding];
+    	return [steps, channelData, currentStep, xKey, xScale, xDomain, scroller_value_binding];
     }
 
     class ScrollSection extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$x, create_fragment$x, safe_not_equal, {});
+    		init(this, options, instance$x, create_fragment$x, safe_not_equal, { steps: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -11487,6 +11480,21 @@ var app = (function () {
     			options,
     			id: create_fragment$x.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*steps*/ ctx[0] === undefined && !('steps' in props)) {
+    			console.warn("<ScrollSection> was created without expected prop 'steps'");
+    		}
+    	}
+
+    	get steps() {
+    		throw new Error("<ScrollSection>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set steps(value) {
+    		throw new Error("<ScrollSection>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -11510,7 +11518,7 @@ var app = (function () {
     		});
 
     	description = new Description({
-    			props: { text: /*text*/ ctx[1] },
+    			props: { standfirst: /*standfirst*/ ctx[1] },
     			$$inline: true
     		});
 
@@ -11519,7 +11527,10 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	scrollsection = new ScrollSection({ $$inline: true });
+    	scrollsection = new ScrollSection({
+    			props: { steps: /*steps*/ ctx[3] },
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {
@@ -11532,7 +11543,7 @@ var app = (function () {
     			t2 = space();
     			create_component(scrollsection.$$.fragment);
     			attr_dev(main, "class", "svelte-1wkni80");
-    			add_location(main, file$v, 15, 0, 589);
+    			add_location(main, file$v, 16, 0, 626);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -11553,11 +11564,14 @@ var app = (function () {
     			if (dirty & /*title*/ 1) title_1_changes.title = /*title*/ ctx[0];
     			title_1.$set(title_1_changes);
     			const description_changes = {};
-    			if (dirty & /*text*/ 2) description_changes.text = /*text*/ ctx[1];
+    			if (dirty & /*standfirst*/ 2) description_changes.standfirst = /*standfirst*/ ctx[1];
     			description.$set(description_changes);
     			const authors_1_changes = {};
     			if (dirty & /*authors*/ 4) authors_1_changes.authors = /*authors*/ ctx[2];
     			authors_1.$set(authors_1_changes);
+    			const scrollsection_changes = {};
+    			if (dirty & /*steps*/ 8) scrollsection_changes.steps = /*steps*/ ctx[3];
+    			scrollsection.$set(scrollsection_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -11598,8 +11612,15 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Main', slots, []);
     	let { title } = $$props;
-    	let { text = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?' } = $$props;
+
+    	let { standfirst = [
+    		{
+    			value: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?'
+    		}
+    	] } = $$props;
+
     	let { authors } = $$props;
+    	let { steps } = $$props;
 
     	const fig3b = {
     		type: 'line',
@@ -11608,7 +11629,7 @@ var app = (function () {
     		zKey: 'label'
     	};
 
-    	const writable_props = ['title', 'text', 'authors'];
+    	const writable_props = ['title', 'standfirst', 'authors', 'steps'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Main> was created with unknown prop '${key}'`);
@@ -11616,8 +11637,9 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
-    		if ('text' in $$props) $$invalidate(1, text = $$props.text);
+    		if ('standfirst' in $$props) $$invalidate(1, standfirst = $$props.standfirst);
     		if ('authors' in $$props) $$invalidate(2, authors = $$props.authors);
+    		if ('steps' in $$props) $$invalidate(3, steps = $$props.steps);
     	};
 
     	$$self.$capture_state = () => ({
@@ -11626,28 +11648,36 @@ var app = (function () {
     		Authors,
     		ScrollSection,
     		title,
-    		text,
+    		standfirst,
     		authors,
+    		steps,
     		fig3b
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
-    		if ('text' in $$props) $$invalidate(1, text = $$props.text);
+    		if ('standfirst' in $$props) $$invalidate(1, standfirst = $$props.standfirst);
     		if ('authors' in $$props) $$invalidate(2, authors = $$props.authors);
+    		if ('steps' in $$props) $$invalidate(3, steps = $$props.steps);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, text, authors];
+    	return [title, standfirst, authors, steps];
     }
 
     class Main extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$w, create_fragment$w, safe_not_equal, { title: 0, text: 1, authors: 2 });
+
+    		init(this, options, instance$w, create_fragment$w, safe_not_equal, {
+    			title: 0,
+    			standfirst: 1,
+    			authors: 2,
+    			steps: 3
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -11666,6 +11696,10 @@ var app = (function () {
     		if (/*authors*/ ctx[2] === undefined && !('authors' in props)) {
     			console.warn("<Main> was created without expected prop 'authors'");
     		}
+
+    		if (/*steps*/ ctx[3] === undefined && !('steps' in props)) {
+    			console.warn("<Main> was created without expected prop 'steps'");
+    		}
     	}
 
     	get title() {
@@ -11676,11 +11710,11 @@ var app = (function () {
     		throw new Error("<Main>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get text() {
+    	get standfirst() {
     		throw new Error("<Main>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set text(value) {
+    	set standfirst(value) {
     		throw new Error("<Main>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -11689,6 +11723,14 @@ var app = (function () {
     	}
 
     	set authors(value) {
+    		throw new Error("<Main>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get steps() {
+    		throw new Error("<Main>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set steps(value) {
     		throw new Error("<Main>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -15788,18 +15830,18 @@ var app = (function () {
 
     function get_each_context$e(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[3] = list[i];
+    	child_ctx[5] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$b(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[3] = list[i];
-    	child_ctx[7] = i;
+    	child_ctx[5] = list[i];
+    	child_ctx[9] = i;
     	return child_ctx;
     }
 
-    // (39:4) {:else}
+    // (40:4) {:else}
     function create_else_block$a(ctx) {
     	let div;
 
@@ -15807,7 +15849,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-fjbk1c");
-    			add_location(div, file$m, 38, 12, 1715);
+    			add_location(div, file$m, 39, 12, 1713);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15824,14 +15866,14 @@ var app = (function () {
     		block,
     		id: create_else_block$a.name,
     		type: "else",
-    		source: "(39:4) {:else}",
+    		source: "(40:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:8) {#if loaded}
+    // (12:8) {#if loaded}
     function create_if_block$f(ctx) {
     	let chartwrapper;
     	let current;
@@ -15896,17 +15938,17 @@ var app = (function () {
     		block,
     		id: create_if_block$f.name,
     		type: "if",
-    		source: "(11:8) {#if loaded}",
+    		source: "(12:8) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (42:8) {#each copy['section-one']['copy'] as d, i}
+    // (43:8) {#each copy as d, i}
     function create_each_block_1$b(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[3].value + "";
+    	let t0_value = /*d*/ ctx[5].value + "";
     	let t0;
     	let t1;
 
@@ -15915,14 +15957,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$m, 42, 12, 1850);
+    			add_location(p, file$m, 43, 12, 1825);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -15932,17 +15976,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$b.name,
     		type: "each",
-    		source: "(42:8) {#each copy['section-one']['copy'] as d, i}",
+    		source: "(43:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (49:8) {#each copy['section-one']['references'] as d}
+    // (50:8) {#each refs as d}
     function create_each_block$e(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[3].value + "";
+    	let t0_value = /*d*/ ctx[5].value + "";
     	let t0;
     	let t1;
 
@@ -15951,14 +15995,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$m, 49, 12, 2020);
+    			add_location(p, file$m, 50, 12, 1966);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -15968,7 +16014,7 @@ var app = (function () {
     		block,
     		id: create_each_block$e.name,
     		type: "each",
-    		source: "(49:8) {#each copy['section-one']['references'] as d}",
+    		source: "(50:8) {#each refs as d}",
     		ctx
     	});
 
@@ -15993,13 +16039,13 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1]) return 0;
+    		if (/*loaded*/ ctx[3]) return 0;
     		return 1;
     	}
 
     	current_block_type_index = select_block_type(ctx);
     	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let each_value_1 = data['section-one']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -16007,7 +16053,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$b(get_each_context_1$b(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-one']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -16037,13 +16083,13 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "section-title svelte-fjbk1c");
-    			add_location(h2, file$m, 9, 4, 338);
+    			add_location(h2, file$m, 10, 4, 336);
     			attr_dev(div0, "class", "copy svelte-fjbk1c");
-    			add_location(div0, file$m, 40, 4, 1767);
+    			add_location(div0, file$m, 41, 4, 1765);
     			attr_dev(div1, "class", "references svelte-fjbk1c");
-    			add_location(div1, file$m, 47, 4, 1928);
+    			add_location(div1, file$m, 48, 4, 1903);
     			attr_dev(div2, "class", "section section-1 svelte-fjbk1c");
-    			add_location(div2, file$m, 8, 0, 248);
+    			add_location(div2, file$m, 9, 0, 246);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16072,7 +16118,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[2], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -16105,8 +16151,8 @@ var app = (function () {
     				if_block.m(div2, t2);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-one']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -16129,8 +16175,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-one']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -16193,43 +16239,50 @@ var app = (function () {
     	validate_slots('Section1', slots, []);
     	let loaded = false;
     	let { once } = $$props;
-    	const writable_props = ['once'];
+    	let { copy } = $$props;
+    	let { refs } = $$props;
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section1> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
     		timeFormat,
     		inView,
     		ChartWrapper,
-    		copy: data,
     		loaded,
-    		once
+    		once,
+    		copy,
+    		refs
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, loaded, enter_handler];
+    	return [once, copy, refs, loaded, enter_handler];
     }
 
     class Section1 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, { once: 0 });
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -16244,6 +16297,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section1> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section1> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section1> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -16253,6 +16314,22 @@ var app = (function () {
     	set once(value) {
     		throw new Error("<Section1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get copy() {
+    		throw new Error("<Section1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
+    		throw new Error("<Section1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src/components/main/Section2.svelte generated by Svelte v3.49.0 */
@@ -16260,18 +16337,18 @@ var app = (function () {
 
     function get_each_context$d(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
+    	child_ctx[7] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$a(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
-    	child_ctx[9] = i;
+    	child_ctx[7] = list[i];
+    	child_ctx[11] = i;
     	return child_ctx;
     }
 
-    // (40:4) {:else}
+    // (41:4) {:else}
     function create_else_block$9(ctx) {
     	let div;
 
@@ -16279,7 +16356,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-1ujva5");
-    			add_location(div, file$l, 39, 12, 1524);
+    			add_location(div, file$l, 40, 12, 1522);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -16296,14 +16373,14 @@ var app = (function () {
     		block,
     		id: create_else_block$9.name,
     		type: "else",
-    		source: "(40:4) {:else}",
+    		source: "(41:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (11:4) {#if loaded}
+    // (12:4) {#if loaded}
     function create_if_block$e(ctx) {
     	let chartwrapper;
     	let current;
@@ -16321,7 +16398,7 @@ var app = (function () {
     						includeCaption: true,
     						caption: 'Percent of users falling into the six political categories.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: /*func*/ ctx[2]
+    						formatTickY: /*func*/ ctx[4]
     					},
     					{
     						url: 'assets/data/fig2b_ledwich.csv',
@@ -16333,7 +16410,7 @@ var app = (function () {
     						includeCaption: true,
     						caption: 'Consumption share of the six political channel categories.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: /*func_1*/ ctx[3]
+    						formatTickY: /*func_1*/ ctx[5]
     					}
     				],
     				title: "Community engagement"
@@ -16368,17 +16445,17 @@ var app = (function () {
     		block,
     		id: create_if_block$e.name,
     		type: "if",
-    		source: "(11:4) {#if loaded}",
+    		source: "(12:4) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (43:8) {#each copy['section-two']['copy'] as d, i}
+    // (44:8) {#each copy as d, i}
     function create_each_block_1$a(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[5].value + "";
+    	let t0_value = /*d*/ ctx[7].value + "";
     	let t0;
     	let t1;
 
@@ -16387,14 +16464,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$l, 43, 12, 1659);
+    			add_location(p, file$l, 44, 12, 1634);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -16404,17 +16483,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$a.name,
     		type: "each",
-    		source: "(43:8) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(44:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:8) {#each copy['section-two']['references'] as d}
+    // (51:8) {#each refs as d}
     function create_each_block$d(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[5].value + "";
+    	let t0_value = /*d*/ ctx[7].value + "";
     	let t0;
     	let t1;
 
@@ -16423,14 +16502,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$l, 50, 12, 1829);
+    			add_location(p, file$l, 51, 12, 1775);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -16440,7 +16521,7 @@ var app = (function () {
     		block,
     		id: create_each_block$d.name,
     		type: "each",
-    		source: "(50:8) {#each copy['section-two']['references'] as d}",
+    		source: "(51:8) {#each refs as d}",
     		ctx
     	});
 
@@ -16463,13 +16544,13 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1]) return 0;
+    		if (/*loaded*/ ctx[3]) return 0;
     		return 1;
     	}
 
     	current_block_type_index = select_block_type(ctx);
     	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -16477,7 +16558,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$a(get_each_context_1$a(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -16504,11 +16585,11 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "copy svelte-1ujva5");
-    			add_location(div0, file$l, 41, 4, 1576);
+    			add_location(div0, file$l, 42, 4, 1574);
     			attr_dev(div1, "class", "references svelte-1ujva5");
-    			add_location(div1, file$l, 48, 4, 1737);
+    			add_location(div1, file$l, 49, 4, 1712);
     			attr_dev(div2, "class", "section section-2 svelte-1ujva5");
-    			add_location(div2, file$l, 9, 0, 284);
+    			add_location(div2, file$l, 10, 0, 282);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16535,7 +16616,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[4], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[6], false, false, false)
     				];
 
     				mounted = true;
@@ -16568,8 +16649,8 @@ var app = (function () {
     				if_block.m(div2, t0);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -16592,8 +16673,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -16653,7 +16734,9 @@ var app = (function () {
     	validate_slots('Section2', slots, []);
     	let loaded = false;
     	let { once } = $$props;
-    	const writable_props = ['once'];
+    	let { copy } = $$props;
+    	let { refs } = $$props;
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section2> was created with unknown prop '${key}'`);
@@ -16661,10 +16744,12 @@ var app = (function () {
 
     	const func = d => format('.1%')(d).replace(/[.,]0+/, "");
     	const func_1 = d => format('.2%')(d).replace(/[.,]0+/, "");
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -16672,27 +16757,30 @@ var app = (function () {
     		format,
     		inView,
     		ChartWrapper,
-    		copy: data,
     		loaded,
-    		once
+    		once,
+    		copy,
+    		refs
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, loaded, func, func_1, enter_handler];
+    	return [once, copy, refs, loaded, func, func_1, enter_handler];
     }
 
     class Section2 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$m, create_fragment$m, safe_not_equal, { once: 0 });
+    		init(this, options, instance$m, create_fragment$m, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -16707,6 +16795,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section2> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section2> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section2> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -16714,6 +16810,22 @@ var app = (function () {
     	}
 
     	set once(value) {
+    		throw new Error("<Section2>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get copy() {
+    		throw new Error("<Section2>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section2>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section2>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
     		throw new Error("<Section2>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -20425,19 +20537,19 @@ var app = (function () {
 
     function get_each_context$8(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[10] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$6(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[10] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
-    // (39:4) {:else}
+    // (40:4) {:else}
     function create_else_block$7(ctx) {
     	let div;
 
@@ -20445,7 +20557,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-1kekzne");
-    			add_location(div, file$f, 38, 12, 1257);
+    			add_location(div, file$f, 39, 12, 1255);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -20462,26 +20574,26 @@ var app = (function () {
     		block,
     		id: create_else_block$7.name,
     		type: "else",
-    		source: "(39:4) {:else}",
+    		source: "(40:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (26:4) {#if loaded && data_fig1}
+    // (27:4) {#if loaded && data_fig1}
     function create_if_block$b(ctx) {
     	let stackedbars;
     	let current;
 
     	stackedbars = new StackedBars({
     			props: {
-    				data: /*data_fig1*/ ctx[2],
-    				yKey: /*yKey*/ ctx[5],
-    				xKey: /*xKey*/ ctx[4],
-    				zKey: /*zKey*/ ctx[6],
+    				data: /*data_fig1*/ ctx[4],
+    				yKey: /*yKey*/ ctx[7],
+    				xKey: /*xKey*/ ctx[6],
+    				zKey: /*zKey*/ ctx[8],
     				formatter: formatPct(2),
-    				url: /*url_fig1*/ ctx[3],
+    				url: /*url_fig1*/ ctx[5],
     				spanCol: 12,
     				customClass: 'chart-medium',
     				tooltipType: 'community',
@@ -20500,7 +20612,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const stackedbars_changes = {};
-    			if (dirty & /*data_fig1*/ 4) stackedbars_changes.data = /*data_fig1*/ ctx[2];
+    			if (dirty & /*data_fig1*/ 16) stackedbars_changes.data = /*data_fig1*/ ctx[4];
     			stackedbars.$set(stackedbars_changes);
     		},
     		i: function intro(local) {
@@ -20521,17 +20633,17 @@ var app = (function () {
     		block,
     		id: create_if_block$b.name,
     		type: "if",
-    		source: "(26:4) {#if loaded && data_fig1}",
+    		source: "(27:4) {#if loaded && data_fig1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (42:8) {#each copy['section-two']['copy'] as d, i}
+    // (43:8) {#each copy as d, i}
     function create_each_block_1$6(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[8].value + "";
+    	let t0_value = /*d*/ ctx[10].value + "";
     	let t0;
     	let t1;
 
@@ -20540,14 +20652,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$f, 42, 12, 1392);
+    			add_location(p, file$f, 43, 12, 1367);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[10].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -20557,17 +20671,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$6.name,
     		type: "each",
-    		source: "(42:8) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(43:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (49:8) {#each copy['section-two']['references'] as d, i}
+    // (50:8) {#each refs as d, i}
     function create_each_block$8(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[8].value + "";
+    	let t0_value = /*d*/ ctx[10].value + "";
     	let t0;
     	let t1;
 
@@ -20576,14 +20690,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$f, 49, 12, 1565);
+    			add_location(p, file$f, 50, 12, 1511);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[10].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -20593,7 +20709,7 @@ var app = (function () {
     		block,
     		id: create_each_block$8.name,
     		type: "each",
-    		source: "(49:8) {#each copy['section-two']['references'] as d, i}",
+    		source: "(50:8) {#each refs as d, i}",
     		ctx
     	});
 
@@ -20618,13 +20734,13 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1] && /*data_fig1*/ ctx[2]) return 0;
+    		if (/*loaded*/ ctx[3] && /*data_fig1*/ ctx[4]) return 0;
     		return 1;
     	}
 
     	current_block_type_index = select_block_type(ctx);
     	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -20632,7 +20748,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$6(get_each_context_1$6(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -20662,13 +20778,13 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "section-title svelte-1kekzne");
-    			add_location(h2, file$f, 24, 4, 764);
+    			add_location(h2, file$f, 25, 4, 762);
     			attr_dev(div0, "class", "copy svelte-1kekzne");
-    			add_location(div0, file$f, 40, 4, 1309);
+    			add_location(div0, file$f, 41, 4, 1307);
     			attr_dev(div1, "class", "references svelte-1kekzne");
-    			add_location(div1, file$f, 47, 4, 1470);
+    			add_location(div1, file$f, 48, 4, 1445);
     			attr_dev(div2, "class", "section section-3 svelte-1kekzne");
-    			add_location(div2, file$f, 23, 0, 674);
+    			add_location(div2, file$f, 24, 0, 672);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20697,7 +20813,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[7], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[9], false, false, false)
     				];
 
     				mounted = true;
@@ -20730,8 +20846,8 @@ var app = (function () {
     				if_block.m(div2, t2);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -20754,8 +20870,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -20815,6 +20931,8 @@ var app = (function () {
     	validate_slots('Section3', slots, []);
     	let loaded = false;
     	let { once } = $$props;
+    	let { copy } = $$props;
+    	let { refs } = $$props;
     	let url_fig1 = 'assets/data/fig1_pnas_mean.csv';
     	let data_fig1;
     	let xKey = [0, 1];
@@ -20823,19 +20941,21 @@ var app = (function () {
 
     	onMount(async () => {
     		const res_fig1 = await csv(url_fig1, autoType);
-    		$$invalidate(2, data_fig1 = res_fig1);
+    		$$invalidate(4, data_fig1 = res_fig1);
     	});
 
-    	const writable_props = ['once'];
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section3> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -20844,10 +20964,11 @@ var app = (function () {
     		autoType,
     		inView,
     		StackedBars,
-    		copy: data,
     		formatPct,
     		loaded,
     		once,
+    		copy,
+    		refs,
     		url_fig1,
     		data_fig1,
     		xKey,
@@ -20856,26 +20977,28 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
-    		if ('url_fig1' in $$props) $$invalidate(3, url_fig1 = $$props.url_fig1);
-    		if ('data_fig1' in $$props) $$invalidate(2, data_fig1 = $$props.data_fig1);
-    		if ('xKey' in $$props) $$invalidate(4, xKey = $$props.xKey);
-    		if ('yKey' in $$props) $$invalidate(5, yKey = $$props.yKey);
-    		if ('zKey' in $$props) $$invalidate(6, zKey = $$props.zKey);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
+    		if ('url_fig1' in $$props) $$invalidate(5, url_fig1 = $$props.url_fig1);
+    		if ('data_fig1' in $$props) $$invalidate(4, data_fig1 = $$props.data_fig1);
+    		if ('xKey' in $$props) $$invalidate(6, xKey = $$props.xKey);
+    		if ('yKey' in $$props) $$invalidate(7, yKey = $$props.yKey);
+    		if ('zKey' in $$props) $$invalidate(8, zKey = $$props.zKey);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, loaded, data_fig1, url_fig1, xKey, yKey, zKey, enter_handler];
+    	return [once, copy, refs, loaded, data_fig1, url_fig1, xKey, yKey, zKey, enter_handler];
     }
 
     class Section3 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$g, create_fragment$g, safe_not_equal, { once: 0 });
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -20890,6 +21013,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section3> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section3> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section3> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -20899,6 +21030,22 @@ var app = (function () {
     	set once(value) {
     		throw new Error("<Section3>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get copy() {
+    		throw new Error("<Section3>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section3>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section3>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
+    		throw new Error("<Section3>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src/components/main/Section4.svelte generated by Svelte v3.49.0 */
@@ -20906,19 +21053,19 @@ var app = (function () {
 
     function get_each_context$7(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[15] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[15] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
-    // (46:4) {:else}
+    // (47:4) {:else}
     function create_else_block$6(ctx) {
     	let div;
 
@@ -20926,7 +21073,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-m0y2zp");
-    			add_location(div, file$e, 45, 12, 1752);
+    			add_location(div, file$e, 46, 12, 1750);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -20943,23 +21090,23 @@ var app = (function () {
     		block,
     		id: create_else_block$6.name,
     		type: "else",
-    		source: "(46:4) {:else}",
+    		source: "(47:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (37:4) {#if loaded && data_fig4}
+    // (38:4) {#if loaded && data_fig4}
     function create_if_block$a(ctx) {
     	let sankeydiagram;
     	let current;
 
     	sankeydiagram = new SankeyDiagram({
     			props: {
-    				nodes: /*nodes*/ ctx[3],
-    				links: /*links*/ ctx[4],
-    				url: /*url_fig4*/ ctx[5],
+    				nodes: /*nodes*/ ctx[5],
+    				links: /*links*/ ctx[6],
+    				url: /*url_fig4*/ ctx[7],
     				sourceLabel: 'Month',
     				targetLabel: 'Month + 1',
     				caption: 'Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month.'
@@ -20977,8 +21124,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const sankeydiagram_changes = {};
-    			if (dirty & /*nodes*/ 8) sankeydiagram_changes.nodes = /*nodes*/ ctx[3];
-    			if (dirty & /*links*/ 16) sankeydiagram_changes.links = /*links*/ ctx[4];
+    			if (dirty & /*nodes*/ 32) sankeydiagram_changes.nodes = /*nodes*/ ctx[5];
+    			if (dirty & /*links*/ 64) sankeydiagram_changes.links = /*links*/ ctx[6];
     			sankeydiagram.$set(sankeydiagram_changes);
     		},
     		i: function intro(local) {
@@ -20999,17 +21146,17 @@ var app = (function () {
     		block,
     		id: create_if_block$a.name,
     		type: "if",
-    		source: "(37:4) {#if loaded && data_fig4}",
+    		source: "(38:4) {#if loaded && data_fig4}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (49:8) {#each copy['section-two']['copy'] as d, i}
+    // (50:8) {#each copy as d, i}
     function create_each_block_1$5(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[13].value + "";
+    	let t0_value = /*d*/ ctx[15].value + "";
     	let t0;
     	let t1;
 
@@ -21018,14 +21165,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$e, 49, 12, 1887);
+    			add_location(p, file$e, 50, 12, 1862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[15].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -21035,17 +21184,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$5.name,
     		type: "each",
-    		source: "(49:8) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(50:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (56:8) {#each copy['section-two']['references'] as d, i}
+    // (57:8) {#each refs as d, i}
     function create_each_block$7(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[13].value + "";
+    	let t0_value = /*d*/ ctx[15].value + "";
     	let t0;
     	let t1;
 
@@ -21054,14 +21203,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$e, 56, 12, 2060);
+    			add_location(p, file$e, 57, 12, 2006);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[15].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -21071,7 +21222,7 @@ var app = (function () {
     		block,
     		id: create_each_block$7.name,
     		type: "each",
-    		source: "(56:8) {#each copy['section-two']['references'] as d, i}",
+    		source: "(57:8) {#each refs as d, i}",
     		ctx
     	});
 
@@ -21096,13 +21247,13 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1] && /*data_fig4*/ ctx[2]) return 0;
+    		if (/*loaded*/ ctx[3] && /*data_fig4*/ ctx[4]) return 0;
     		return 1;
     	}
 
     	current_block_type_index = select_block_type(ctx);
     	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -21110,7 +21261,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$5(get_each_context_1$5(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -21140,13 +21291,13 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "section-title svelte-m0y2zp");
-    			add_location(h2, file$e, 35, 4, 1279);
+    			add_location(h2, file$e, 36, 4, 1277);
     			attr_dev(div0, "class", "copy svelte-m0y2zp");
-    			add_location(div0, file$e, 47, 4, 1804);
+    			add_location(div0, file$e, 48, 4, 1802);
     			attr_dev(div1, "class", "references svelte-m0y2zp");
-    			add_location(div1, file$e, 54, 4, 1965);
+    			add_location(div1, file$e, 55, 4, 1940);
     			attr_dev(div2, "class", "section section-4 svelte-m0y2zp");
-    			add_location(div2, file$e, 34, 0, 1189);
+    			add_location(div2, file$e, 35, 0, 1187);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21175,7 +21326,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[6], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[8], false, false, false)
     				];
 
     				mounted = true;
@@ -21208,8 +21359,8 @@ var app = (function () {
     				if_block.m(div2, t2);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -21232,8 +21383,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -21293,6 +21444,8 @@ var app = (function () {
     	validate_slots('Section4', slots, []);
     	let loaded = false;
     	let { once } = $$props;
+    	let { copy } = $$props;
+    	let { refs } = $$props;
     	let url_fig1 = 'assets/data/fig1_ledwich.csv';
     	let data_fig1;
     	let xKey = [0, 1];
@@ -21306,15 +21459,15 @@ var app = (function () {
 
     	onMount(async () => {
     		const res_fig4 = await csv(url_fig4, autoType);
-    		$$invalidate(2, data_fig4 = enforceOrder(res_fig4, ['fR', 'R', 'AW', 'C', 'L', 'fL'], 'from'));
+    		$$invalidate(4, data_fig4 = enforceOrder(res_fig4, ['fR', 'R', 'AW', 'C', 'L', 'fL'], 'from'));
     		cols = enforceOrder(res_fig4.columns, ['fR', 'R', 'AW', 'C', 'L', 'fL']);
 
-    		$$invalidate(3, nodes = [
+    		$$invalidate(5, nodes = [
     			...data_fig4.map(d => ({ id: `source_${d.from}` })),
     			...cols.map(d => ({ id: `target_${d}` }))
     		]);
 
-    		$$invalidate(4, links = flatten(data_fig4.map((d, i) => cols.map((e, l) => ({
+    		$$invalidate(6, links = flatten(data_fig4.map((d, i) => cols.map((e, l) => ({
     			sourceName: d.from,
     			targetName: e,
     			source: i,
@@ -21323,16 +21476,18 @@ var app = (function () {
     		})))));
     	});
 
-    	const writable_props = ['once'];
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section4> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -21342,10 +21497,11 @@ var app = (function () {
     		flatten,
     		inView,
     		SankeyDiagram,
-    		copy: data,
     		enforceOrder,
     		loaded,
     		once,
+    		copy,
+    		refs,
     		url_fig1,
     		data_fig1,
     		xKey,
@@ -21359,17 +21515,19 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     		if ('url_fig1' in $$props) url_fig1 = $$props.url_fig1;
     		if ('data_fig1' in $$props) data_fig1 = $$props.data_fig1;
     		if ('xKey' in $$props) xKey = $$props.xKey;
     		if ('yKey' in $$props) yKey = $$props.yKey;
     		if ('zKey' in $$props) zKey = $$props.zKey;
-    		if ('url_fig4' in $$props) $$invalidate(5, url_fig4 = $$props.url_fig4);
-    		if ('data_fig4' in $$props) $$invalidate(2, data_fig4 = $$props.data_fig4);
-    		if ('nodes' in $$props) $$invalidate(3, nodes = $$props.nodes);
-    		if ('links' in $$props) $$invalidate(4, links = $$props.links);
+    		if ('url_fig4' in $$props) $$invalidate(7, url_fig4 = $$props.url_fig4);
+    		if ('data_fig4' in $$props) $$invalidate(4, data_fig4 = $$props.data_fig4);
+    		if ('nodes' in $$props) $$invalidate(5, nodes = $$props.nodes);
+    		if ('links' in $$props) $$invalidate(6, links = $$props.links);
     		if ('cols' in $$props) cols = $$props.cols;
     	};
 
@@ -21377,13 +21535,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, loaded, data_fig4, nodes, links, url_fig4, enter_handler];
+    	return [once, copy, refs, loaded, data_fig4, nodes, links, url_fig4, enter_handler];
     }
 
     class Section4 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, { once: 0 });
+    		init(this, options, instance$f, create_fragment$f, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -21398,6 +21556,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section4> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section4> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section4> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -21405,6 +21571,22 @@ var app = (function () {
     	}
 
     	set once(value) {
+    		throw new Error("<Section4>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get copy() {
+    		throw new Error("<Section4>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section4>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section4>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
     		throw new Error("<Section4>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -22693,19 +22875,19 @@ var app = (function () {
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[15] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
-    	child_ctx[15] = i;
+    	child_ctx[15] = list[i];
+    	child_ctx[17] = i;
     	return child_ctx;
     }
 
-    // (58:8) {:else}
+    // (59:8) {:else}
     function create_else_block_1$1(ctx) {
     	let div;
 
@@ -22713,7 +22895,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-cjebcy");
-    			add_location(div, file$b, 57, 16, 2377);
+    			add_location(div, file$b, 58, 16, 2375);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22730,25 +22912,25 @@ var app = (function () {
     		block,
     		id: create_else_block_1$1.name,
     		type: "else",
-    		source: "(58:8) {:else}",
+    		source: "(59:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (47:4) {#if loaded && data_fig5}
+    // (48:4) {#if loaded && data_fig5}
     function create_if_block_1$5(ctx) {
     	let rangeplot;
     	let current;
 
     	rangeplot = new RangePlot({
     			props: {
-    				data: /*data_fig5*/ ctx[2],
-    				groupedData: /*groupedData_fig5*/ ctx[3],
-    				yKey: /*yKey*/ ctx[8],
-    				xKey: /*xKey*/ ctx[7],
-    				zKey: /*zKey*/ ctx[9],
+    				data: /*data_fig5*/ ctx[4],
+    				groupedData: /*groupedData_fig5*/ ctx[5],
+    				yKey: /*yKey*/ ctx[10],
+    				xKey: /*xKey*/ ctx[9],
+    				zKey: /*zKey*/ ctx[11],
     				formatter: func$1,
     				url: url_fig5,
     				caption: 'Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption group in the event of watching 2 to 4 videos, or to a control group, if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources.'
@@ -22766,8 +22948,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const rangeplot_changes = {};
-    			if (dirty & /*data_fig5*/ 4) rangeplot_changes.data = /*data_fig5*/ ctx[2];
-    			if (dirty & /*groupedData_fig5*/ 8) rangeplot_changes.groupedData = /*groupedData_fig5*/ ctx[3];
+    			if (dirty & /*data_fig5*/ 16) rangeplot_changes.data = /*data_fig5*/ ctx[4];
+    			if (dirty & /*groupedData_fig5*/ 32) rangeplot_changes.groupedData = /*groupedData_fig5*/ ctx[5];
     			rangeplot.$set(rangeplot_changes);
     		},
     		i: function intro(local) {
@@ -22788,14 +22970,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$5.name,
     		type: "if",
-    		source: "(47:4) {#if loaded && data_fig5}",
+    		source: "(48:4) {#if loaded && data_fig5}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (71:4) {:else}
+    // (72:4) {:else}
     function create_else_block$5(ctx) {
     	let div;
 
@@ -22803,7 +22985,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-cjebcy");
-    			add_location(div, file$b, 70, 12, 2860);
+    			add_location(div, file$b, 71, 12, 2858);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22820,23 +23002,23 @@ var app = (function () {
     		block,
     		id: create_else_block$5.name,
     		type: "else",
-    		source: "(71:4) {:else}",
+    		source: "(72:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (60:4) {#if loaded && data_fig6}
+    // (61:4) {#if loaded && data_fig6}
     function create_if_block$8(ctx) {
     	let sankeydiagram;
     	let current;
 
     	sankeydiagram = new SankeyDiagram({
     			props: {
-    				nodes: /*nodes*/ ctx[5],
-    				links: /*links*/ ctx[6],
-    				formatter: /*sankeyTooltipFormatter*/ ctx[10],
+    				nodes: /*nodes*/ ctx[7],
+    				links: /*links*/ ctx[8],
+    				formatter: /*sankeyTooltipFormatter*/ ctx[12],
     				url: url_fig6,
     				spanCol: 6,
     				sourceLabel: 'YouTube',
@@ -22856,8 +23038,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const sankeydiagram_changes = {};
-    			if (dirty & /*nodes*/ 32) sankeydiagram_changes.nodes = /*nodes*/ ctx[5];
-    			if (dirty & /*links*/ 64) sankeydiagram_changes.links = /*links*/ ctx[6];
+    			if (dirty & /*nodes*/ 128) sankeydiagram_changes.nodes = /*nodes*/ ctx[7];
+    			if (dirty & /*links*/ 256) sankeydiagram_changes.links = /*links*/ ctx[8];
     			sankeydiagram.$set(sankeydiagram_changes);
     		},
     		i: function intro(local) {
@@ -22878,17 +23060,17 @@ var app = (function () {
     		block,
     		id: create_if_block$8.name,
     		type: "if",
-    		source: "(60:4) {#if loaded && data_fig6}",
+    		source: "(61:4) {#if loaded && data_fig6}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (74:8) {#each copy['section-two']['copy'] as d, i}
+    // (75:8) {#each copy as d, i}
     function create_each_block_1$3(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[13].value + "";
+    	let t0_value = /*d*/ ctx[15].value + "";
     	let t0;
     	let t1;
 
@@ -22897,14 +23079,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$b, 74, 12, 2995);
+    			add_location(p, file$b, 75, 12, 2970);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[15].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -22914,17 +23098,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$3.name,
     		type: "each",
-    		source: "(74:8) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(75:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (81:8) {#each copy['section-two']['references'] as d, i}
+    // (82:8) {#each refs as d, i}
     function create_each_block$4(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[13].value + "";
+    	let t0_value = /*d*/ ctx[15].value + "";
     	let t0;
     	let t1;
 
@@ -22933,14 +23117,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$b, 81, 12, 3168);
+    			add_location(p, file$b, 82, 12, 3114);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[15].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -22950,7 +23136,7 @@ var app = (function () {
     		block,
     		id: create_each_block$4.name,
     		type: "each",
-    		source: "(81:8) {#each copy['section-two']['references'] as d, i}",
+    		source: "(82:8) {#each refs as d, i}",
     		ctx
     	});
 
@@ -22976,7 +23162,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1] && /*data_fig5*/ ctx[2]) return 0;
+    		if (/*loaded*/ ctx[3] && /*data_fig5*/ ctx[4]) return 0;
     		return 1;
     	}
 
@@ -22986,13 +23172,13 @@ var app = (function () {
     	const if_blocks_1 = [];
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*loaded*/ ctx[1] && /*data_fig6*/ ctx[4]) return 0;
+    		if (/*loaded*/ ctx[3] && /*data_fig6*/ ctx[6]) return 0;
     		return 1;
     	}
 
     	current_block_type_index_1 = select_block_type_1(ctx);
     	if_block1 = if_blocks_1[current_block_type_index_1] = if_block_creators_1[current_block_type_index_1](ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -23000,7 +23186,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$3(get_each_context_1$3(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -23029,11 +23215,11 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "copy svelte-cjebcy");
-    			add_location(div0, file$b, 72, 4, 2912);
+    			add_location(div0, file$b, 73, 4, 2910);
     			attr_dev(div1, "class", "references svelte-cjebcy");
-    			add_location(div1, file$b, 79, 4, 3073);
+    			add_location(div1, file$b, 80, 4, 3048);
     			attr_dev(div2, "class", "section section-5 svelte-cjebcy");
-    			add_location(div2, file$b, 45, 0, 1566);
+    			add_location(div2, file$b, 46, 0, 1564);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23062,7 +23248,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[11], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[13], false, false, false)
     				];
 
     				mounted = true;
@@ -23121,8 +23307,8 @@ var app = (function () {
     				if_block1.m(div2, t1);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -23145,8 +23331,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -23213,6 +23399,8 @@ var app = (function () {
     	validate_slots('Section5', slots, []);
     	let loaded = false;
     	let { once } = $$props;
+    	let { copy } = $$props;
+    	let { refs } = $$props;
     	let data_fig5;
     	let groupedData_fig5;
     	let xKey = 'mean';
@@ -23231,18 +23419,18 @@ var app = (function () {
 
     	onMount(async () => {
     		const res_fig5 = await csv(url_fig5, autoType);
-    		$$invalidate(2, data_fig5 = res_fig5);
-    		$$invalidate(3, groupedData_fig5 = group(data_fig5, d => d[yKey]));
+    		$$invalidate(4, data_fig5 = res_fig5);
+    		$$invalidate(5, groupedData_fig5 = group(data_fig5, d => d[yKey]));
     		const res_fig6 = await csv(url_fig6, autoType);
-    		$$invalidate(4, data_fig6 = res_fig6);
+    		$$invalidate(6, data_fig6 = res_fig6);
     		cols = enforceOrder(data_fig6.columns, ['fR', 'R', 'C', 'L', 'fL']);
 
-    		$$invalidate(5, nodes = [
+    		$$invalidate(7, nodes = [
     			...data_fig6.map(d => ({ id: `source_${d.from}` })),
     			...cols.map(d => ({ id: `target_${d}` }))
     		]);
 
-    		$$invalidate(6, links = flatten(data_fig6.map((d, i) => cols.map((e, l) => ({
+    		$$invalidate(8, links = flatten(data_fig6.map((d, i) => cols.map((e, l) => ({
     			sourceName: d.from,
     			targetName: e,
     			source: i,
@@ -23251,16 +23439,18 @@ var app = (function () {
     		})))));
     	});
 
-    	const writable_props = ['once'];
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section5> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -23272,10 +23462,11 @@ var app = (function () {
     		inView,
     		RangePlot,
     		SankeyDiagram,
-    		copy: data,
     		enforceOrder,
     		loaded,
     		once,
+    		copy,
+    		refs,
     		url_fig5,
     		url_fig6,
     		data_fig5,
@@ -23291,16 +23482,18 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
-    		if ('data_fig5' in $$props) $$invalidate(2, data_fig5 = $$props.data_fig5);
-    		if ('groupedData_fig5' in $$props) $$invalidate(3, groupedData_fig5 = $$props.groupedData_fig5);
-    		if ('xKey' in $$props) $$invalidate(7, xKey = $$props.xKey);
-    		if ('yKey' in $$props) $$invalidate(8, yKey = $$props.yKey);
-    		if ('zKey' in $$props) $$invalidate(9, zKey = $$props.zKey);
-    		if ('data_fig6' in $$props) $$invalidate(4, data_fig6 = $$props.data_fig6);
-    		if ('nodes' in $$props) $$invalidate(5, nodes = $$props.nodes);
-    		if ('links' in $$props) $$invalidate(6, links = $$props.links);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
+    		if ('data_fig5' in $$props) $$invalidate(4, data_fig5 = $$props.data_fig5);
+    		if ('groupedData_fig5' in $$props) $$invalidate(5, groupedData_fig5 = $$props.groupedData_fig5);
+    		if ('xKey' in $$props) $$invalidate(9, xKey = $$props.xKey);
+    		if ('yKey' in $$props) $$invalidate(10, yKey = $$props.yKey);
+    		if ('zKey' in $$props) $$invalidate(11, zKey = $$props.zKey);
+    		if ('data_fig6' in $$props) $$invalidate(6, data_fig6 = $$props.data_fig6);
+    		if ('nodes' in $$props) $$invalidate(7, nodes = $$props.nodes);
+    		if ('links' in $$props) $$invalidate(8, links = $$props.links);
     		if ('cols' in $$props) cols = $$props.cols;
     	};
 
@@ -23310,6 +23503,8 @@ var app = (function () {
 
     	return [
     		once,
+    		copy,
+    		refs,
     		loaded,
     		data_fig5,
     		groupedData_fig5,
@@ -23327,7 +23522,7 @@ var app = (function () {
     class Section5 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { once: 0 });
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -23342,6 +23537,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section5> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section5> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section5> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -23351,6 +23554,22 @@ var app = (function () {
     	set once(value) {
     		throw new Error("<Section5>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get copy() {
+    		throw new Error("<Section5>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section5>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section5>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
+    		throw new Error("<Section5>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src/components/main/Section6.svelte generated by Svelte v3.49.0 */
@@ -23358,19 +23577,19 @@ var app = (function () {
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[10] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
     function get_each_context_1$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[10] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
-    // (56:4) {:else}
+    // (57:4) {:else}
     function create_else_block_1(ctx) {
     	let div;
 
@@ -23378,7 +23597,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-cjebcy");
-    			add_location(div, file$a, 55, 12, 2303);
+    			add_location(div, file$a, 56, 12, 2301);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -23394,14 +23613,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(56:4) {:else}",
+    		source: "(57:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:4) {#if loaded}
+    // (28:4) {#if loaded}
     function create_if_block_1$4(ctx) {
     	let chartwrapper;
     	let current;
@@ -23466,14 +23685,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$4.name,
     		type: "if",
-    		source: "(27:4) {#if loaded}",
+    		source: "(28:4) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (71:4) {:else}
+    // (72:4) {:else}
     function create_else_block$4(ctx) {
     	let div;
 
@@ -23481,7 +23700,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-cjebcy");
-    			add_location(div, file$a, 70, 12, 2790);
+    			add_location(div, file$a, 71, 12, 2788);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -23498,28 +23717,28 @@ var app = (function () {
     		block,
     		id: create_else_block$4.name,
     		type: "else",
-    		source: "(71:4) {:else}",
+    		source: "(72:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (58:4) {#if loaded && data_table2}
+    // (59:4) {#if loaded && data_table2}
     function create_if_block$7(ctx) {
     	let stackedbars;
     	let current;
 
     	stackedbars = new StackedBars({
     			props: {
-    				data: /*data_table2*/ ctx[2],
-    				yKey: /*yKey*/ ctx[5],
-    				xKey: /*xKey*/ ctx[4],
-    				zKey: /*zKey*/ ctx[6],
+    				data: /*data_table2*/ ctx[4],
+    				yKey: /*yKey*/ ctx[7],
+    				xKey: /*xKey*/ ctx[6],
+    				zKey: /*zKey*/ ctx[8],
     				formatter: formatPct(2),
     				keyColorMap: youTubeMap,
     				keyLabelMap: youTubeMap$1,
-    				url: /*url_fig1*/ ctx[3],
+    				url: /*url_fig1*/ ctx[5],
     				spanCol: 6,
     				caption: 'Distribution of the entry points of videos within each political category'
     			},
@@ -23536,7 +23755,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const stackedbars_changes = {};
-    			if (dirty & /*data_table2*/ 4) stackedbars_changes.data = /*data_table2*/ ctx[2];
+    			if (dirty & /*data_table2*/ 16) stackedbars_changes.data = /*data_table2*/ ctx[4];
     			stackedbars.$set(stackedbars_changes);
     		},
     		i: function intro(local) {
@@ -23557,17 +23776,17 @@ var app = (function () {
     		block,
     		id: create_if_block$7.name,
     		type: "if",
-    		source: "(58:4) {#if loaded && data_table2}",
+    		source: "(59:4) {#if loaded && data_table2}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (74:8) {#each copy['section-two']['copy'] as d, i}
+    // (75:8) {#each copy as d, i}
     function create_each_block_1$2(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[8].value + "";
+    	let t0_value = /*d*/ ctx[10].value + "";
     	let t0;
     	let t1;
 
@@ -23576,14 +23795,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$a, 74, 12, 2925);
+    			add_location(p, file$a, 75, 12, 2900);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[10].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -23593,17 +23814,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$2.name,
     		type: "each",
-    		source: "(74:8) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(75:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (81:8) {#each copy['section-two']['references'] as d, i}
+    // (82:8) {#each refs as d, i}
     function create_each_block$3(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[8].value + "";
+    	let t0_value = /*d*/ ctx[10].value + "";
     	let t0;
     	let t1;
 
@@ -23612,14 +23833,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$a, 81, 12, 3098);
+    			add_location(p, file$a, 82, 12, 3044);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[10].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -23629,7 +23852,7 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(81:8) {#each copy['section-two']['references'] as d, i}",
+    		source: "(82:8) {#each refs as d, i}",
     		ctx
     	});
 
@@ -23655,7 +23878,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1]) return 0;
+    		if (/*loaded*/ ctx[3]) return 0;
     		return 1;
     	}
 
@@ -23665,13 +23888,13 @@ var app = (function () {
     	const if_blocks_1 = [];
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*loaded*/ ctx[1] && /*data_table2*/ ctx[2]) return 0;
+    		if (/*loaded*/ ctx[3] && /*data_table2*/ ctx[4]) return 0;
     		return 1;
     	}
 
     	current_block_type_index_1 = select_block_type_1(ctx);
     	if_block1 = if_blocks_1[current_block_type_index_1] = if_block_creators_1[current_block_type_index_1](ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let each_value_1 = /*copy*/ ctx[1];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -23679,7 +23902,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$2(get_each_context_1$2(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -23708,11 +23931,11 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "copy svelte-cjebcy");
-    			add_location(div0, file$a, 72, 4, 2842);
+    			add_location(div0, file$a, 73, 4, 2840);
     			attr_dev(div1, "class", "references svelte-cjebcy");
-    			add_location(div1, file$a, 79, 4, 3003);
+    			add_location(div1, file$a, 80, 4, 2978);
     			attr_dev(div2, "class", "section section-5 svelte-cjebcy");
-    			add_location(div2, file$a, 25, 0, 790);
+    			add_location(div2, file$a, 26, 0, 788);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23741,7 +23964,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[7], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[9], false, false, false)
     				];
 
     				mounted = true;
@@ -23796,8 +24019,8 @@ var app = (function () {
     				if_block1.m(div2, t1);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -23820,8 +24043,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -23889,6 +24112,8 @@ var app = (function () {
     	validate_slots('Section6', slots, []);
     	let loaded = false;
     	let { once } = $$props;
+    	let { copy } = $$props;
+    	let { refs } = $$props;
     	let url_fig1 = 'assets/data/table2.csv';
     	let data_table2;
     	let xKey = [0, 1];
@@ -23897,19 +24122,21 @@ var app = (function () {
 
     	onMount(async () => {
     		const res = await csv(url_fig1, autoType);
-    		$$invalidate(2, data_table2 = res);
+    		$$invalidate(4, data_table2 = res);
     	});
 
-    	const writable_props = ['once'];
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section6> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -23922,9 +24149,10 @@ var app = (function () {
     		labelMap: youTubeMap$1,
     		colorMap: youTubeMap,
     		formatPct,
-    		copy: data,
     		loaded,
     		once,
+    		copy,
+    		refs,
     		url_fig1,
     		data_table2,
     		xKey,
@@ -23933,26 +24161,39 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
-    		if ('url_fig1' in $$props) $$invalidate(3, url_fig1 = $$props.url_fig1);
-    		if ('data_table2' in $$props) $$invalidate(2, data_table2 = $$props.data_table2);
-    		if ('xKey' in $$props) $$invalidate(4, xKey = $$props.xKey);
-    		if ('yKey' in $$props) $$invalidate(5, yKey = $$props.yKey);
-    		if ('zKey' in $$props) $$invalidate(6, zKey = $$props.zKey);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
+    		if ('url_fig1' in $$props) $$invalidate(5, url_fig1 = $$props.url_fig1);
+    		if ('data_table2' in $$props) $$invalidate(4, data_table2 = $$props.data_table2);
+    		if ('xKey' in $$props) $$invalidate(6, xKey = $$props.xKey);
+    		if ('yKey' in $$props) $$invalidate(7, yKey = $$props.yKey);
+    		if ('zKey' in $$props) $$invalidate(8, zKey = $$props.zKey);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, loaded, data_table2, url_fig1, xKey, yKey, zKey, enter_handler];
+    	return [
+    		once,
+    		copy,
+    		refs,
+    		loaded,
+    		data_table2,
+    		url_fig1,
+    		xKey,
+    		yKey,
+    		zKey,
+    		enter_handler
+    	];
     }
 
     class Section6 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, { once: 0 });
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -23967,6 +24208,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Section6> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Section6> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Section6> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -23974,6 +24223,22 @@ var app = (function () {
     	}
 
     	set once(value) {
+    		throw new Error("<Section6>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get copy() {
+    		throw new Error("<Section6>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Section6>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Section6>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
     		throw new Error("<Section6>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -27974,33 +28239,26 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
-    	child_ctx[11] = i;
+    	child_ctx[11] = list[i];
+    	child_ctx[13] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
-    	child_ctx[11] = i;
+    	child_ctx[11] = list[i];
+    	child_ctx[13] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
-    	child_ctx[11] = i;
+    	child_ctx[11] = list[i];
+    	child_ctx[13] = i;
     	return child_ctx;
     }
 
-    function get_each_context_3(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[9] = list[i];
-    	child_ctx[11] = i;
-    	return child_ctx;
-    }
-
-    // (41:8) {:else}
+    // (42:8) {:else}
     function create_else_block(ctx) {
     	let div;
 
@@ -28008,7 +28266,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-1xnka0e");
-    			add_location(div, file, 40, 16, 1486);
+    			add_location(div, file, 41, 16, 1484);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -28025,24 +28283,24 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(41:8) {:else}",
+    		source: "(42:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (29:8) {#if loaded}
+    // (30:8) {#if loaded}
     function create_if_block_1(ctx) {
     	let singlelinechart;
     	let current;
 
     	singlelinechart = new SingleLineChart({
     			props: {
-    				data: /*data_videos*/ ctx[2],
-    				url: /*videos_url*/ ctx[4],
-    				xKey: /*xKey*/ ctx[5],
-    				yKey: /*yKey*/ ctx[6],
+    				data: /*data_videos*/ ctx[4],
+    				url: /*videos_url*/ ctx[6],
+    				xKey: /*xKey*/ ctx[7],
+    				yKey: /*yKey*/ ctx[8],
     				formatTickX: timeFormat('%b %Y'),
     				formatTickY: formatThousands,
     				caption: 'Montly videos crawled.',
@@ -28062,7 +28320,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const singlelinechart_changes = {};
-    			if (dirty & /*data_videos*/ 4) singlelinechart_changes.data = /*data_videos*/ ctx[2];
+    			if (dirty & /*data_videos*/ 16) singlelinechart_changes.data = /*data_videos*/ ctx[4];
     			singlelinechart.$set(singlelinechart_changes);
     		},
     		i: function intro(local) {
@@ -28083,51 +28341,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(29:8) {#if loaded}",
+    		source: "(30:8) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (44:12) {#each copy['section-two']['copy'] as d, i}
-    function create_each_block_3(ctx) {
-    	let p;
-    	let t_value = /*d*/ ctx[9].value + "";
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			p = element("p");
-    			t = text$1(t_value);
-    			attr_dev(p, "class", "svelte-1xnka0e");
-    			add_location(p, file, 44, 16, 1648);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
-    			append_dev(p, t);
-    		},
-    		p: noop$1,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_each_block_3.name,
-    		type: "each",
-    		source: "(44:12) {#each copy['section-two']['copy'] as d, i}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (49:12) {#each copy['section-two']['copy'] as d, i}
+    // (45:12) {#each copy.slice(0, Math.floor(copy.length/2)) as d, i}
     function create_each_block_2(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[9].value + "";
+    	let t0_value = /*d*/ ctx[11].value + "";
     	let t0;
     	let t1;
 
@@ -28137,14 +28361,16 @@ var app = (function () {
     			t0 = text$1(t0_value);
     			t1 = space();
     			attr_dev(p, "class", "svelte-1xnka0e");
-    			add_location(p, file, 49, 16, 1795);
+    			add_location(p, file, 45, 16, 1659);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[11].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -28154,14 +28380,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(49:12) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(45:12) {#each copy.slice(0, Math.floor(copy.length/2)) as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (55:8) {#if loaded}
+    // (51:8) {#if loaded}
     function create_if_block(ctx) {
     	let div;
     	let h3;
@@ -28171,7 +28397,7 @@ var app = (function () {
 
     	tablewrapper = new TableWrapper({
     			props: {
-    				data: /*data_channels*/ ctx[3],
+    				data: /*data_channels*/ ctx[5],
     				pageSize: 20
     			},
     			$$inline: true
@@ -28185,9 +28411,9 @@ var app = (function () {
     			t1 = space();
     			create_component(tablewrapper.$$.fragment);
     			attr_dev(h3, "class", "chart-title");
-    			add_location(h3, file, 56, 16, 1962);
+    			add_location(h3, file, 52, 16, 1826);
     			attr_dev(div, "class", "table-wrapper svelte-1xnka0e");
-    			add_location(div, file, 55, 12, 1918);
+    			add_location(div, file, 51, 12, 1782);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -28198,7 +28424,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const tablewrapper_changes = {};
-    			if (dirty & /*data_channels*/ 8) tablewrapper_changes.data = /*data_channels*/ ctx[3];
+    			if (dirty & /*data_channels*/ 32) tablewrapper_changes.data = /*data_channels*/ ctx[5];
     			tablewrapper.$set(tablewrapper_changes);
     		},
     		i: function intro(local) {
@@ -28220,17 +28446,17 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(55:8) {#if loaded}",
+    		source: "(51:8) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (62:12) {#each copy['section-two']['copy'] as d, i}
+    // (58:12) {#each copy.slice(Math.floor(copy.length/2)) as d, i}
     function create_each_block_1(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[9].value + "";
+    	let t0_value = /*d*/ ctx[11].value + "";
     	let t0;
     	let t1;
 
@@ -28240,14 +28466,16 @@ var app = (function () {
     			t0 = text$1(t0_value);
     			t1 = space();
     			attr_dev(p, "class", "svelte-1xnka0e");
-    			add_location(p, file, 62, 16, 2225);
+    			add_location(p, file, 58, 16, 2099);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[11].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -28257,17 +28485,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(62:12) {#each copy['section-two']['copy'] as d, i}",
+    		source: "(58:12) {#each copy.slice(Math.floor(copy.length/2)) as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (69:12) {#each copy['section-two']['references'] as d, i}
+    // (65:12) {#each refs as d, i}
     function create_each_block(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[9].value + "";
+    	let t0_value = /*d*/ ctx[11].value + "";
     	let t0;
     	let t1;
 
@@ -28276,14 +28504,16 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file, 69, 16, 2426);
+    			add_location(p, file, 65, 16, 2271);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t0);
     			append_dev(p, t1);
     		},
-    		p: noop$1,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[11].value + "")) set_data_dev(t0, t0_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
     		}
@@ -28293,7 +28523,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(69:12) {#each copy['section-two']['references'] as d, i}",
+    		source: "(65:12) {#each refs as d, i}",
     		ctx
     	});
 
@@ -28311,9 +28541,8 @@ var app = (function () {
     	let div0;
     	let t3;
     	let t4;
-    	let t5;
     	let div1;
-    	let t6;
+    	let t5;
     	let div2;
     	let inView_action;
     	let current;
@@ -28323,21 +28552,13 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*loaded*/ ctx[1]) return 0;
+    		if (/*loaded*/ ctx[3]) return 0;
     		return 1;
     	}
 
     	current_block_type_index = select_block_type(ctx);
     	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let each_value_3 = data['section-two']['copy'];
-    	validate_each_argument(each_value_3);
-    	let each_blocks_3 = [];
-
-    	for (let i = 0; i < each_value_3.length; i += 1) {
-    		each_blocks_3[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
-    	}
-
-    	let each_value_2 = data['section-two']['copy'];
+    	let each_value_2 = /*copy*/ ctx[1].slice(0, Math.floor(/*copy*/ ctx[1].length / 2));
     	validate_each_argument(each_value_2);
     	let each_blocks_2 = [];
 
@@ -28345,8 +28566,8 @@ var app = (function () {
     		each_blocks_2[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
     	}
 
-    	let if_block1 = /*loaded*/ ctx[1] && create_if_block(ctx);
-    	let each_value_1 = data['section-two']['copy'];
+    	let if_block1 = /*loaded*/ ctx[3] && create_if_block(ctx);
+    	let each_value_1 = /*copy*/ ctx[1].slice(Math.floor(/*copy*/ ctx[1].length / 2));
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -28354,7 +28575,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	let each_value = data['section-two']['references'];
+    	let each_value = /*refs*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -28373,26 +28594,20 @@ var app = (function () {
     			t2 = space();
     			div0 = element("div");
 
-    			for (let i = 0; i < each_blocks_3.length; i += 1) {
-    				each_blocks_3[i].c();
-    			}
-
-    			t3 = space();
-
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].c();
     			}
 
-    			t4 = space();
+    			t3 = space();
     			if (if_block1) if_block1.c();
-    			t5 = space();
+    			t4 = space();
     			div1 = element("div");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t6 = space();
+    			t5 = space();
     			div2 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -28400,17 +28615,17 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "section-title svelte-1xnka0e");
-    			add_location(h2, file, 27, 8, 996);
+    			add_location(h2, file, 28, 8, 994);
     			attr_dev(div0, "class", "copy copy-part1 svelte-1xnka0e");
-    			add_location(div0, file, 42, 8, 1546);
+    			add_location(div0, file, 43, 8, 1544);
     			attr_dev(div1, "class", "copy copy-part2 svelte-1xnka0e");
-    			add_location(div1, file, 60, 8, 2123);
+    			add_location(div1, file, 56, 8, 1987);
     			attr_dev(div2, "class", "references svelte-1xnka0e");
-    			add_location(div2, file, 67, 8, 2323);
+    			add_location(div2, file, 63, 8, 2197);
     			attr_dev(div3, "class", "section section-supplementary svelte-1xnka0e");
-    			add_location(div3, file, 26, 4, 890);
+    			add_location(div3, file, 27, 4, 888);
     			attr_dev(main, "class", "supplementary svelte-1xnka0e");
-    			add_location(main, file, 25, 0, 857);
+    			add_location(main, file, 26, 0, 855);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28424,26 +28639,20 @@ var app = (function () {
     			append_dev(div3, t2);
     			append_dev(div3, div0);
 
-    			for (let i = 0; i < each_blocks_3.length; i += 1) {
-    				each_blocks_3[i].m(div0, null);
-    			}
-
-    			append_dev(div0, t3);
-
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].m(div0, null);
     			}
 
-    			append_dev(div3, t4);
+    			append_dev(div3, t3);
     			if (if_block1) if_block1.m(div3, null);
-    			append_dev(div3, t5);
+    			append_dev(div3, t4);
     			append_dev(div3, div1);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].m(div1, null);
     			}
 
-    			append_dev(div3, t6);
+    			append_dev(div3, t5);
     			append_dev(div3, div2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -28455,7 +28664,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div3, { once: /*once*/ ctx[0] })),
-    					listen_dev(div3, "enter", /*enter_handler*/ ctx[7], false, false, false)
+    					listen_dev(div3, "enter", /*enter_handler*/ ctx[9], false, false, false)
     				];
 
     				mounted = true;
@@ -28488,32 +28697,8 @@ var app = (function () {
     				if_block0.m(div3, t2);
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_3 = data['section-two']['copy'];
-    				validate_each_argument(each_value_3);
-    				let i;
-
-    				for (i = 0; i < each_value_3.length; i += 1) {
-    					const child_ctx = get_each_context_3(ctx, each_value_3, i);
-
-    					if (each_blocks_3[i]) {
-    						each_blocks_3[i].p(child_ctx, dirty);
-    					} else {
-    						each_blocks_3[i] = create_each_block_3(child_ctx);
-    						each_blocks_3[i].c();
-    						each_blocks_3[i].m(div0, t3);
-    					}
-    				}
-
-    				for (; i < each_blocks_3.length; i += 1) {
-    					each_blocks_3[i].d(1);
-    				}
-
-    				each_blocks_3.length = each_value_3.length;
-    			}
-
-    			if (dirty & /*copy*/ 0) {
-    				each_value_2 = data['section-two']['copy'];
+    			if (dirty & /*copy, Math*/ 2) {
+    				each_value_2 = /*copy*/ ctx[1].slice(0, Math.floor(/*copy*/ ctx[1].length / 2));
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -28536,18 +28721,18 @@ var app = (function () {
     				each_blocks_2.length = each_value_2.length;
     			}
 
-    			if (/*loaded*/ ctx[1]) {
+    			if (/*loaded*/ ctx[3]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty & /*loaded*/ 2) {
+    					if (dirty & /*loaded*/ 8) {
     						transition_in(if_block1, 1);
     					}
     				} else {
     					if_block1 = create_if_block(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
-    					if_block1.m(div3, t5);
+    					if_block1.m(div3, t4);
     				}
     			} else if (if_block1) {
     				group_outros();
@@ -28559,8 +28744,8 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value_1 = data['section-two']['copy'];
+    			if (dirty & /*copy, Math*/ 2) {
+    				each_value_1 = /*copy*/ ctx[1].slice(Math.floor(/*copy*/ ctx[1].length / 2));
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -28583,8 +28768,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*copy*/ 0) {
-    				each_value = data['section-two']['references'];
+    			if (dirty & /*refs*/ 4) {
+    				each_value = /*refs*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
 
@@ -28623,7 +28808,6 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
     			if_blocks[current_block_type_index].d();
-    			destroy_each(each_blocks_3, detaching);
     			destroy_each(each_blocks_2, detaching);
     			if (if_block1) if_block1.d();
     			destroy_each(each_blocks_1, detaching);
@@ -28649,6 +28833,8 @@ var app = (function () {
     	validate_slots('Supplementary', slots, []);
     	let loaded = false;
     	let { once } = $$props;
+    	let { copy } = $$props;
+    	let { refs } = $$props;
     	let videos_url = 'assets/data/video_count.csv';
     	let data_videos;
     	let channels_url = 'assets/data/channels_top250.csv';
@@ -28658,21 +28844,23 @@ var app = (function () {
 
     	onMount(async () => {
     		const res_videos = await csv(videos_url, autoType);
-    		$$invalidate(2, data_videos = res_videos);
+    		$$invalidate(4, data_videos = res_videos);
     		const res_channels = await csv(channels_url, autoType);
-    		$$invalidate(3, data_channels = res_channels);
+    		$$invalidate(5, data_channels = res_channels);
     	});
 
-    	const writable_props = ['once'];
+    	const writable_props = ['once', 'copy', 'refs'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Supplementary> was created with unknown prop '${key}'`);
     	});
 
-    	const enter_handler = () => $$invalidate(1, loaded = true);
+    	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
     	};
 
     	$$self.$capture_state = () => ({
@@ -28684,9 +28872,10 @@ var app = (function () {
     		SingleLineChart,
     		TableWrapper,
     		formatThousands,
-    		copy: data,
     		loaded,
     		once,
+    		copy,
+    		refs,
     		videos_url,
     		data_videos,
     		channels_url,
@@ -28696,14 +28885,16 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('loaded' in $$props) $$invalidate(1, loaded = $$props.loaded);
+    		if ('loaded' in $$props) $$invalidate(3, loaded = $$props.loaded);
     		if ('once' in $$props) $$invalidate(0, once = $$props.once);
-    		if ('videos_url' in $$props) $$invalidate(4, videos_url = $$props.videos_url);
-    		if ('data_videos' in $$props) $$invalidate(2, data_videos = $$props.data_videos);
+    		if ('copy' in $$props) $$invalidate(1, copy = $$props.copy);
+    		if ('refs' in $$props) $$invalidate(2, refs = $$props.refs);
+    		if ('videos_url' in $$props) $$invalidate(6, videos_url = $$props.videos_url);
+    		if ('data_videos' in $$props) $$invalidate(4, data_videos = $$props.data_videos);
     		if ('channels_url' in $$props) channels_url = $$props.channels_url;
-    		if ('data_channels' in $$props) $$invalidate(3, data_channels = $$props.data_channels);
-    		if ('xKey' in $$props) $$invalidate(5, xKey = $$props.xKey);
-    		if ('yKey' in $$props) $$invalidate(6, yKey = $$props.yKey);
+    		if ('data_channels' in $$props) $$invalidate(5, data_channels = $$props.data_channels);
+    		if ('xKey' in $$props) $$invalidate(7, xKey = $$props.xKey);
+    		if ('yKey' in $$props) $$invalidate(8, yKey = $$props.yKey);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -28712,6 +28903,8 @@ var app = (function () {
 
     	return [
     		once,
+    		copy,
+    		refs,
     		loaded,
     		data_videos,
     		data_channels,
@@ -28725,7 +28918,7 @@ var app = (function () {
     class Supplementary extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { once: 0 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { once: 0, copy: 1, refs: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -28740,6 +28933,14 @@ var app = (function () {
     		if (/*once*/ ctx[0] === undefined && !('once' in props)) {
     			console.warn("<Supplementary> was created without expected prop 'once'");
     		}
+
+    		if (/*copy*/ ctx[1] === undefined && !('copy' in props)) {
+    			console.warn("<Supplementary> was created without expected prop 'copy'");
+    		}
+
+    		if (/*refs*/ ctx[2] === undefined && !('refs' in props)) {
+    			console.warn("<Supplementary> was created without expected prop 'refs'");
+    		}
     	}
 
     	get once() {
@@ -28747,6 +28948,22 @@ var app = (function () {
     	}
 
     	set once(value) {
+    		throw new Error("<Supplementary>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get copy() {
+    		throw new Error("<Supplementary>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set copy(value) {
+    		throw new Error("<Supplementary>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get refs() {
+    		throw new Error("<Supplementary>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set refs(value) {
     		throw new Error("<Supplementary>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -28778,19 +28995,77 @@ var app = (function () {
 
     	main = new Main({
     			props: {
-    				title: /*title*/ ctx[0],
-    				authors: /*authors*/ ctx[1]
+    				title: /*data*/ ctx[0].title,
+    				authors: /*authors*/ ctx[1],
+    				standfirst: /*data*/ ctx[0].standfirst,
+    				steps: /*data*/ ctx[0].scroller
     			},
     			$$inline: true
     		});
 
-    	section1 = new Section1({ props: { once: true }, $$inline: true });
-    	section2 = new Section2({ props: { once: true }, $$inline: true });
-    	section3 = new Section3({ props: { once: true }, $$inline: true });
-    	section4 = new Section4({ props: { once: true }, $$inline: true });
-    	section5 = new Section5({ props: { once: true }, $$inline: true });
-    	section6 = new Section6({ props: { once: true }, $$inline: true });
-    	supplementary = new Supplementary({ props: { once: true }, $$inline: true });
+    	section1 = new Section1({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-one'].copy,
+    				refs: /*data*/ ctx[0]['section-one'].references
+    			},
+    			$$inline: true
+    		});
+
+    	section2 = new Section2({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-two'].copy,
+    				refs: /*data*/ ctx[0]['section-two'].references
+    			},
+    			$$inline: true
+    		});
+
+    	section3 = new Section3({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-three'].copy,
+    				refs: /*data*/ ctx[0]['section-three'].references
+    			},
+    			$$inline: true
+    		});
+
+    	section4 = new Section4({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-four'].copy,
+    				refs: /*data*/ ctx[0]['section-four'].references
+    			},
+    			$$inline: true
+    		});
+
+    	section5 = new Section5({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-five'].copy,
+    				refs: /*data*/ ctx[0]['section-five'].references
+    			},
+    			$$inline: true
+    		});
+
+    	section6 = new Section6({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-six'].copy,
+    				refs: /*data*/ ctx[0]['section-six'].references
+    			},
+    			$$inline: true
+    		});
+
+    	supplementary = new Supplementary({
+    			props: {
+    				once: true,
+    				copy: /*data*/ ctx[0]['section-one'].copy,
+    				refs: /*data*/ ctx[0]['section-one'].references
+    			},
+    			$$inline: true
+    		});
+
     	footer = new Footer({ $$inline: true });
 
     	const block = {
@@ -28842,9 +29117,39 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			const main_changes = {};
-    			if (dirty & /*title*/ 1) main_changes.title = /*title*/ ctx[0];
+    			if (dirty & /*data*/ 1) main_changes.title = /*data*/ ctx[0].title;
     			if (dirty & /*authors*/ 2) main_changes.authors = /*authors*/ ctx[1];
+    			if (dirty & /*data*/ 1) main_changes.standfirst = /*data*/ ctx[0].standfirst;
+    			if (dirty & /*data*/ 1) main_changes.steps = /*data*/ ctx[0].scroller;
     			main.$set(main_changes);
+    			const section1_changes = {};
+    			if (dirty & /*data*/ 1) section1_changes.copy = /*data*/ ctx[0]['section-one'].copy;
+    			if (dirty & /*data*/ 1) section1_changes.refs = /*data*/ ctx[0]['section-one'].references;
+    			section1.$set(section1_changes);
+    			const section2_changes = {};
+    			if (dirty & /*data*/ 1) section2_changes.copy = /*data*/ ctx[0]['section-two'].copy;
+    			if (dirty & /*data*/ 1) section2_changes.refs = /*data*/ ctx[0]['section-two'].references;
+    			section2.$set(section2_changes);
+    			const section3_changes = {};
+    			if (dirty & /*data*/ 1) section3_changes.copy = /*data*/ ctx[0]['section-three'].copy;
+    			if (dirty & /*data*/ 1) section3_changes.refs = /*data*/ ctx[0]['section-three'].references;
+    			section3.$set(section3_changes);
+    			const section4_changes = {};
+    			if (dirty & /*data*/ 1) section4_changes.copy = /*data*/ ctx[0]['section-four'].copy;
+    			if (dirty & /*data*/ 1) section4_changes.refs = /*data*/ ctx[0]['section-four'].references;
+    			section4.$set(section4_changes);
+    			const section5_changes = {};
+    			if (dirty & /*data*/ 1) section5_changes.copy = /*data*/ ctx[0]['section-five'].copy;
+    			if (dirty & /*data*/ 1) section5_changes.refs = /*data*/ ctx[0]['section-five'].references;
+    			section5.$set(section5_changes);
+    			const section6_changes = {};
+    			if (dirty & /*data*/ 1) section6_changes.copy = /*data*/ ctx[0]['section-six'].copy;
+    			if (dirty & /*data*/ 1) section6_changes.refs = /*data*/ ctx[0]['section-six'].references;
+    			section6.$set(section6_changes);
+    			const supplementary_changes = {};
+    			if (dirty & /*data*/ 1) supplementary_changes.copy = /*data*/ ctx[0]['section-one'].copy;
+    			if (dirty & /*data*/ 1) supplementary_changes.refs = /*data*/ ctx[0]['section-one'].references;
+    			supplementary.$set(supplementary_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -28910,16 +29215,16 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let { title = 'Your title goes here' } = $$props;
+    	let { data } = $$props;
     	let { authors } = $$props;
-    	const writable_props = ['title', 'authors'];
+    	const writable_props = ['data', 'authors'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('title' in $$props) $$invalidate(0, title = $$props.title);
+    		if ('data' in $$props) $$invalidate(0, data = $$props.data);
     		if ('authors' in $$props) $$invalidate(1, authors = $$props.authors);
     	};
 
@@ -28934,12 +29239,12 @@ var app = (function () {
     		Section5,
     		Section6,
     		Supplementary,
-    		title,
+    		data,
     		authors
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('title' in $$props) $$invalidate(0, title = $$props.title);
+    		if ('data' in $$props) $$invalidate(0, data = $$props.data);
     		if ('authors' in $$props) $$invalidate(1, authors = $$props.authors);
     	};
 
@@ -28947,13 +29252,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, authors];
+    	return [data, authors];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, { title: 0, authors: 1 });
+    		init(this, options, instance, create_fragment, safe_not_equal, { data: 0, authors: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -28965,16 +29270,20 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
+    		if (/*data*/ ctx[0] === undefined && !('data' in props)) {
+    			console.warn("<App> was created without expected prop 'data'");
+    		}
+
     		if (/*authors*/ ctx[1] === undefined && !('authors' in props)) {
     			console.warn("<App> was created without expected prop 'authors'");
     		}
     	}
 
-    	get title() {
+    	get data() {
     		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set title(value) {
+    	set data(value) {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -28986,6 +29295,238 @@ var app = (function () {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
+
+    var title = "Youtube Politics";
+    var standfirst = [
+    	{
+    		type: "text",
+    		value: "YouTube is arguably the largest and most engaging online media platform in the world. Its scale has fueled concerns that YouTube users are being radicalized by biased recommendations and professedly apolitical “anti-woke” channels."
+    	},
+    	{
+    		type: "text",
+    		value: "Here we test this hypothesis using a panel of more than 300,000 Americans and their individual-level browsing behavior, on and off YouTube, from January 2016 to September 2021. The dashboards below present key findings from our analysis."
+    	}
+    ];
+    var scroller = [
+    	{
+    		type: "step-one",
+    		value: [
+    			"Our data covers 974 YouTube channels, totalling to 523,242 unique videos. Shown here are the top 200 YouTube channels we monitor, represented by dots of different colors and sizes.",
+    			"Each dot’s size corresponds to its subscriber count, while the colors correspond to the channel’s political leaning — dark blue for far-left, light blue for left, grey for center, red for right, and dark red for far-right."
+    		]
+    	},
+    	{
+    		type: "step-two",
+    		value: [
+    			"Here are the channels organized by their size, or number of subscribers. With this visualization, we can see that even among the largest channels we studied, far-left and far-right channels tend to have smaller audiences."
+    		]
+    	},
+    	{
+    		type: "step-three",
+    		value: [
+    			"And here they are clustered together based on their political leaning."
+    		]
+    	},
+    	{
+    		type: "step-four",
+    		value: [
+    			"Explore our channel data before we dive deeper into the politics of YouTube. Hovering over a channel gives more information about its size and reach."
+    		]
+    	}
+    ];
+    var data = {
+    	title: title,
+    	standfirst: standfirst,
+    	scroller: scroller,
+    	"section-one": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "Using our collection of YouTube channel data, we are able to group YouTube viewers into political clusters based on their news consumption habits."
+    		},
+    		{
+    			type: "text",
+    			value: "The graph above reflects the viewing habits of the average YouTube user from each of the six political clusters, corresponding to the political content categories: far-left, left, center, right, and far-right. Here, we look at how active these clusters are in terms of video watchtime."
+    		},
+    		{
+    			type: "text",
+    			value: "Selecting “Median video duration” from the dropdown above shows the median total monthly watchtime for YouTube users within each of our six defined viewing clusters; i.e., how many minutes of YouTube content were consumed by, say, a member of the far-left cluster in a given month."
+    		},
+    		{
+    			type: "text",
+    			value: "Selecting “Median user consumption duration” shows the median monthly watchtime within the political category for viewers in the corresponding cluster; i.e., how many minutes of far-right content were consumed by a member of the far-right cluster."
+    		},
+    		{
+    			type: "text",
+    			value: "These figures suggest stronger engagement with far-right and anti-woke content compared to other categories. The median monthly watchtime for members of these communities rose to almost twice the engagement of users in the left, center, and right communities. In other words, while the far-right and anti-woke communities remained relatively small in size throughout the observation period (with only anti-woke growing), their user engagement grew to exceed every other category."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+    		}
+    	]
+    },
+    	"section-two": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "To check for overall trends in political category preferences, we examine changes in the six viewing clusters’ total consumption. Here, we track how many YouTube users fall into each political cluster over time, which tells us whether these communities are growing or shrinking."
+    		},
+    		{
+    			type: "text",
+    			value: "Selecting “User share” from the dropdown above shows the percentages of the total number of YouTube users who fall into each of our six defined viewing clusters, corresponding to the political content categories."
+    		},
+    		{
+    			type: "text",
+    			value: "Selecting “Total consumption share” shows the percentages of the total amount (in minutes) of viewed YouTube content which fall into each of the six categories of news content."
+    		},
+    		{
+    			type: "text",
+    			value: "Our results reveal that news, in general, makes up only a small portion of YouTube consumption. However, even a small percentage of users can mean large absolute numbers at the scale of YouTube. For example, averaged over the 4-year period, 764,405 Americans consumed anti-woke content at least once in a given month, with that number growing steadily over time."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
+    		},
+    		{
+    			type: "text",
+    			value: "Democracy, 2015"
+    		}
+    	]
+    },
+    	"section-three": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
+    		},
+    		{
+    			type: "text",
+    			value: "Democracy, 2015"
+    		}
+    	]
+    },
+    	"section-four": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
+    		},
+    		{
+    			type: "text",
+    			value: "Democracy, 2015"
+    		}
+    	]
+    },
+    	"section-five": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
+    		},
+    		{
+    			type: "text",
+    			value: "Democracy, 2015"
+    		}
+    	]
+    },
+    	"section-six": {
+    	copy: [
+    		{
+    			type: "text",
+    			value: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+    		},
+    		{
+    			type: "text",
+    			value: "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+    		}
+    	],
+    	references: [
+    		{
+    			type: "text",
+    			value: "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+    		},
+    		{
+    			type: "text",
+    			value: "Jones, Declining trust in congress: Effects of polarization and consequences for"
+    		},
+    		{
+    			type: "text",
+    			value: "Democracy, 2015"
+    		}
+    	]
+    }
+    };
 
     var authors = [
     	{
@@ -29036,7 +29577,7 @@ var app = (function () {
     const app = new App({
         target: document.body,
         props: {
-            title: data.title,
+            data,
             authors,
         }
     });

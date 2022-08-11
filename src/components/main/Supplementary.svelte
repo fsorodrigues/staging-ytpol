@@ -17,12 +17,11 @@
     // utils
     import { formatThousands } from '../../utils/format-numbers'
 
-    // local data
-    import copy from '../../data/copy';
-
     // props
     let loaded : boolean = false;
     export let once : boolean;
+    export let copy : any[];
+    export let refs : any[];
 
     // variable declaration
     let videos_url : string = 'assets/data/video_count.csv'
@@ -60,12 +59,7 @@
         {:else} <div class='chart-placeholder'></div>
         {/if}
         <div class='copy copy-part1'>
-            {#each copy['section-two']['copy'] as d, i}
-                <p>
-                    {d.value}
-                </p>
-            {/each}
-            {#each copy['section-two']['copy'] as d, i}
+            {#each copy.slice(0, Math.floor(copy.length/2)) as d, i}
                 <p>
                     {d.value}
                 </p>
@@ -78,14 +72,14 @@
             </div>
         {/if}
         <div class='copy copy-part2'>
-            {#each copy['section-two']['copy'] as d, i}
+            {#each copy.slice(Math.floor(copy.length/2)) as d, i}
                 <p>
                     {d.value}
                 </p>
             {/each}
         </div>
         <div class='references'>
-            {#each copy['section-two']['references'] as d, i}
+            {#each refs as d, i}
                 <p>
                     {d.value}
                 </p>

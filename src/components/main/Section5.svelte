@@ -17,15 +17,14 @@
     import RangePlot from "../graphs/RangePlot.svelte";
     import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
 
-    // local data
-    import copy from '../../data/copy';
-
     // utils
     import enforceOrder from "../../utils/order";
 
     // props
     let loaded : boolean = false;
     export let once : boolean;
+    export let copy : any[]
+    export let refs : any[]
 
     // variable declaration
     const url_fig5 = 'assets/data/fig5.csv'
@@ -97,14 +96,14 @@
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
-        {#each copy['section-two']['copy'] as d, i}
+        {#each copy as d, i}
             <p>
                 {d.value}
             </p>
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-two']['references'] as d, i}
+        {#each refs as d, i}
             <p>
                 {d.value}
             </p>

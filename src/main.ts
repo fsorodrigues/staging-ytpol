@@ -7,7 +7,7 @@ import authors from './data/authors.json'
 const app = new App({
 	target: document.body,
 	props: {
-		title: data.title,
+		data,
 		authors,
 	}
 });

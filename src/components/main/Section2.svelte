@@ -8,13 +8,12 @@
 
     // components
     import ChartWrapper from "../graphs/ChartWrapper.svelte";
-
-    // local data
-    import copy from '../../data/copy';
     
     // props
     let loaded : boolean = false;
     export let once : boolean;
+    export let copy : any[]
+    export let refs : any[]
 </script>
 
 <div class="section section-2" use:inView={{ once }} on:enter={() => loaded = true }>
@@ -50,14 +49,14 @@
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
-        {#each copy['section-two']['copy'] as d, i}
+        {#each copy as d, i}
             <p>
                 {d.value}
             </p>
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-two']['references'] as d}
+        {#each refs as d}
             <p>
                 {d.value}
             </p>

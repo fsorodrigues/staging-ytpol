@@ -3,36 +3,61 @@
     "standfirst": [
         {
             "type": "text",
-            "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?"
+            "value": "YouTube is arguably the largest and most engaging online media platform in the world. Its scale has fueled concerns that YouTube users are being radicalized by biased recommendations and professedly apolitical “anti-woke” channels."
+        },
+        {
+            "type": "text",
+            "value": "Here we test this hypothesis using a panel of more than 300,000 Americans and their individual-level browsing behavior, on and off YouTube, from January 2016 to September 2021. The dashboards below present key findings from our analysis."
         }
     ],
     "scroller": [
         {
-            "type": "text",
-            "value": "Here are the top 200 YouTube channels we monitor."
+            "type": "step-one",
+            "value": [
+                "Our data covers 974 YouTube channels, totalling to 523,242 unique videos. Shown here are the top 200 YouTube channels we monitor, represented by dots of different colors and sizes.",
+                "Each dot’s size corresponds to its subscriber count, while the colors correspond to the channel’s political leaning — dark blue for far-left, light blue for left, grey for center, red for right, and dark red for far-right."
+            ]
         },
         {
-            "type": "text",
-            "value": "Organized by their size."
+            "type": "step-two",
+            "value": [
+                "Here are the channels organized by their size, or number of subscribers. With this visualization, we can see that even among the largest channels we studied, far-left and far-right channels tend to have smaller audiences."
+            ]
         },
         {
-            "type": "text",
-            "value": "Clustered together."
+            "type": "step-three",
+            "value": [
+                "And here they are clustered together based on their political leaning."
+            ]
         },
         {
-            "type": "text",
-            "value": "Explore the data before we dive deeper into the politics of YouTube."
+            "type": "step-four",
+            "value": [
+                "Explore our channel data before we dive deeper into the politics of YouTube. Hovering over a channel gives more information about its size and reach."
+            ]
         }
     ],
     "section-one": {
         "copy": [
             {
                 "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus[1] architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam[2] delectus debitis ab corrupti hic praesentium?"
+                "value": "Using our collection of YouTube channel data, we are able to group YouTube viewers into political clusters based on their news consumption habits."
             },
             {
                 "type": "text",
-                "value": "Iusto minus quae temporibus deleniti vel exercitationem, repellat recusandae quam totam laboriosam!"
+                "value": "The graph above reflects the viewing habits of the average YouTube user from each of the six political clusters, corresponding to the political content categories: far-left, left, center, right, and far-right. Here, we look at how active these clusters are in terms of video watchtime."
+            },
+            {
+                "type": "text",
+                "value": "Selecting “Median video duration” from the dropdown above shows the median total monthly watchtime for YouTube users within each of our six defined viewing clusters; i.e., how many minutes of YouTube content were consumed by, say, a member of the far-left cluster in a given month."
+            },
+            {
+                "type": "text",
+                "value": "Selecting “Median user consumption duration” shows the median monthly watchtime within the political category for viewers in the corresponding cluster; i.e., how many minutes of far-right content were consumed by a member of the far-right cluster."
+            },
+            {
+                "type": "text",
+                "value": "These figures suggest stronger engagement with far-right and anti-woke content compared to other categories. The median monthly watchtime for members of these communities rose to almost twice the engagement of users in the left, center, and right communities. In other words, while the far-right and anti-woke communities remained relatively small in size throughout the observation period (with only anti-woke growing), their user engagement grew to exceed every other category."
             }
         ],
         "references": [
@@ -50,15 +75,19 @@
         "copy": [
             {
                 "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+                "value": "To check for overall trends in political category preferences, we examine changes in the six viewing clusters’ total consumption. Here, we track how many YouTube users fall into each political cluster over time, which tells us whether these communities are growing or shrinking."
             },
             {
                 "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+                "value": "Selecting “User share” from the dropdown above shows the percentages of the total number of YouTube users who fall into each of our six defined viewing clusters, corresponding to the political content categories."
             },
             {
                 "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+                "value": "Selecting “Total consumption share” shows the percentages of the total amount (in minutes) of viewed YouTube content which fall into each of the six categories of news content."
+            },
+            {
+                "type": "text",
+                "value": "Our results reveal that news, in general, makes up only a small portion of YouTube consumption. However, even a small percentage of users can mean large absolute numbers at the scale of YouTube. For example, averaged over the 4-year period, 764,405 Americans consumed anti-woke content at least once in a given month, with that number growing steadily over time."
             }
         ],
         "references": [
@@ -137,6 +166,36 @@
         ]
     },
     "section-five": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+            },
+            {
+                "type": "text",
+                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+            },
+            {
+                "type": "text",
+                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
+            },
+            {
+                "type": "text",
+                "value": "Democracy, 2015"
+            }
+        ]
+    },
+    "section-six": {
         "copy": [
             {
                 "type": "text",

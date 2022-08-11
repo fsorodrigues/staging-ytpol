@@ -16,9 +16,6 @@
     import StackedBars from "../graphs/StackedBars.svelte";
     import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
 
-    // local data
-    import copy from '../../data/copy';
-
     // utils
     import enforceOrder from "../../utils/order";
     import { formatPct } from '../../utils/format-numbers';
@@ -26,6 +23,8 @@
     // props
     let loaded : boolean = false;
     export let once : boolean;
+    export let copy : any[]
+    export let refs : any[]
 
     // variable declaration
     let url_fig1 : string = 'assets/data/fig1_ledwich.csv'
@@ -71,14 +70,14 @@
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
-        {#each copy['section-two']['copy'] as d, i}
+        {#each copy as d, i}
             <p>
                 {d.value}
             </p>
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-two']['references'] as d, i}
+        {#each refs as d, i}
             <p>
                 {d.value}
             </p>

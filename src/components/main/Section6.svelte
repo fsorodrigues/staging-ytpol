@@ -22,12 +22,11 @@
     import { youTubeMap as colorMap } from "../../utils/colors";
     import { formatPct } from '../../utils/format-numbers';
 
-    // local data
-    import copy from '../../data/copy';
-
     // props
     let loaded : boolean = false;
     export let once : boolean;
+    export let copy : any[]
+    export let refs : any[]
 
     // variable declaration
     let url_fig1 : string = 'assets/data/table2.csv'
@@ -91,14 +90,14 @@
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>
-        {#each copy['section-two']['copy'] as d, i}
+        {#each copy as d, i}
             <p>
                 {d.value}
             </p>
         {/each}
     </div>
     <div class='references'>
-        {#each copy['section-two']['references'] as d, i}
+        {#each refs as d, i}
             <p>
                 {d.value}
             </p>

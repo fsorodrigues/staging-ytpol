@@ -18,8 +18,9 @@
 
 	// prop declaration
 	export let title : string;
-	export let text : string = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?'
+	export let standfirst : any[] = [{value: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?'}]
 	export let authors : Author[];
+	export let steps : any[]
 
 	// variable declaration
 	// let data : Row[];
@@ -37,9 +38,9 @@
 
 <main>
 	<Title title={ title }></Title>
-	<Description text={ text }></Description>
+	<Description standfirst={ standfirst }></Description>
 	<Authors authors={ authors }></Authors>
-	<ScrollSection />
+	<ScrollSection { steps } />
 </main>
 
 

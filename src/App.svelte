@@ -1,6 +1,8 @@
 <script lang="ts">
 	// types
+	import type Data from './types/Data';
 	import type Author from './types/Authors';
+
 	// sections
 	import Header from './components/header/Header.svelte';
 	import Footer from './components/footer/Footer.svelte';
@@ -13,19 +15,21 @@
 	import Section6 from './components/main/Section6.svelte';
 	import Supplementary from './components/main/Supplementary.svelte';
 
-	export let title : string = 'Your title goes here';
+	// export let title : string = 'Your title goes here';
+	// export let standfirst : any[]
+	export let data : Data
 	export let authors : Author[];
 </script>
 
 <Header />
-<Main title={ title } authors={ authors } />
-<Section1 once={ true } />
-<Section2 once={ true } />
-<Section3 once={ true } />
-<Section4 once={ true } />
-<Section5 once={ true } />
-<Section6 once={ true } />
-<Supplementary once={ true } />
+<Main title={ data.title } { authors } standfirst={ data.standfirst } steps={ data.scroller }/>
+<Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} />
+<Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} />
+<Section3 once={ true } copy={data['section-three'].copy} refs={data['section-three'].references} />
+<Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} />
+<Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} />
+<Section6 once={ true } copy={data['section-six'].copy} refs={data['section-six'].references} />
+<Supplementary once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} />
 <Footer />
 
 <style lang='scss' global>
