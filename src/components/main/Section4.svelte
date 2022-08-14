@@ -57,7 +57,7 @@
 </script>
 
 <div class="section section-4" use:inView={{ once }} on:enter={() => loaded = true }>
-    <h2 class="section-title">Subtitle 2</h2>
+    <!-- <h2 class="section-title">Subtitle 2</h2> -->
     {#if loaded && data_fig4}
         <SankeyDiagram 
             { nodes } 
@@ -66,6 +66,7 @@
             sourceLabel={ 'Month' }
             targetLabel={ 'Month + 1' }
             caption={'Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month.'}
+            title={'Community members tend to remain in their communities, suggesting "stickiness"'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

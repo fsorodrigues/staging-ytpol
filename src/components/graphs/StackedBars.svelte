@@ -38,6 +38,7 @@
 	export let customClass : string = 'chart-large';
 	export let tooltipType : string = 'arrow';
 	export let showLegend : boolean = false;
+	export let title : string;
 
 	// // variable declaration
 	const columns = data.columns.filter(d => d !== yKey);
@@ -53,6 +54,7 @@
 	let hideTooltip : boolean|CustomEvent<any> = true;
 </script>
 
+{#if title}<h3 class="chart-title">{title}</h3>{/if}
 <div class='legend-container'>
 	{#each data.columns.filter(d => d !== 'cluster') as group, i}
 		<div class='legend-group'>
@@ -154,6 +156,10 @@
 </div>
 
 <style lang='scss'>
+	.chart-title {
+		grid-column: 1 / span 12;
+	}
+
 	.chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;

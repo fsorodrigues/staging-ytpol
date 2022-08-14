@@ -1,11 +1,6 @@
 <script lang="ts">
-	// node_modules
-	// import { onMount } from 'svelte';
-    // import { csv } from 'd3-fetch'
-
 	// types
 	import type Author from '../../types/Authors';
-	// import type Row from '../../types/TimeSeriesRow';
 	import type ChartConfig from '../../types/ChartConfig';
 
 	// components
@@ -13,18 +8,12 @@
 	import Description from '../copy/Description.svelte';
 	import Authors from '../copy/Authors.svelte';
 	import ScrollSection from './ScrollSection.svelte';
-	// import LineChart from '../graphs/LineChart.svelte';
-	// import Beeswarm from '../graphs/Beeswarm.svelte';
 
 	// prop declaration
 	export let title : string;
 	export let standfirst : any[] = [{value: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi consequatur inventore exercitationem ex perferendis provident, earum cumque maiores quam quidem labore, mollitia odit eaque laborum?'}]
 	export let authors : Author[];
 	export let steps : any[]
-
-	// variable declaration
-	// let data : Row[];
-	// let channelData : Channel[];
 
 	// chart config
 	const fig3b : ChartConfig = {
@@ -33,7 +22,6 @@
 		yKey: 'median_user_watchtime',
 		zKey: 'label'
 	}
-
 </script>
 
 <main>
@@ -43,17 +31,7 @@
 	<ScrollSection { steps } />
 </main>
 
-
-
-
 <style lang='scss'>
-	.placeholder {
-		height: 1000px;
-		background-color: gainsboro;
-		grid-column: 1 / span last-line;
-		grid-row: 3 / span last-line;
-	}
-
 	main {
 		@include grid;
 		@include centerH;

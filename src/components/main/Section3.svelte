@@ -45,7 +45,7 @@
 </script>
 
 <div class="section section-3" use:inView={{ once }} on:enter={() => loaded = true }>
-    <h2 class="section-title">Subtitle 1</h2>
+    <!-- <h2 class="section-title">Subtitle 1</h2> -->
     {#if loaded && data_fig1}
         <StackedBars 
             data={ data_fig1 } 
@@ -58,6 +58,7 @@
             customClass={'chart-medium'}
             tooltipType={'community'}
             caption={'The archetypes of news consumption behavior on YouTube for each political category.'}
+            title={'Consumption patterns of individuals strongly align with their clusters'}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

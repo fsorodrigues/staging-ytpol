@@ -36,6 +36,16 @@
         .range([0, 1, 2, 3, 4, 5]);
     const spectrum = comparator('cluster', leftRightScale);
 
+    function clearActiveNodes() {
+        const allActiveNodes = document.getElementsByClassName('active-node')
+
+        if (allActiveNodes || allActiveNodes.length) {
+            for (let node of allActiveNodes) {
+                node.classList.remove('active-node');
+            }
+        }
+    }
+
     onMount(async () => {
 		const res = await csv('assets/data/channels_top250.csv', autoType);
 		channelData = res
@@ -48,16 +58,19 @@
     } else if (currentStep == 1) {
         xKey = 'subscribers'
         xScale = scaleLog()
-        xDomain = [null, null]
+        xDomain = [null, null] 
+        clearActiveNodes()
     } else if (currentStep == 2) {
         xKey = 'cluster'
         xScale = scaleBand()
         xDomain = ['fL', 'L', 'C', 'AW', 'R', 'fR']
+        clearActiveNodes()
     } else if (currentStep == 3) {
         xKey = 'index'
         xScale = scaleLinear()
         xDomain = [null, null]
 		channelData = channelData.map((d, i) => ({...d, index: i}))
+        clearActiveNodes()
     }
 </script>
 
@@ -74,6 +87,7 @@
                     {/each}
                 </div>
             </div>
+            <div class='spacer'></div>
         {/each}
     </Scroller>
 </div>
@@ -103,6 +117,10 @@
             p:last-of-type {
                 margin-bottom: 0;
             }
+        }
+
+        .spacer {
+            height: 20vh;
         }
     }
 </style>

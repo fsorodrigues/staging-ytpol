@@ -44,7 +44,7 @@
 				maxIndex = i;
 			}
 		}
-
+		// console.log(steps[i])
 		if (maxRatio > 0) value = maxIndex;
 		else value = undefined;
 	};
@@ -73,7 +73,7 @@
 		for (let i = 0; i < increments + 1; i++) {
 			threshold.push(i / increments);
 		}
-		nodes = container.querySelectorAll(":scope > *");
+		nodes = container.querySelectorAll(":scope > .step");
 		update();
 	});
 </script>

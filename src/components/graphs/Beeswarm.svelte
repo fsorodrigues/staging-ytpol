@@ -1,6 +1,5 @@
 <script lang="ts">
 	// node_modules
-	import { group } from 'd3-array'
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleLinear, scaleOrdinal } from 'd3-scale';
 
@@ -15,7 +14,6 @@
 	// utils
 	import colorMap from '../../utils/colors';
 	import labelMap from '../../utils/labels';
-
 
 	// props declaration
     // export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';

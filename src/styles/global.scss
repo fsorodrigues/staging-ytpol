@@ -8,9 +8,9 @@
 @mixin grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    column-gap: 5px;
+    column-gap: 10px;
     grid-template-rows: auto auto;
-    row-gap: 15px;
+    row-gap: 45px;
 }
 
 @mixin centerH {

@@ -12,7 +12,7 @@
 
 <style lang='scss'>
 	.standfirst-wrapper {
-		grid-column: 1 / span 6;
+		grid-column: 1 / span 8;
 
 		p {
 			margin-bottom: 1em;

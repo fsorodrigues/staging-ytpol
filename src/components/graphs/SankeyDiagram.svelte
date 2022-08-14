@@ -26,6 +26,7 @@
     export let spanCol : number = 12;
     export let sourceLabel : string = 'Source';
     export let targetLabel : string = 'Target';
+    export let title : string;
 
     // variable declaration
 	let evt;
@@ -33,6 +34,7 @@
     
 </script>
 
+{#if title}<h3 class="chart-title">{title}</h3>{/if}
 <div 
     class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
     style={`--spanCol: ${spanCol}`}
@@ -101,6 +103,10 @@
 </div>
 
 <style lang='scss'>
+    .chart-title {
+        grid-column: 1 / span 12;
+
+    }
     .chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;

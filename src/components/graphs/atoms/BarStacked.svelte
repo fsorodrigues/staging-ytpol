@@ -12,6 +12,7 @@
     const dispatch = createEventDispatcher();
 
     function handleMouseOver(e, d) {
+        console.log(e.target)
         dispatch('mousemove', { e, props: d })
         document.querySelectorAll('.group-rect')
             .forEach(el => {
@@ -42,7 +43,7 @@
                     fill={$zGet(series)}
                     stroke='white'
                     on:mouseover={(e) => handleMouseOver(e, { key: series.key, ...d.data })}
-                    on:focus={(e) => handleMouseOver(e, d)}
+                    on:focus={(e) => handleMouseOver(e, { key: series.key, ...d.data })}
                     on:mouseout={(e) => handleMouseOut(e)}
                     on:blur={(e) => handleMouseOut(e)}
                 ></rect>

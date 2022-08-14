@@ -10,10 +10,10 @@
 
 </script>
 
-<div class='sankey-label source' style="--padding-top: -{$padding.top}px">
+<div class='sankey-label source' style="--padding-top: -{3 * $padding.top / 4}px">
     { source }
 </div>
-<div class='sankey-label target' style="--padding-bottom: -{$padding.bottom}px">
+<div class='sankey-label target' style="--padding-bottom: -{3 * $padding.bottom / 4}px">
     { target }
 </div>
 
@@ -34,5 +34,7 @@
     .sankey-label {
         color: $dark-grey;
         font-weight: 300 !important;
+        @include fs-sm;
+        text-transform: uppercase;
     }
 </style>
