@@ -42,7 +42,7 @@
 
 </script>
 
-<div class="section section-5" use:inView={{ once }} on:enter={() => loaded = true }>
+<div class="section section-6" use:inView={{ once }} on:enter={() => loaded = true }>
     {#if loaded}
         <ChartWrapper config={[{
                     url: 'assets/data/fig7a.csv',
@@ -85,6 +85,7 @@
             keyLabelMap={ labelMap }
             url={ url_fig1 }
             spanCol={6}
+            row={6}
             caption={'Distribution of the entry points of videos within each political category'}
         />
     {:else} <div class='chart-placeholder'></div>
@@ -106,10 +107,15 @@
 </div>
 
 <style lang='scss'>
-    .section-5 {
+    .section-6 {
         grid-template-columns: repeat(12, 1fr);
-        column-gap: 50px;
-        grid-template-rows: auto auto auto 1fr auto;
+        column-gap: 0;
+        grid-template-rows: repeat(8, auto);
+
+        @media (min-width: $bp-3) {
+            column-gap: 50px;
+            grid-template-rows: auto auto auto 1fr auto;
+        }
     }
 
     .chart-placeholder {
@@ -125,13 +131,23 @@
     }
 
     .copy {
-        grid-row: 5 / span 1;
-        grid-column: span 7;
+        grid-row: 7 / span 1;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-row: 5 / span 1;
+            grid-column: span 7;
+        }
     }
 
     .references {
-        grid-row: 5 / span 1;
-        grid-column: span 4;
+        grid-row: 8 / span 1;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-row: 5 / span 1;
+            grid-column: span 5;
+        }
     }
 </style>
 

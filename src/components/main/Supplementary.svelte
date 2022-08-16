@@ -95,8 +95,12 @@
     }
     .section-supplementary {
         grid-template-columns: repeat(12, 1fr);
-        column-gap: 50px;
-        grid-template-rows: auto auto auto 1fr auto auto auto;
+        column-gap: 0;
+        grid-template-rows: auto auto auto 1fr auto auto auto auto;
+
+        @media (min-width: $bp-3) {
+            column-gap: 50px;    
+        }
     }
 
     .chart-placeholder {
@@ -112,7 +116,24 @@
     }
 
     .copy {
-        grid-column: span 7;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-column: span 7;
+        }
+
+        p {
+            @include fs-base;
+        }
+    }
+
+    .references {
+        grid-column: span 12;
+        grid-row: 8 / span 1;
+
+        @media (min-width: $bp-3) {
+            grid-column: span 5;
+        }
     }
 
     .copy-part1 {
@@ -122,20 +143,13 @@
     .copy-part2 {
         grid-row: 7 / span 1; 
     }
-    
-    .references {
-        grid-row: 5 / span 1;
-        grid-column: span 4;
-    }
 
     .table-wrapper {
         grid-row: 6 / span 1;
-        grid-column: 1 / span 10;
-    }
+        grid-column: 1 / span 12;
 
-    .copy {
-        p {
-            @include fs-base;
+        @media (min-width: $bp-3) {
+            grid-column: 1 / span 10;    
         }
     }
 </style>

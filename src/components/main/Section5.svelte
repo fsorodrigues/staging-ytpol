@@ -114,8 +114,13 @@
 <style lang='scss'>
     .section-5 {
         grid-template-columns: repeat(12, 1fr);
-        column-gap: 50px;
-        grid-template-rows: auto auto auto 1fr auto;
+        column-gap: 0;
+        grid-template-rows: auto auto auto;
+
+        @media (min-width: $bp-3) {
+            column-gap: 50px;
+            grid-template-rows: auto auto auto 1fr auto;
+        }
     }
 
     .chart-placeholder {
@@ -132,11 +137,20 @@
 
     .copy {
         grid-row: 5 / span 1;
-        grid-column: span 7;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-column: span 7;
+        }
     }
 
     .references {
-        grid-row: 5 / span 1;
-        grid-column: span 4;
+        grid-row: 6 / span 1;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-row: 5 / span 1;
+            grid-column: span 5;
+        }
     }
 </style>

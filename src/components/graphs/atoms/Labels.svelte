@@ -7,15 +7,23 @@
     import colorMap from '../../../utils/colors';
 
     // use context
-    const { xScale, zDomain, zScale } = getContext('LayerCake');
+    const { xScale, yScale, zDomain, width, height } = getContext('LayerCake');
 
 </script>
 
 <div class='label-container'>
     {#each $zDomain as group}
-        <!-- <div class='label' style="--left: {$xScale(group)}px; --color: {$zScale(group)}">{labelMap.get(group)}</div> -->
         <div class='label-group'>
-            <span class='label' style={`--left: ${$xScale(group)}px; --color: ${colorMap.get(group)}`}>{labelMap.get(group)}</span>
+            {#if $width >= $height}
+                <span 
+                    class='label' 
+                    style={`--left: ${$xScale(group)}px; --top: 75px; --color: ${colorMap.get(group)}`}
+                >{labelMap.get(group)}</span>
+            {:else} <span 
+                    class='label' 
+                    style={`--top: ${$yScale(group)}px; --left: 18px; --color: ${colorMap.get(group)}`}
+                >{labelMap.get(group)}</span>
+            {/if}
         </div>
     {/each}
 </div>
@@ -29,9 +37,8 @@
 		.label {
 			position: absolute;
 			left: var(--left);
-            top: 75px;
+            top: var(--top);
             font-weight: 700;
-            // color: var(--color);
             background-color: var(--color);
             color: white;
             transform: translate(-50%, 0);

@@ -38,6 +38,7 @@
   { page } 
   { pageSize } 
   rows={ data } 
+  responsive={false}
   let:rows={ rows2 }
 >
   <thead slot="head">

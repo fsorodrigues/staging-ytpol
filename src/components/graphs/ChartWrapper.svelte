@@ -93,15 +93,22 @@
 <style lang="scss">
     .chart-wrapper {
         display: grid;
-        grid-template-columns: 10fr 2fr;
         column-gap: 10px;
         row-gap: 10px;
         grid-row: 4 / span 1;
-        grid-column: span var(--spanCol);
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-column: span var(--spanCol);
+        }
     }
 
     .split-cols {
-        grid-template-columns: 10fr 2fr;
+        grid-template-columns: 1fr;
+
+        @media (min-width: $bp-3) {
+            grid-template-columns: 10fr 2fr;
+        }
     }
 
     .single-cols {
@@ -110,20 +117,28 @@
 
     .chart-title {
         grid-row: 2 / span 1;
-        grid-column: span 8;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-column: span 8;
+        }
     }
 
     .legend-container {
         grid-row: 3 / span 1;
-        grid-column: span 6;
+        grid-column: span 12;
         display: flex;
         justify-content: start;
+        gap: 2.5px;
         margin: 15px 0;
+
+        @media (min-width: $bp-3) {
+            grid-column: span 6;
+        }
 
         .legend-group {
             display: flex;
             align-items: baseline;
-            margin: 0 5px;
 
             .legend-label {
                 background-color: var(--color);
@@ -131,6 +146,7 @@
                 padding: 2.5px 5px;
                 border-radius: 3px;
                 font-weight: 700;
+                @include fs-sm;
             }
         }
     }

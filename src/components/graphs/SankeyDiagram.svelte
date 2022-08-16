@@ -112,9 +112,13 @@
         grid-template-columns: 1fr;
         row-gap: 10px;
         column-gap: 10px;
-        grid-row: 4 / span 1;
-        grid-column: span 6;
-        grid-column: span var(--spanCol);
+        grid-row: 2 / span 1;
+        grid-column: span 12;
+
+        @media (min-width: $bp-3) {
+            grid-column: span var(--spanCol);
+            grid-row: 1 / span 1;
+        }
     }
 
     .cluster-label {
@@ -123,7 +127,11 @@
     }
 
     .split-cols {
-        grid-template-columns: 10fr 2fr;
+        grid-template-columns: 1fr;
+
+        @media (min-width: $bp-3) {
+            grid-template-columns: 10fr 2fr;
+        }
     }
 
     .single-cols {

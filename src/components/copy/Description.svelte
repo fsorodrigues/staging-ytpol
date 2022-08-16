@@ -12,10 +12,14 @@
 
 <style lang='scss'>
 	.standfirst-wrapper {
-		grid-column: 1 / span 8;
+		grid-column: 1 / span 12;
 
 		p {
 			margin-bottom: 1em;
+		}
+
+		@media (min-width: $bp-3) {
+			grid-column: 1 / span 4;
 		}
 	}
 </style>

@@ -112,8 +112,12 @@
         grid-template-columns: 1fr;
         row-gap: 10px;
         column-gap: 10px;
-        grid-row: 4 / span 1;
-        grid-column: span 6;
+        grid-column: span 12;
+        grid-row: 1 / span 1;
+        
+        @media (min-width: $bp-3) {
+            grid-column: span 6;
+        }
     }
 
     .cluster-label {

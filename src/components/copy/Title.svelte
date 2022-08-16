@@ -6,6 +6,10 @@
 
 <style lang='scss'>
 	h1 {
-		grid-column: 1 / span 4;
+		grid-column: 1 / span 12;
+
+		@media (min-width: $bp-3) {
+			grid-column: 1 / span 5;
+		}
 	}
 </style>

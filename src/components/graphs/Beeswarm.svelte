@@ -19,10 +19,13 @@
     // export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
 	export let data : Channel[];
 	export let currentStep : number = 0;
-	// x scale
+	// scale
 	export let xKey : string = 'channel';
 	export let xScale : Function = scaleLinear();
 	export let xDomain : any[] = [null, null];
+	export let yKey : string = 'channel';
+	export let yScale : Function = scaleLinear();
+	export let yDomain : any[] = [null, null];
 	// z scale
 	export let zKey : string = 'cluster';
 	export let zScale : Function = scaleOrdinal();
@@ -38,11 +41,14 @@
 
 </script>
 
-<div class="chart beeswarm-chart">
+<div id='beeswarm' class="chart beeswarm-chart">
 	<LayerCake
 		x={ xKey }
 		{ xScale }
 		{ xDomain }
+		y={ yKey }
+		{ yScale }
+		{ yDomain }
 		z={ zKey }
 		{ zScale }
 		{ zDomain }
@@ -50,6 +56,7 @@
 		r={ rKey }
 		{ rRange }
 		{ data }
+		padding={{ top: 50, right: 15, bottom: 15, left: 15 }}
 	>
 
     <Svg>
@@ -97,9 +104,13 @@
 <style lang='scss'>
 	.chart {
 		width: 100%;
-		height: 500px;
+		height: 600px;
 		position: sticky;
 		top: 10px;
+
+		@media (min-width: $bp-3) {
+			height: 500px
+		}
 	}
 
 	.channel-label {

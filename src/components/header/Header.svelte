@@ -1,6 +1,3 @@
-<script lang="ts">
-</script>
-
 <header id="main-header" data-height-onload="84" data-height-loaded="true" data-fixed-height-onload="84" style="top: 0px;">
     <div class="container clearfix et_menu_container">
         <div class="logo_container">
@@ -60,7 +57,7 @@
 
 <style lang="scss">
     header {
-        height: 84px;
+        height: 50px;
         background-color: $css-lab-dark-blue;
         line-height: 23px;
         font-weight: 500;
@@ -69,6 +66,10 @@
         box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
         position: relative;
         z-index: 99999;
+
+        @media (min-width: $bp-3) {
+            height: 84px;
+        }
     }
 
     .container {
@@ -109,6 +110,10 @@
 
     .nav {
         display: flex;
+    }
+
+    #et-top-navigation {
+        display: none;
     }
 
     .menu-item, .menu-item-has-children {
@@ -167,64 +172,3 @@
     }
 
 </style>
-
-<!-- <div id="et-top-navigation" data-height="70" data-fixed-height="70" style="padding-left: 210px;">
-    <nav id="top-menu-nav">
-<ul id="top-menu" class="nav"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2731"><a>About</a>
-<ul class="sub-menu">
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1554"><a href="https://css.seas.upenn.edu/about/lab/">The Lab</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2232"><a href="https://css.seas.upenn.edu/about/community/">CSS Community</a></li>
-</ul>
-</li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1747"><a href="https://css.seas.upenn.edu/people/">People</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-37"><a href="https://css.seas.upenn.edu/research/">Research</a>
-<ul class="sub-menu">
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-735"><a href="https://css.seas.upenn.edu/project/penn-map/">PennMAP</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-292"><a href="https://css.seas.upenn.edu/project/virtual-lab/">Group Dynamics</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-291"><a href="https://css.seas.upenn.edu/project/covid-philadelphia/">COVID-Philadelphia</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-377"><a href="https://css.seas.upenn.edu/project/common-sense/">Common Sense</a></li>
-</ul>
-</li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-344"><a href="https://css.seas.upenn.edu/partnerships/">Partners</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-58"><a href="https://css.seas.upenn.edu/publications/">Publications</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a href="https://css.seas.upenn.edu/blog-news-events/">News</a></li>
-</ul>					</nav>
-
-
-
-    <div id="et_top_search">
-<span id="et_search_icon"></span>
-</div>
-
-<div id="et_mobile_nav_menu">
-<div class="mobile_nav closed">
-<span class="select_page">Select Page</span>
-<span class="mobile_menu_bar mobile_menu_bar_toggle"></span>
-<ul id="mobile_menu" class="et_mobile_menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2731 et_first_mobile_item"><a>About</a>
-<ul class="sub-menu">
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1554"><a href="https://css.seas.upenn.edu/about/lab/">The Lab</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2232"><a href="https://css.seas.upenn.edu/about/community/">CSS Community</a></li>
-</ul>
-</li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1747"><a href="https://css.seas.upenn.edu/people/">People</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-37"><a href="https://css.seas.upenn.edu/research/">Research</a>
-<ul class="sub-menu">
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-735"><a href="https://css.seas.upenn.edu/project/penn-map/">PennMAP</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-292"><a href="https://css.seas.upenn.edu/project/virtual-lab/">Group Dynamics</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-291"><a href="https://css.seas.upenn.edu/project/covid-philadelphia/">COVID-Philadelphia</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-377"><a href="https://css.seas.upenn.edu/project/common-sense/">Common Sense</a></li>
-</ul>
-</li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-344"><a href="https://css.seas.upenn.edu/partnerships/">Partners</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-58"><a href="https://css.seas.upenn.edu/publications/">Publications</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-105"><a href="https://css.seas.upenn.edu/blog-news-events/">News</a></li>
-</ul></div>
-</div>			</div>
-</div>
-<div class="et_search_outer">
-<div class="container et_search_form_container">
-<form role="search" method="get" class="et-search-form" action="https://css.seas.upenn.edu/">
-<input type="search" class="et-search-field" placeholder="Search …" value="" name="s" title="Search for:">				</form>
-<span class="et_close_search_field"></span>
-</div>
-</div> -->

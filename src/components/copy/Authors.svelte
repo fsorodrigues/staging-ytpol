@@ -35,12 +35,17 @@
 
 <style lang='scss'>
 	.authors {
-		grid-column: 5 / span last-line;
-		grid-row: 1 / span 1;
+		grid-column: 1 / span last-line;
+		grid-row: 2 / span 1;
 		display: flex;
 		flex-wrap: wrap;
-		column-gap: 10px;
-		row-gap: 5px;
+		column-gap: 5px;
+		row-gap: 2.5px;
+
+		@media (min-width: $bp-3) {
+			grid-row: 1 / span 1;
+			grid-column: 6 / span 6;
+		}
 
 		.author-container {
 			display: inline-flex;
@@ -52,9 +57,23 @@
 				font-weight: 300;
 				display: inline;
 				pointer-events: none;
+				@include fs-xs;
+
+				@media (min-width: $bp-3) {
+					@include fs-sm;
+				}
+			}
+
+			.author-name:after {
+				content: ',';
+
+				@media (min-width: $bp-3) {
+					display: none;
+				}
 			}
 
 			.detail {
+				display: none;
 
 				.detail-list {
 					@include fs-sm;
@@ -71,6 +90,10 @@
 						margin-bottom: 2.5px
 					}
 				}
+
+				@media (min-width: $bp-3) {
+					display: block;
+				}
 			}
 			
 			.detail:before {
@@ -86,6 +109,12 @@
 				.detail-list {
 					display: block;
 				}
+			}
+		}
+
+		.author-container:last-of-type {
+			.author-name:after {
+				content: '';
 			}
 		}
 	}

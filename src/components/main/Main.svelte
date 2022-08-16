@@ -33,10 +33,15 @@
 
 <style lang='scss'>
 	main {
-		@include grid;
+		@include grid-mobile;
 		@include centerH;
 		align-items: center;
 		max-width: $column-width;
-		margin: 120px auto 0 auto;
+		margin: 25px auto 0 auto;
+
+		@media (min-width: $bp-3) {
+            margin: 120px auto 0 auto;
+			@include grid;
+        }
 	}
 </style>

@@ -82,10 +82,11 @@
 	<slot />
 </div>
 
-<style>
+<style lang='scss'>
 	.step-container {
 		position: relative;
 		z-index: 100;
 		pointer-events: none;
+		margin: 0 -1em
 	}
 </style>

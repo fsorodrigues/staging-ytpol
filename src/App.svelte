@@ -29,7 +29,7 @@
 <Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} />
 <Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} />
 <Section6 once={ true } copy={data['section-six'].copy} refs={data['section-six'].references} />
-<Supplementary once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} />
+<Supplementary once={ true } copy={data['supplementary'].copy} refs={data['supplementary'].references} />
 <Footer />
 
 <style lang='scss' global>
@@ -61,7 +61,11 @@
 	}
 
 	.copy {
-		margin: 35px 0;
+		margin: 0;
+
+		@media (min-width: $bp-3) {
+			margin: 35px 0;
+		}
 
 		p {
 			margin: 10px 0;
@@ -70,7 +74,11 @@
 	}
 
 	.references {
-		margin: 35px 0;
+		margin: 0;
+
+		@media (min-width: $bp-3) {
+			margin: 35px 0;
+		}
 
 		p {
 			margin: 10px 0;

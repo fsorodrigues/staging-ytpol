@@ -30,6 +30,9 @@
     let xKey : string = 'channel';
 	let xScale : Function = scaleLinear();
     let xDomain : any[] = [null, null];
+    let yKey : string = 'channel';
+	let yScale : Function = scaleLinear();
+    let yDomain : any[] = [null, null];
 
     const leftRightScale = scaleOrdinal()
         .domain(['fL', 'L', 'C', 'AW', 'R', 'fR'])
@@ -59,16 +62,25 @@
         xKey = 'subscribers'
         xScale = scaleLog()
         xDomain = [null, null] 
+        yKey = 'subscribers'
+        yScale = scaleLog()
+        yDomain = [null, null] 
         clearActiveNodes()
     } else if (currentStep == 2) {
         xKey = 'cluster'
         xScale = scaleBand()
         xDomain = ['fL', 'L', 'C', 'AW', 'R', 'fR']
+        yKey = 'cluster'
+        yScale = scaleBand()
+        yDomain = ['fL', 'L', 'C', 'AW', 'R', 'fR']
         clearActiveNodes()
     } else if (currentStep == 3) {
         xKey = 'index'
         xScale = scaleLinear()
         xDomain = [null, null]
+        yKey = 'index'
+        yScale = scaleLinear()
+        yDomain = [null, null]
 		channelData = channelData.map((d, i) => ({...d, index: i}))
         clearActiveNodes()
     }
@@ -76,7 +88,16 @@
 
 <div class='scroller-wrapper'>
     {#if channelData && channelData.length}
-        <Beeswarm { currentStep } { xKey } { xScale } { xDomain } data={channelData} ></Beeswarm>
+        <Beeswarm 
+            { currentStep } 
+            { xKey } 
+            { xScale } 
+            { xDomain } 
+            { yKey } 
+            { yScale } 
+            { yDomain } 
+            data={channelData} 
+        ></Beeswarm>
     {/if}
     <Scroller bind:value={currentStep}>
         {#each steps as d, i}
@@ -96,7 +117,11 @@
     .scroller-wrapper {
         position: relative;
         grid-column: 1 / span last-line;
-		grid-row: 3 / span last-line;
+		grid-row: 4 / span last-line;
+
+        @media (min-width: $bp-3) {
+            grid-row: 3 / span last-line;
+        }
         
         .step {
             height: 100vh;

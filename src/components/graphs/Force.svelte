@@ -2,7 +2,7 @@
     import { getContext, createEventDispatcher } from 'svelte';
     import { forceSimulation, forceX, forceY, forceCollide, forceManyBody } from 'd3-force';
   
-    const { data, xGet, zGet, rGet, height, width } = getContext('LayerCake');
+    const { data, xGet, yGet, zGet, rGet, height, width } = getContext('LayerCake');
   
     // /** @type {Number} [r=4] - The circle radius size in pixels. */
     // export let r = 4;
@@ -31,22 +31,33 @@
       return ({ ...d, y: 500/2, x: i/$data.length * 960 })
     });
 
+    // variables
     let simulation = forceSimulation(nodes)
-
-    // console.log(simulation.nodes())
-
+    let xForce = null;
+    let yForce = null;
+    let rRatio = 1;
+  
     simulation.on("tick", () => {
       nodes = simulation.nodes()
     })
   
     $: {
+      if ($width >= $height) {
+        xForce = forceX().x(d => $xGet(d)).strength(xStrength)
+        yForce = forceY().y($height / 2).strength(yStrength)
+      } else {
+        rRatio = 0.75
+        xForce = forceX().x($width / 2).strength(yStrength)
+        yForce = forceY().y(d => $yGet(d)).strength(xStrength)
+      }
+      
       simulation = simulation
-      .force('collide', forceCollide(d => $rGet(d)+0.5).strength(collideStrength).iterations(2))
-      .force('x', forceX().x(d => $xGet(d)).strength(xStrength))
-      .force('y', forceY().y($height / 2).strength(yStrength))
-      .force('charge', forceManyBody().strength(-1))
-      .alpha(1)
-			.restart();
+        .force('collide', forceCollide(d => ($rGet(d) * rRatio) + 0.5).strength(collideStrength).iterations(2))
+        .force('charge', forceManyBody().strength(-1))
+        .force('x', xForce)
+        .force('y', yForce)
+        .alpha(1)
+        .restart();
     }
 
     function handleMouseOver(e, d) {
@@ -81,7 +92,7 @@
       stroke-width={strokeWidth}
       cx={node.x}
       cy={node.y}
-      r={$rGet(node)}
+      r={$rGet(node) * rRatio}
       on:mouseover={(e) => handleMouseOver(e, node)}
       on:focus={(e) => handleMouseOver(e, node)}
     >

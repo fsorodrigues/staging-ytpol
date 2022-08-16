@@ -35,6 +35,7 @@
 	export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';;
     export let includeCaption : boolean = true;
 	export let spanCol : number = 12;
+	export let row : number = 4;
 	export let customClass : string = 'chart-large';
 	export let tooltipType : string = 'arrow';
 	export let showLegend : boolean = false;
@@ -55,7 +56,7 @@
 </script>
 
 {#if title}<h3 class="chart-title">{title}</h3>{/if}
-<div class='legend-container'>
+<div class='legend-container' style={`--row: ${row-1}`}>
 	{#each data.columns.filter(d => d !== 'cluster') as group, i}
 		<div class='legend-group'>
 			<span class='legend-label' style={`--color: ${keyColorMap.get(group)}`}>{keyLabelMap.get(group)}</span>
@@ -64,7 +65,7 @@
 </div>
 <div 
 	class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
-	style={`--spanCol: ${spanCol}`}
+	style={`--spanCol: ${spanCol}; --row: ${row}`}
 >
 	<div class={`chart stacked-bar-chart ${customClass}`}>
 		<LayerCake
@@ -165,21 +166,31 @@
         grid-template-columns: 1fr;
 		row-gap: 10px;
         column-gap: 10px;
-        grid-row: 4 / span 1;
-        grid-column: span var(--spanCol);
+		grid-row: var(--row) / span 1;
+        grid-column: 1 / span 12;
+
+        @media (min-width: $bp-3) {
+			grid-column: 7 / span var(--spanCol);
+			grid-row: 4 / span 1;
+        }
     }
 
 	.legend-container {
-        grid-row: 3 / span 1;
-        grid-column: span 6;
+        grid-row: var(--row) / span 1;
+        grid-column: span 12;
         display: flex;
         justify-content: start;
-        margin: 15px 0;
+        gap: 2.5px;
+		margin: 15px 0;
+
+        @media (min-width: $bp-3) {
+			grid-row: 3 / span 1;
+            grid-column: span 6;
+        }
 
         .legend-group {
             display: flex;
             align-items: baseline;
-            margin: 0 5px;
 
             .legend-label {
                 background-color: var(--color);
@@ -188,6 +199,7 @@
                 border-radius: 3px;
                 font-weight: 700;
 				text-align: center;
+				@include fs-sm;
             }
         }
     }
@@ -198,11 +210,19 @@
 	}
 
 	.split-cols {
-        grid-template-columns: 10fr 2fr;
+        grid-template-columns: 1fr;
+		grid-row: var(--row) / span 1;
+        grid-column: 1 / span 12;
+
+        @media (min-width: $bp-3) {
+            grid-template-columns: 10fr 2fr;
+			grid-column: 1 / span var(--spanCol);
+			grid-row: 4 / span 1;
+        }
     }
 
     .single-cols {
         grid-template-columns: 1fr;
-		grid-template-rows: auto 1fr;
+        grid-template-rows: auto 1fr;
     }
 </style>

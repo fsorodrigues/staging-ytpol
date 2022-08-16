@@ -9,7 +9,16 @@ $css-lab-dark-red: #990000;
 
 // layout
 $column-width: 960px;
+// breakpoints
+$bp-1: 480px;
+$bp-2: 768px;
+$bp-3: 1024px;
+$bp-4: 1200px;
 
+@mixin fs-xs {
+    font-size: 11px;
+    line-height: 1.35;
+}
 @mixin fs-sm {
     font-size: 12px;
     line-height: 1.45;
