@@ -34,3 +34,11 @@ $bp-4: 1200px;
 @mixin fs-lg {
     font-size: 20px;
 }
+
+@mixin fs-xl {
+    font-size: 32px;
+}
+
+@mixin fs-xxl {
+    font-size: 45px;
+}

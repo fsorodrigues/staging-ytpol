@@ -19,7 +19,7 @@
 		}
 
 		@media (min-width: $bp-3) {
-			grid-column: 1 / span 4;
+			grid-column: 1 / span 5;
 		}
 	}
 </style>

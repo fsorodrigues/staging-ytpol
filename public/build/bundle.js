@@ -1615,7 +1615,7 @@ var app = (function () {
     		c: function create() {
     			h1 = element("h1");
     			t = text$1(/*title*/ ctx[0]);
-    			attr_dev(h1, "class", "svelte-1e817do");
+    			attr_dev(h1, "class", "svelte-1yobrna");
     			add_location(h1, file$H, 3, 0, 47);
     		},
     		l: function claim(nodes) {
@@ -1722,7 +1722,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text$1(t_value);
-    			attr_dev(p, "class", "svelte-1hr8fsp");
+    			attr_dev(p, "class", "svelte-2zvnp6");
     			add_location(p, file$G, 5, 2, 115);
     		},
     		m: function mount(target, anchor) {
@@ -1766,7 +1766,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "standfirst-wrapper svelte-1hr8fsp");
+    			attr_dev(div, "class", "standfirst-wrapper svelte-2zvnp6");
     			add_location(div, file$G, 3, 0, 52);
     		},
     		l: function claim(nodes) {
@@ -30007,7 +30007,7 @@ var app = (function () {
 
     var authors = [
     	{
-    		name: "Homa Hosseinmardia",
+    		name: "Homa Hosseinmardi",
     		detail: [
     			"Department of Computer and Information Science, University of Pennsylvania, Philadelphia, PA 19104",
     			"homahm@seas.upenn.edu"
@@ -30035,7 +30035,7 @@ var app = (function () {
     		]
     	},
     	{
-    		name: "David M. Rothschildh",
+    		name: "David M. Rothschild",
     		detail: [
     			"Microsoft Research New York, New York, NY 10012"
     		]

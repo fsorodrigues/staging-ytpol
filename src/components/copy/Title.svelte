@@ -7,9 +7,11 @@
 <style lang='scss'>
 	h1 {
 		grid-column: 1 / span 12;
+		@include fs-xl;
 
 		@media (min-width: $bp-3) {
 			grid-column: 1 / span 5;
+			@include fs-xxl;
 		}
 	}
 </style>
