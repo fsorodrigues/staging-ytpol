@@ -69,7 +69,7 @@
 >
 	<div class={`chart stacked-bar-chart ${customClass}`}>
 		<LayerCake
-			padding={{ top: 0, right: 0, bottom: 15, left: 45 }}
+			padding={{ top: 0, right: 0, bottom: 15, left: 55 }}
 			flatData={ flatten(stackedData) }
 			data={ stackedData }
 			x={ xKey }

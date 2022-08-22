@@ -44,7 +44,9 @@
             data={{ nodes, links }}
             padding={{
                 top: 30,
-                bottom: 30
+                bottom: 30,
+                left: 5,
+                right: 5,
             }}
             position={'relative'}
         >

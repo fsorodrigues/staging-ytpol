@@ -46,7 +46,7 @@
 <div class='chart-wrapper'>
     <div class="chart range-plot">
         <LayerCake
-            padding={{ top: 0, right: 10, bottom: 20, left: 45 }}
+            padding={{ top: 0, right: 10, bottom: 20, left: 55 }}
             flatData = { data }
             data = { Array.from(groupedData) }
             x={ xKey }
