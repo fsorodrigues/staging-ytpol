@@ -69,7 +69,11 @@
 
 		p {
 			margin: 10px 0;
-			@include fs-md;
+			@include fs-root;
+
+			@media (min-width: $bp-2) {
+				@include fs-md;
+			}
 		}
 	}
 

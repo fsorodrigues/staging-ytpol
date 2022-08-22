@@ -32,6 +32,10 @@ $bp-4: 1200px;
     font-size: 14px;
     line-height: 1.6;
 }
+@mixin fs-root {
+    font-size: 16px;
+    line-height: 1.6;
+}
 @mixin fs-md {
     font-size: 18px;
     line-height: 1.6;

@@ -11459,7 +11459,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text$1(t_value);
-    			attr_dev(p, "class", "svelte-1ih3eqn");
+    			attr_dev(p, "class", "svelte-104zqcg");
     			add_location(p, file$w, 84, 24, 2634);
     		},
     		m: function mount(target, anchor) {
@@ -11511,12 +11511,12 @@ var app = (function () {
 
     			t = space();
     			div2 = element("div");
-    			attr_dev(div0, "class", "step-content svelte-1ih3eqn");
+    			attr_dev(div0, "class", "step-content svelte-104zqcg");
     			add_location(div0, file$w, 82, 16, 2539);
-    			attr_dev(div1, "class", div1_class_value = "step " + /*d*/ ctx[12].type + " svelte-1ih3eqn");
+    			attr_dev(div1, "class", div1_class_value = "step " + /*d*/ ctx[12].type + " svelte-104zqcg");
     			toggle_class(div1, "active", /*currentStep*/ ctx[2] === /*i*/ ctx[14]);
     			add_location(div1, file$w, 81, 12, 2462);
-    			attr_dev(div2, "class", "spacer svelte-1ih3eqn");
+    			attr_dev(div2, "class", "spacer svelte-104zqcg");
     			add_location(div2, file$w, 88, 12, 2727);
     		},
     		m: function mount(target, anchor) {
@@ -11555,7 +11555,7 @@ var app = (function () {
     				each_blocks.length = each_value_1.length;
     			}
 
-    			if (dirty & /*steps*/ 1 && div1_class_value !== (div1_class_value = "step " + /*d*/ ctx[12].type + " svelte-1ih3eqn")) {
+    			if (dirty & /*steps*/ 1 && div1_class_value !== (div1_class_value = "step " + /*d*/ ctx[12].type + " svelte-104zqcg")) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -11680,7 +11680,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t = space();
     			create_component(scroller.$$.fragment);
-    			attr_dev(div, "class", "scroller-wrapper svelte-1ih3eqn");
+    			attr_dev(div, "class", "scroller-wrapper svelte-104zqcg");
     			add_location(div, file$w, 66, 0, 2052);
     		},
     		l: function claim(nodes) {

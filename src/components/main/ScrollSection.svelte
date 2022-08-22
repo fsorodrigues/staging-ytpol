@@ -147,5 +147,15 @@
         .spacer {
             height: 20vh;
         }
+
+        .step-content {
+            p {
+            @include fs-root;
+
+                @media (min-width: $bp-2) {
+                    @include fs-md;
+                }
+            }
+        }
     }
 </style>
