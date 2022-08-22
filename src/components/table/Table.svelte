@@ -64,8 +64,6 @@
     function onSearch(event) {
       dispatch("search", event.detail);
     }
-
-    // setSearchLabels('channel_name')
   </script>
   
   <style>
@@ -78,6 +76,7 @@
     .table :global(td) {
       position: relative;
       padding: 0.3em 0.3em;
+      overflow-x: scroll;
     }
   
     .center {
@@ -93,7 +92,6 @@
   
     .slot-top,
     .slot-bottom {
-      /* float: left; */
       width: 100%;
       margin-top: 1em;
     }
@@ -154,7 +152,7 @@
     </div>
   </slot>
   
-  <table class={'table ' + $$props.class} class:responsive >
+  <table class={'table'} class:responsive >
     <slot name="head" />
     {#if loading}
       <tbody>

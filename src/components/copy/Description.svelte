@@ -1,4 +1,8 @@
 <script lang="ts">
+	// components
+	import LinkButton from "./LinkButton.svelte";
+	
+	// property definitions
 	export let standfirst : any[];
 
 </script>
@@ -7,6 +11,7 @@
 	{#each standfirst as text}
 		<p>{ text.value }</p>
 	{/each}
+	<LinkButton url={'https://www.pnas.org/doi/10.1073/pnas.2101967118'} />
 </div>
 
 

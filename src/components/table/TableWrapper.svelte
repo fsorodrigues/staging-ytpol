@@ -13,10 +13,6 @@
   let page = 0; //first page
   export let pageSize = 10;
 
-  function onCellClick(row) {
-    console.log(row)
-  }
-
   function onSortString(event) {
     event.detail.rows = sortString(
       event.detail.rows,
@@ -56,7 +52,6 @@
   </thead>
   <tbody>
     {#each rows2 as row, index (row)}
-      <!-- <Row {index} on:click={() => onCellClick(row)}> -->
       <Row {index}>
       {#each Object.entries(data[0]) as [k, v]}
         {@const type = Number.isFinite(v) ? 'number' : 'string'}
@@ -83,7 +78,11 @@
 
 <style lang='scss'>
   .header-cell {
-    @include fs-sm;
+    @include fs-xxs;
+
+    @media (min-width: $bp-2) {
+      @include fs-sm;
+    }
 
     .content {
       display: flex;
@@ -93,7 +92,11 @@
 
   .header-cell-number {
     .content {
-      padding-left: 15px;
+      padding-left: 0;
+
+      @media (min-width: $bp-3) {
+        padding-left: 15px;
+      }
     }
   }
   
@@ -121,7 +124,11 @@
   .header-cell-total_views,
   .row-cell-total_videos,
   .header-cell-total_videos {
-    width: calc(50% / 3);
+    width: auto;
+
+    @media (min-width: $bp-3) {
+      width: calc(50% / 3)
+    }
   }
 
   .cluster {

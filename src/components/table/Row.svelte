@@ -16,14 +16,18 @@
 
     .row {
       height: 28px;
-      @include fs-sm;
+      @include fs-xxs;
+
+      @media (min-width: $bp-2) {
+        @include fs-sm;
+      }
     }
 
   </style>
   
   <tr
       on:click={onClick}
-      class={`row ${$$props.class}`}
+      class={`row`}
       class:odd={index % 2 !== 0}
       class:even={index % 2 === 0}
     >

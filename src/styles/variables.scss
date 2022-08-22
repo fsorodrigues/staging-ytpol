@@ -15,6 +15,11 @@ $bp-2: 768px;
 $bp-3: 1024px;
 $bp-4: 1200px;
 
+@mixin fs-xxs {
+    font-size: 10px;
+    line-height: 1.35;
+}
+
 @mixin fs-xs {
     font-size: 11px;
     line-height: 1.35;
