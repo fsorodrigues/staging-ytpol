@@ -22,6 +22,7 @@
     export let once : boolean;
     export let copy : any[];
     export let refs : any[];
+    export let captions: any[];
 
     // variable declaration
     let videos_url : string = 'assets/data/video_count.csv'
@@ -43,7 +44,7 @@
 
 <main class='supplementary'>
     <div class="section section-supplementary" use:inView={{ once }} on:enter={() => loaded = true }>
-        <h2 class="section-title">Supplementary information appendix</h2>
+        <h2 class="section-title">Supplementary information</h2>
         {#if loaded}
             <SingleLineChart
                 data={ data_videos }
@@ -109,7 +110,7 @@
     }
 
     .section-title {
-        border-bottom: 1pt solid black;
+        // border-bottom: 1pt solid black;
         margin: 0 0 25px 0;
         grid-row: 1 / span 1;
         grid-column: span 12;

@@ -13,6 +13,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 </script>
 
 <div class="section section-2" use:inView={{ once }} on:enter={() => loaded = true }>
@@ -25,7 +26,7 @@
                 yKey: 'median_duration',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
+                caption: captions[0].value,
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => d.toFixed(0)
             },
@@ -37,7 +38,7 @@
                 yKey: 'median_user_watchtime',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
+                caption: captions[1].value,
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => d.toFixed(0)
             }

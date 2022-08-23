@@ -24,7 +24,7 @@
 		}
 
 		@media (min-width: $bp-3) {
-			grid-column: 1 / span 5;
+			grid-column: 1 / span 8;
 		}
 	}
 </style>
