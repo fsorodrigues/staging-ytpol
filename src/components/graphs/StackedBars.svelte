@@ -186,7 +186,7 @@
         @media (min-width: $bp-3) {
 			grid-row: 3 / span 1;
             grid-column: span 6;
-			margin: 25px 0;
+			margin: 15px 0;
         }
 
         .legend-group {

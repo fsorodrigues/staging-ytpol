@@ -58,6 +58,7 @@
             zScale={ scaleOrdinal() }
             zDomain={ seriesNames }
             zRange={ seriesColors }
+            custom={ groupedData }
         >
             <Svg>
                 <AxisX
