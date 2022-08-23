@@ -1,6 +1,7 @@
 <script lang="ts">
     // node_modules
 	import { timeFormat } from 'd3-time-format'
+    import { format } from 'd3-format'
 
     // actions
     import inView from "../../actions/inView";
@@ -18,33 +19,33 @@
 <div class="section section-1" use:inView={{ once }} on:enter={() => loaded = true }>
     <h2 class="section-title">Section 1 title</h2>
         {#if loaded}
-            <ChartWrapper config={[{
-                    url: 'assets/data/fig3a_smoothed.csv',
-                    description: 'Median video duration',
-                    type: 'line',
-                    xKey: 'date',
-                    yKey: 'median_duration',
-                    zKey: 'label',
-                    includeCaption: true,
-                    caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
-                    formatTickX: timeFormat('%b %Y'),
-                    formatTickY: (d) => d.toFixed(0)
-                },
-                {
-                    url: 'assets/data/fig3b_smoothed.csv',
-                    description: 'Median user consumption duration',
-                    type: 'line',
-                    xKey: 'date',
-                    yKey: 'median_user_watchtime',
-                    zKey: 'label',
-                    includeCaption: true,
-                    caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
-                    formatTickX: timeFormat('%b %Y'),
-                    formatTickY: (d) => d.toFixed(0)
-                }
-            ]} 
-            title='YouTube consumption'
-            />
+        <ChartWrapper config={[{
+            url: 'assets/data/fig2a_ledwich.csv',
+            description: 'User share',
+            type: 'line',
+            xKey: 'date',
+            yKey: 'user_percent',
+            zKey: 'label',
+            includeCaption: true,
+            caption: 'Percent of users falling into the six political categories.',
+            formatTickX: timeFormat('%b %Y'),
+            formatTickY: (d) => format('.1%')(d).replace(/[.,]0+/, "")
+            },
+            {
+                url: 'assets/data/fig2b_ledwich.csv',
+                description: 'Total consumption share',
+                type: 'line',
+                xKey: 'date',
+                yKey: 'percentage_duration',
+                zKey: 'label',
+                includeCaption: true,
+                caption: 'Consumption share of the six political channel categories.',
+                formatTickX: timeFormat('%b %Y'),
+                formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
+            }
+        ]}
+        title='Community engagement'
+        />
     {:else} <div class='chart-placeholder'></div>
     {/if}
     <div class='copy'>

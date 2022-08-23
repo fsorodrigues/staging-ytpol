@@ -15698,8 +15698,7 @@ var app = (function () {
     				caption: /*activeFig*/ ctx[4].caption,
     				formatTickX: /*activeFig*/ ctx[4].formatTickX,
     				formatTickY: /*activeFig*/ ctx[4].formatTickY,
-    				spanCol: /*spanCol*/ ctx[1],
-    				title: /*title*/ ctx[2]
+    				spanCol: /*spanCol*/ ctx[1]
     			},
     			$$inline: true
     		});
@@ -15720,11 +15719,11 @@ var app = (function () {
     			t3 = space();
     			div1 = element("div");
     			create_component(linechart.$$.fragment);
-    			attr_dev(h3, "class", "chart-title svelte-s3duru");
+    			attr_dev(h3, "class", "chart-title svelte-su6sm6");
     			add_location(h3, file$n, 32, 4, 1135);
-    			attr_dev(div0, "class", "legend-container svelte-s3duru");
+    			attr_dev(div0, "class", "legend-container svelte-su6sm6");
     			add_location(div0, file$n, 41, 4, 1474);
-    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(`chart-wrapper ${/*spanCol*/ ctx[1] === 12 ? 'split-cols' : 'single-cols'}`) + " svelte-s3duru"));
+    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(`chart-wrapper ${/*spanCol*/ ctx[1] === 12 ? 'split-cols' : 'single-cols'}`) + " svelte-su6sm6"));
     			attr_dev(div1, "style", div1_style_value = `--spanCol: ${/*spanCol*/ ctx[1]}`);
     			add_location(div1, file$n, 49, 4, 1890);
     		},
@@ -15799,10 +15798,9 @@ var app = (function () {
     			if (dirty & /*activeFig*/ 16) linechart_changes.formatTickX = /*activeFig*/ ctx[4].formatTickX;
     			if (dirty & /*activeFig*/ 16) linechart_changes.formatTickY = /*activeFig*/ ctx[4].formatTickY;
     			if (dirty & /*spanCol*/ 2) linechart_changes.spanCol = /*spanCol*/ ctx[1];
-    			if (dirty & /*title*/ 4) linechart_changes.title = /*title*/ ctx[2];
     			linechart.$set(linechart_changes);
 
-    			if (!current || dirty & /*spanCol*/ 2 && div1_class_value !== (div1_class_value = "" + (null_to_empty(`chart-wrapper ${/*spanCol*/ ctx[1] === 12 ? 'split-cols' : 'single-cols'}`) + " svelte-s3duru"))) {
+    			if (!current || dirty & /*spanCol*/ 2 && div1_class_value !== (div1_class_value = "" + (null_to_empty(`chart-wrapper ${/*spanCol*/ ctx[1] === 12 ? 'split-cols' : 'single-cols'}`) + " svelte-su6sm6"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -15987,10 +15985,10 @@ var app = (function () {
     			span = element("span");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			attr_dev(span, "class", "legend-label svelte-s3duru");
+    			attr_dev(span, "class", "legend-label svelte-su6sm6");
     			attr_dev(span, "style", span_style_value = `--color: ${colorMap.get(/*group*/ ctx[9])}`);
     			add_location(span, file$n, 44, 16, 1640);
-    			attr_dev(div, "class", "legend-group svelte-s3duru");
+    			attr_dev(div, "class", "legend-group svelte-su6sm6");
     			add_location(div, file$n, 43, 12, 1597);
     		},
     		m: function mount(target, anchor) {
@@ -16254,18 +16252,18 @@ var app = (function () {
 
     function get_each_context$e(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
+    	child_ctx[7] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$b(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
-    	child_ctx[9] = i;
+    	child_ctx[7] = list[i];
+    	child_ctx[11] = i;
     	return child_ctx;
     }
 
-    // (40:4) {:else}
+    // (41:4) {:else}
     function create_else_block$a(ctx) {
     	let div;
 
@@ -16273,7 +16271,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-1uzo7nm");
-    			add_location(div, file$m, 39, 12, 1713);
+    			add_location(div, file$m, 40, 12, 1520);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -16290,14 +16288,14 @@ var app = (function () {
     		block,
     		id: create_else_block$a.name,
     		type: "else",
-    		source: "(40:4) {:else}",
+    		source: "(41:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:8) {#if loaded}
+    // (13:8) {#if loaded}
     function create_if_block$f(ctx) {
     	let chartwrapper;
     	let current;
@@ -16306,31 +16304,31 @@ var app = (function () {
     			props: {
     				config: [
     					{
-    						url: 'assets/data/fig3a_smoothed.csv',
-    						description: 'Median video duration',
+    						url: 'assets/data/fig2a_ledwich.csv',
+    						description: 'User share',
     						type: 'line',
     						xKey: 'date',
-    						yKey: 'median_duration',
+    						yKey: 'user_percent',
     						zKey: 'label',
     						includeCaption: true,
-    						caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
+    						caption: 'Percent of users falling into the six political categories.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: func$3
+    						formatTickY: /*func*/ ctx[4]
     					},
     					{
-    						url: 'assets/data/fig3b_smoothed.csv',
-    						description: 'Median user consumption duration',
+    						url: 'assets/data/fig2b_ledwich.csv',
+    						description: 'Total consumption share',
     						type: 'line',
     						xKey: 'date',
-    						yKey: 'median_user_watchtime',
+    						yKey: 'percentage_duration',
     						zKey: 'label',
     						includeCaption: true,
-    						caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
+    						caption: 'Consumption share of the six political channel categories.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: func_1$1
+    						formatTickY: /*func_1*/ ctx[5]
     					}
     				],
-    				title: "YouTube consumption"
+    				title: "Community engagement"
     			},
     			$$inline: true
     		});
@@ -16362,17 +16360,17 @@ var app = (function () {
     		block,
     		id: create_if_block$f.name,
     		type: "if",
-    		source: "(12:8) {#if loaded}",
+    		source: "(13:8) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (43:8) {#each copy as d, i}
+    // (44:8) {#each copy as d, i}
     function create_each_block_1$b(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[5].value + "";
+    	let t0_value = /*d*/ ctx[7].value + "";
     	let t0;
     	let t1;
 
@@ -16381,7 +16379,7 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$m, 43, 12, 1825);
+    			add_location(p, file$m, 44, 12, 1632);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -16389,7 +16387,7 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -16400,17 +16398,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$b.name,
     		type: "each",
-    		source: "(43:8) {#each copy as d, i}",
+    		source: "(44:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:8) {#each refs as d}
+    // (51:8) {#each refs as d}
     function create_each_block$e(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[5].value + "";
+    	let t0_value = /*d*/ ctx[7].value + "";
     	let t0;
     	let t1;
 
@@ -16419,7 +16417,7 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$m, 50, 12, 1966);
+    			add_location(p, file$m, 51, 12, 1773);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -16427,7 +16425,7 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -16438,7 +16436,7 @@ var app = (function () {
     		block,
     		id: create_each_block$e.name,
     		type: "each",
-    		source: "(50:8) {#each refs as d}",
+    		source: "(51:8) {#each refs as d}",
     		ctx
     	});
 
@@ -16507,13 +16505,13 @@ var app = (function () {
     			}
 
     			attr_dev(h2, "class", "section-title svelte-1uzo7nm");
-    			add_location(h2, file$m, 10, 4, 336);
+    			add_location(h2, file$m, 11, 4, 372);
     			attr_dev(div0, "class", "copy svelte-1uzo7nm");
-    			add_location(div0, file$m, 41, 4, 1765);
+    			add_location(div0, file$m, 42, 4, 1572);
     			attr_dev(div1, "class", "references svelte-1uzo7nm");
-    			add_location(div1, file$m, 48, 4, 1903);
+    			add_location(div1, file$m, 49, 4, 1710);
     			attr_dev(div2, "class", "section section-1 svelte-1uzo7nm");
-    			add_location(div2, file$m, 9, 0, 246);
+    			add_location(div2, file$m, 10, 0, 282);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16542,7 +16540,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[4], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[6], false, false, false)
     				];
 
     				mounted = true;
@@ -16655,9 +16653,6 @@ var app = (function () {
     	return block;
     }
 
-    const func$3 = d => d.toFixed(0);
-    const func_1$1 = d => d.toFixed(0);
-
     function instance$n($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Section1', slots, []);
@@ -16671,6 +16666,8 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section1> was created with unknown prop '${key}'`);
     	});
 
+    	const func = d => format('.1%')(d).replace(/[.,]0+/, "");
+    	const func_1 = d => format('.2%')(d).replace(/[.,]0+/, "");
     	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
@@ -16681,6 +16678,7 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		timeFormat,
+    		format,
     		inView,
     		ChartWrapper,
     		loaded,
@@ -16700,7 +16698,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, copy, refs, loaded, enter_handler];
+    	return [once, copy, refs, loaded, func, func_1, enter_handler];
     }
 
     class Section1 extends SvelteComponentDev {
@@ -16761,18 +16759,18 @@ var app = (function () {
 
     function get_each_context$d(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[7] = list[i];
+    	child_ctx[5] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$a(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[7] = list[i];
-    	child_ctx[11] = i;
+    	child_ctx[5] = list[i];
+    	child_ctx[9] = i;
     	return child_ctx;
     }
 
-    // (41:4) {:else}
+    // (39:4) {:else}
     function create_else_block$9(ctx) {
     	let div;
 
@@ -16780,7 +16778,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "chart-placeholder svelte-1kkpabm");
-    			add_location(div, file$l, 40, 12, 1522);
+    			add_location(div, file$l, 38, 12, 1597);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -16797,14 +16795,14 @@ var app = (function () {
     		block,
     		id: create_else_block$9.name,
     		type: "else",
-    		source: "(41:4) {:else}",
+    		source: "(39:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:4) {#if loaded}
+    // (11:4) {#if loaded}
     function create_if_block$e(ctx) {
     	let chartwrapper;
     	let current;
@@ -16813,31 +16811,31 @@ var app = (function () {
     			props: {
     				config: [
     					{
-    						url: 'assets/data/fig2a_ledwich.csv',
-    						description: 'User share',
+    						url: 'assets/data/fig3a_smoothed.csv',
+    						description: 'Median monthly minutes on YouTube (total)',
     						type: 'line',
     						xKey: 'date',
-    						yKey: 'user_percent',
+    						yKey: 'median_duration',
     						zKey: 'label',
     						includeCaption: true,
-    						caption: 'Percent of users falling into the six political categories.',
+    						caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: /*func*/ ctx[4]
+    						formatTickY: func$3
     					},
     					{
-    						url: 'assets/data/fig2b_ledwich.csv',
-    						description: 'Total consumption share',
+    						url: 'assets/data/fig3b_smoothed.csv',
+    						description: 'Median monthly minutes on YouTube (within news cluster)',
     						type: 'line',
     						xKey: 'date',
-    						yKey: 'percentage_duration',
+    						yKey: 'median_user_watchtime',
     						zKey: 'label',
     						includeCaption: true,
-    						caption: 'Consumption share of the six political channel categories.',
+    						caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
     						formatTickX: timeFormat('%b %Y'),
-    						formatTickY: /*func_1*/ ctx[5]
+    						formatTickY: func_1$1
     					}
     				],
-    				title: "Community engagement"
+    				title: "YouTube consumption"
     			},
     			$$inline: true
     		});
@@ -16869,17 +16867,17 @@ var app = (function () {
     		block,
     		id: create_if_block$e.name,
     		type: "if",
-    		source: "(12:4) {#if loaded}",
+    		source: "(11:4) {#if loaded}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (44:8) {#each copy as d, i}
+    // (42:8) {#each copy as d, i}
     function create_each_block_1$a(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[7].value + "";
+    	let t0_value = /*d*/ ctx[5].value + "";
     	let t0;
     	let t1;
 
@@ -16888,7 +16886,7 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$l, 44, 12, 1634);
+    			add_location(p, file$l, 42, 12, 1709);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -16896,7 +16894,7 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*copy*/ 2 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -16907,17 +16905,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1$a.name,
     		type: "each",
-    		source: "(44:8) {#each copy as d, i}",
+    		source: "(42:8) {#each copy as d, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (51:8) {#each refs as d}
+    // (49:8) {#each refs as d}
     function create_each_block$d(ctx) {
     	let p;
-    	let t0_value = /*d*/ ctx[7].value + "";
+    	let t0_value = /*d*/ ctx[5].value + "";
     	let t0;
     	let t1;
 
@@ -16926,7 +16924,7 @@ var app = (function () {
     			p = element("p");
     			t0 = text$1(t0_value);
     			t1 = space();
-    			add_location(p, file$l, 51, 12, 1775);
+    			add_location(p, file$l, 49, 12, 1850);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -16934,7 +16932,7 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[7].value + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*refs*/ 4 && t0_value !== (t0_value = /*d*/ ctx[5].value + "")) set_data_dev(t0, t0_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -16945,7 +16943,7 @@ var app = (function () {
     		block,
     		id: create_each_block$d.name,
     		type: "each",
-    		source: "(51:8) {#each refs as d}",
+    		source: "(49:8) {#each refs as d}",
     		ctx
     	});
 
@@ -17009,11 +17007,11 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "copy svelte-1kkpabm");
-    			add_location(div0, file$l, 42, 4, 1574);
+    			add_location(div0, file$l, 40, 4, 1649);
     			attr_dev(div1, "class", "references svelte-1kkpabm");
-    			add_location(div1, file$l, 49, 4, 1712);
+    			add_location(div1, file$l, 47, 4, 1787);
     			attr_dev(div2, "class", "section section-2 svelte-1kkpabm");
-    			add_location(div2, file$l, 10, 0, 282);
+    			add_location(div2, file$l, 9, 0, 246);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -17040,7 +17038,7 @@ var app = (function () {
     			if (!mounted) {
     				dispose = [
     					action_destroyer(inView_action = inView.call(null, div2, { once: /*once*/ ctx[0] })),
-    					listen_dev(div2, "enter", /*enter_handler*/ ctx[6], false, false, false)
+    					listen_dev(div2, "enter", /*enter_handler*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -17153,6 +17151,9 @@ var app = (function () {
     	return block;
     }
 
+    const func$3 = d => d.toFixed(0);
+    const func_1$1 = d => d.toFixed(0);
+
     function instance$m($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Section2', slots, []);
@@ -17166,8 +17167,6 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Section2> was created with unknown prop '${key}'`);
     	});
 
-    	const func = d => format('.1%')(d).replace(/[.,]0+/, "");
-    	const func_1 = d => format('.2%')(d).replace(/[.,]0+/, "");
     	const enter_handler = () => $$invalidate(3, loaded = true);
 
     	$$self.$$set = $$props => {
@@ -17178,7 +17177,6 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		timeFormat,
-    		format,
     		inView,
     		ChartWrapper,
     		loaded,
@@ -17198,7 +17196,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [once, copy, refs, loaded, func, func_1, enter_handler];
+    	return [once, copy, refs, loaded, enter_handler];
     }
 
     class Section2 extends SvelteComponentDev {

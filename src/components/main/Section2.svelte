@@ -1,7 +1,6 @@
 <script lang="ts">
     // node_modules
 	import { timeFormat } from 'd3-time-format'
-    import { format } from 'd3-format'
     
     // actions
     import inView from "../../actions/inView";
@@ -18,33 +17,32 @@
 
 <div class="section section-2" use:inView={{ once }} on:enter={() => loaded = true }>
     {#if loaded}
-        <ChartWrapper config={[{
-                url: 'assets/data/fig2a_ledwich.csv',
-                description: 'User share',
+            <ChartWrapper config={[{
+                url: 'assets/data/fig3a_smoothed.csv',
+                description: 'Median monthly minutes on YouTube (total)',
                 type: 'line',
                 xKey: 'date',
-                yKey: 'user_percent',
+                yKey: 'median_duration',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Percent of users falling into the six political categories.',
+                caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
                 formatTickX: timeFormat('%b %Y'),
-                formatTickY: (d) => format('.1%')(d).replace(/[.,]0+/, "")
-                
+                formatTickY: (d) => d.toFixed(0)
             },
             {
-                url: 'assets/data/fig2b_ledwich.csv',
-                description: 'Total consumption share',
+                url: 'assets/data/fig3b_smoothed.csv',
+                description: 'Median monthly minutes on YouTube (within news cluster)',
                 type: 'line',
                 xKey: 'date',
-                yKey: 'percentage_duration',
+                yKey: 'median_user_watchtime',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Consumption share of the six political channel categories.',
+                caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
                 formatTickX: timeFormat('%b %Y'),
-                formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
+                formatTickY: (d) => d.toFixed(0)
             }
-        ]}
-        title='Community engagement'
+        ]} 
+        title='YouTube consumption'
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

@@ -84,7 +84,6 @@
             formatTickX={ activeFig.formatTickX }
             formatTickY={ activeFig.formatTickY }
             { spanCol }
-            { title }
         />
     </div>
 {/if}
@@ -119,9 +118,9 @@
         grid-row: 2 / span 1;
         grid-column: span 12;
 
-        @media (min-width: $bp-3) {
-            grid-column: span 8;
-        }
+        // @media (min-width: $bp-3) {
+        //     grid-column: span 8;
+        // }
     }
 
     .legend-container {
