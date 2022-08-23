@@ -56,10 +56,10 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				ticks={3}
+				ticks={6}
 				formatTick={formatTickX}
 				snapTicks={false}
-				tickMarks={false}
+				tickMarks={true}
 			/>
 			<AxisY
 				ticks={4}

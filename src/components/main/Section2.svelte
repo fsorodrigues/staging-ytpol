@@ -27,8 +27,15 @@
                 zKey: 'label',
                 includeCaption: true,
                 caption: captions[0].value,
-                formatTickX: timeFormat('%b %Y'),
-                formatTickY: (d) => d.toFixed(0)
+                formatTickX: (d) => { 
+                    if (d.getMonth() === 0) return timeFormat('%Y')(d)
+                    return timeFormat('%b %Y')(d)
+                },
+                formatTickY: (d, i, n) => {
+                    const val = d.toFixed(0);
+                    if (i === n-1) return `${val} minutes`;
+                    return val;
+                }
             },
             {
                 url: 'assets/data/fig3b_smoothed.csv',
@@ -39,8 +46,15 @@
                 zKey: 'label',
                 includeCaption: true,
                 caption: captions[1].value,
-                formatTickX: timeFormat('%b %Y'),
-                formatTickY: (d) => d.toFixed(0)
+                formatTickX: (d) => { 
+                    if (d.getMonth() === 0) return timeFormat('%Y')(d)
+                    return timeFormat('%b %Y')(d)
+                },
+                formatTickY: (d, i, n) => {
+                    const val = d.toFixed(0);
+                    if (i === n-1) return `${val} minutes`;
+                    return val;
+                }
             }
         ]} 
         title='YouTube consumption'

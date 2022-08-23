@@ -28,12 +28,13 @@
 
   $: isBandwidth = typeof $xScale.bandwidth === 'function';
 
-  $: tickVals = Array.isArray(ticks) ? ticks :
-    isBandwidth ?
-      $xScale.domain() :
-      typeof ticks === 'function' ?
-        ticks($xScale.ticks()) :
-          $xScale.ticks(ticks);
+  $: tickVals = Array.isArray(ticks) 
+    ? ticks
+    : isBandwidth 
+    ? $xScale.domain() 
+    : typeof ticks === 'function' 
+    ? ticks($xScale.ticks()) 
+    : $xScale.ticks(ticks);
 
   function textAnchor(i) {
     if (snapTicks === true) {

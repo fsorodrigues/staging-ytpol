@@ -15,6 +15,7 @@
     import Range from './atoms/Range.svelte';
     import Tooltip from './tooltips/Tooltip.svelte';
     import Caption from './atoms/Caption.svelte';
+    import RangeLabels from './atoms/RangeLabels.svelte';
 
 	// import utils
 	import colorMap from '../../utils/colors';
@@ -32,21 +33,20 @@
 	export let yKey : string;
 	export let zKey : string;
     export let formatter : Function = formatPct(0)
-	// export let formatTickX : Function = timeFormat('%b %Y');
-	// export let formatTickY : Function = (d : number) => d.toFixed(0);
+    export let title : string;
 
 	// variable declaration
 	let seriesNames = Array.from(groupedData).map(d => d[0])
 	let seriesColors = seriesNames.map(d => colorMap.get(d))
-        // variable declaration
 	let evt;
 	let hideTooltip : boolean|CustomEvent<any> = true;
 </script>
 
+{#if title}<h3 class="chart-title">{title}</h3>{/if}
 <div class='chart-wrapper'>
     <div class="chart range-plot">
         <LayerCake
-            padding={{ top: 0, right: 10, bottom: 20, left: 55 }}
+            padding={{ top: 0, right: 10, bottom: 50, left: 55 }}
             flatData = { data }
             data = { Array.from(groupedData) }
             x={ xKey }
@@ -62,7 +62,7 @@
             <Svg>
                 <AxisX
                     gridlines={false}
-                    ticks={3}
+                    ticks={6}
                     snapTicks={false}
                     tickMarks={true}
                 />
@@ -98,6 +98,7 @@
                         {/each}
                     </Tooltip>
                 {/if}
+                <RangeLabels />
             </Html>
         </LayerCake>
     </div>
@@ -107,13 +108,22 @@
 </div>
 
 <style lang='scss'>
+    .chart-title {
+        grid-column: 1 / span 12;
+        grid-row: 1 / span 1;
+
+        @media (min-width: $bp-3) {
+            grid-column: 1 / span 6;
+        }
+    }
+
 	.chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;
         row-gap: 10px;
         column-gap: 10px;
         grid-column: span 12;
-        grid-row: 1 / span 1;
+        grid-row: 2 / span 1;
         
         @media (min-width: $bp-3) {
             grid-column: span 6;
@@ -124,4 +134,5 @@
         color: var(--color);
         font-weight: 700;
     }
+
 </style>

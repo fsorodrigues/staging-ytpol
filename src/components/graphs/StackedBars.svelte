@@ -181,11 +181,12 @@
         display: flex;
         justify-content: start;
         gap: 2.5px;
-		margin: 15px 0;
+		margin: 35px 0 15px 0;
 
         @media (min-width: $bp-3) {
 			grid-row: 3 / span 1;
             grid-column: span 6;
+			margin: 25px 0;
         }
 
         .legend-group {

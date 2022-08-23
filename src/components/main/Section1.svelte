@@ -20,31 +20,38 @@
 <div class="section section-1" use:inView={{ once }} on:enter={() => loaded = true }>
         {#if loaded}
             <ChartWrapper config={[{
-                    url: 'assets/data/fig3a_smoothed.csv',
-                    description: 'Median video duration',
+                    url: 'assets/data/fig2a_ledwich.csv',
+                    description: 'User share',
                     type: 'line',
                     xKey: 'date',
-                    yKey: 'median_duration',
+                    yKey: 'user_percent',
                     zKey: 'label',
                     includeCaption: true,
                     caption: captions[0].value,
-                    formatTickX: timeFormat('%b %Y'),
-                    formatTickY: (d) => d.toFixed(0)
+                    formatTickX: (d) => { 
+                        if (d.getMonth() === 0) return timeFormat('%Y')(d)
+                        return timeFormat('%b %Y')(d)
+                    },
+                    formatTickY: (d, i) => format('.1%')(d).replace(/[.,]0+/, "")
+                    
                 },
                 {
-                    url: 'assets/data/fig3b_smoothed.csv',
-                    description: 'Median user consumption duration',
+                    url: 'assets/data/fig2b_ledwich.csv',
+                    description: 'Total consumption share',
                     type: 'line',
                     xKey: 'date',
-                    yKey: 'median_user_watchtime',
+                    yKey: 'percentage_duration',
                     zKey: 'label',
                     includeCaption: true,
                     caption: captions[1].value,
-                    formatTickX: timeFormat('%b %Y'),
-                    formatTickY: (d) => d.toFixed(0)
+                    formatTickX: (d) => { 
+                        if (d.getMonth() === 0) return timeFormat('%Y')(d)
+                        return timeFormat('%b %Y')(d)
+                    },
+                    formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
                 }
-            ]} 
-            title='YouTube consumption'
+            ]}
+            title='Community engagement'
             />
     {:else} <div class='chart-placeholder'></div>
     {/if}

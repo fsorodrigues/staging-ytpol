@@ -80,6 +80,7 @@
             formatter={(d) => d.toFixed(2)}
             url={ url_fig5 }
             caption={captions[0].value}
+            title={'Bursts of political videos impact overall consumption habits differently'}
         />
         {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -92,7 +93,7 @@
             spanCol={6}
             sourceLabel={ 'YouTube' }
             targetLabel={ 'News media' }
-            title={''}
+            title={"YouTube consumption is reflective of user's news habits"}
             caption={captions[1].value}
         />
     {:else} <div class='chart-placeholder'></div>
@@ -117,7 +118,7 @@
     .section-5 {
         grid-template-columns: repeat(12, 1fr);
         column-gap: 0;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: repeat(8, auto);
 
         @media (min-width: $bp-3) {
             column-gap: 50px;

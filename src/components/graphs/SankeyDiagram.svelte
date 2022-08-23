@@ -34,7 +34,7 @@
     
 </script>
 
-{#if title}<h3 class="chart-title">{title}</h3>{/if}
+{#if title}<h3 class="chart-title {spanCol === 12 ? 'title-split-cols' : 'title-single-cols'}">{title}</h3>{/if}
 <div 
     class={`chart-wrapper ${spanCol === 12 ? 'split-cols' : 'single-cols'}`} 
     style={`--spanCol: ${spanCol}`}
@@ -105,8 +105,21 @@
 </div>
 
 <style lang='scss'>
-    .chart-title {
+    .title-split-cols {
         grid-column: 1 / span 12;
+        grid-row: 1 / span 1;
+    }
+
+    .title-single-cols {
+        grid-column: 1 / span 12;
+        grid-row: 3 / span 1;
+        margin-top: 25px;
+
+        @media (min-width: $bp-3) {
+            grid-column: 7 / span 6;
+            grid-row: 1 / span 1;
+            margin-top: 0;
+        }
     }
 
     .chart-wrapper {
@@ -139,6 +152,10 @@
     .single-cols {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        grid-row: 1 / span 1;
+        grid-row: 4 / span 1;
+
+        @media (min-width: $bp-3) {
+            grid-row: 2 / span 1; 
+        }
     }
 </style>

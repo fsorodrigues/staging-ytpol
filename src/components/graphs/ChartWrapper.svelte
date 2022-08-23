@@ -52,7 +52,7 @@
 {#if activeChart && activeFig }
     <h3 class="chart-title">{title}
         {#if Array.isArray(config) && config.length >= 2}
-            <select type="select" bind:value={activeChart}>
+            <select class='dropdown-menu' type="select" bind:value={activeChart}>
                 {#each config as file, i}
                     <option value={file.url}>{file.description}</option>
                 {/each}
@@ -117,10 +117,6 @@
     .chart-title {
         grid-row: 2 / span 1;
         grid-column: span 12;
-
-        // @media (min-width: $bp-3) {
-        //     grid-column: span 8;
-        // }
     }
 
     .legend-container {
@@ -147,6 +143,14 @@
                 font-weight: 700;
                 @include fs-sm;
             }
+        }
+    }
+
+    .dropdown-menu {
+        @include fs-sm;
+
+        @media (min-width: $bp-3) {
+            @include fs-root;
         }
     }
 </style>
