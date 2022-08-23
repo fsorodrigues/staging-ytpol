@@ -14,6 +14,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 </script>
 
 <div class="section section-2" use:inView={{ once }} on:enter={() => loaded = true }>
@@ -26,7 +27,7 @@
                 yKey: 'user_percent',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Percent of users falling into the six political categories.',
+                caption: captions[0].value,
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => format('.1%')(d).replace(/[.,]0+/, "")
                 
@@ -39,7 +40,7 @@
                 yKey: 'percentage_duration',
                 zKey: 'label',
                 includeCaption: true,
-                caption: 'Consumption share of the six political channel categories.',
+                caption: captions[1].value,
                 formatTickX: timeFormat('%b %Y'),
                 formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
             }

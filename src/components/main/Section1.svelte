@@ -1,6 +1,7 @@
 <script lang="ts">
     // node_modules
 	import { timeFormat } from 'd3-time-format'
+import { text } from 'svelte/internal';
 
     // actions
     import inView from "../../actions/inView";
@@ -13,10 +14,10 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 </script>
 
 <div class="section section-1" use:inView={{ once }} on:enter={() => loaded = true }>
-    <h2 class="section-title">Section 1 title</h2>
         {#if loaded}
             <ChartWrapper config={[{
                     url: 'assets/data/fig3a_smoothed.csv',
@@ -26,7 +27,7 @@
                     yKey: 'median_duration',
                     zKey: 'label',
                     includeCaption: true,
-                    caption: 'Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average.',
+                    caption: captions[0].value,
                     formatTickX: timeFormat('%b %Y'),
                     formatTickY: (d) => d.toFixed(0)
                 },
@@ -38,7 +39,7 @@
                     yKey: 'median_user_watchtime',
                     zKey: 'label',
                     includeCaption: true,
-                    caption: 'Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average.',
+                    caption: captions[1].value,
                     formatTickX: timeFormat('%b %Y'),
                     formatTickY: (d) => d.toFixed(0)
                 }

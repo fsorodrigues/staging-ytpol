@@ -25,6 +25,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 
     // variable declaration
     let url_fig1 : string = 'assets/data/fig1_pnas_mean.csv'
@@ -57,7 +58,7 @@
             spanCol={12}
             customClass={'chart-medium'}
             tooltipType={'community'}
-            caption={'The archetypes of news consumption behavior on YouTube for each political category.'}
+            caption={captions[0].value}
             title={'Consumption patterns of individuals strongly align with their clusters'}
         />
     {:else} <div class='chart-placeholder'></div>

@@ -22,14 +22,14 @@
 </script>
 
 <Header />
-<Main title={ data.title } { authors } standfirst={ data.standfirst } steps={ data.scroller }/>
-<Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} />
-<Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} />
-<Section3 once={ true } copy={data['section-three'].copy} refs={data['section-three'].references} />
-<Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} />
-<Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} />
-<Section6 once={ true } copy={data['section-six'].copy} refs={data['section-six'].references} />
-<Supplementary once={ true } copy={data['supplementary'].copy} refs={data['supplementary'].references} />
+<Main title={ data.title } { authors } standfirst={ data.standfirst } steps={ data.scroller } />
+<Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} captions={data['section-one'].captions} />
+<Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} captions={data['section-two'].captions} />
+<Section3 once={ true } copy={data['section-three'].copy} refs={data['section-three'].references} captions={data['section-three'].captions} />
+<Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} captions={data['section-four'].captions} />
+<Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} captions={data['section-five'].captions} />
+<Section6 once={ true } copy={data['section-six'].copy} refs={data['section-six'].references} captions={data['section-six'].captions} />
+<Supplementary once={ true } copy={data['supplementary'].copy} refs={data['supplementary'].references} captions={data['supplementary'].captions} />
 <Footer />
 
 <style lang='scss' global>
@@ -43,7 +43,7 @@
 	}
 	.section {
 		max-width: $column-width;
-		margin: 1em auto;
+		margin: 3em auto;
 		display: grid;
 	}
 

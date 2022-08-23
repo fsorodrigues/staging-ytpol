@@ -27,6 +27,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 
     // variable declaration
     let url_fig1 : string = 'assets/data/table2.csv'
@@ -54,7 +55,7 @@
                     formatTickX: (d) => d,
                     formatTickY: (d) => d.toFixed(2),
                     includeCaption: true,
-                    caption: 'Mean fractions of videos as a function of normalized relative indices across session definitions for each political category, for sessions with length 20 or more videos.'
+                    caption: captions[0].value
                 },
                 {
                     url: 'assets/data/fig7b.csv',
@@ -66,7 +67,7 @@
                     formatTickX: (d) => d,
                     formatTickY: (d) => d.toFixed(2),
                     includeCaption: true,
-                    caption: 'Average fraction of videos of a political category by numbers of videos in sessions. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped.'
+                    caption: captions[1].value
                 }
             ]} 
             spanCol={6}
@@ -86,7 +87,8 @@
             url={ url_fig1 }
             spanCol={6}
             row={6}
-            caption={'Distribution of the entry points of videos within each political category'}
+            title={''}
+            caption={captions[2].value}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

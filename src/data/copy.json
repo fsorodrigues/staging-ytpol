@@ -69,6 +69,16 @@
                 "type": "text",
                 "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
             }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average."
+            },
+            {
+                "type": "text",
+                "value": "Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average."
+            }
         ]
     },
     "section-two": {
@@ -103,6 +113,16 @@
                 "type": "text",
                 "value": "Democracy, 2015"
             }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Percent of users falling into the six political categories."
+            },
+            {
+                "type": "text",
+                "value": "Consumption share of the six political channel categories."
+            }
         ]
     },
     "section-three": {
@@ -132,6 +152,12 @@
             {
                 "type": "text",
                 "value": "Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "The archetypes of news consumption behavior on YouTube for each political category."
             }
         ]
     },
@@ -163,6 +189,12 @@
                 "type": "text",
                 "value": "Democracy, 2015"
             }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month."
+            }
         ]
     },
     "section-five": {
@@ -193,6 +225,16 @@
                 "type": "text",
                 "value": "Democracy, 2015"
             }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption group in the event of watching 2 to 4 videos, or to a control group, if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources."
+            },
+            {
+                "type": "text",
+                "value": "Risk ratio of consumption of polical content on YouTube from news content of politcal categories on the web."
+            }
         ]
     },
     "section-six": {
@@ -218,6 +260,20 @@
             {
                 "type": "text",
                 "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Mean fractions of videos as a function of normalized relative indices across session definitions for each political category, for sessions with length 20 or more videos."
+            },
+            {
+                "type": "text",
+                "value": "Average fraction of videos of a political category by numbers of videos in sessions. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
+            },
+            {
+                "type": "text",
+                "value": "Distribution of the entry points of videos within each political category"
             }
         ]
     },
@@ -268,6 +324,12 @@
             {
                 "type": "text",
                 "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average."
             }
         ]
     }

@@ -25,6 +25,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 
     // variable declaration
     let url_fig1 : string = 'assets/data/fig1_ledwich.csv'
@@ -65,7 +66,7 @@
             url={ url_fig4 }
             sourceLabel={ 'Month' }
             targetLabel={ 'Month + 1' }
-            caption={'Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month.'}
+            caption={captions[0].value}
             title={'Community members tend to remain in their communities, suggesting "stickiness"'}
         />
     {:else} <div class='chart-placeholder'></div>

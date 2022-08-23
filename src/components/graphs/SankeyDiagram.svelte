@@ -107,8 +107,8 @@
 <style lang='scss'>
     .chart-title {
         grid-column: 1 / span 12;
-
     }
+
     .chart-wrapper {
         display: grid;
         grid-template-columns: 1fr;
@@ -119,7 +119,7 @@
 
         @media (min-width: $bp-3) {
             grid-column: span var(--spanCol);
-            grid-row: 1 / span 1;
+            grid-row: 2 / span 1;
         }
     }
 
@@ -139,5 +139,6 @@
     .single-cols {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
+        grid-row: 1 / span 1;
     }
 </style>

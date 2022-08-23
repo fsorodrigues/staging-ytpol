@@ -25,6 +25,7 @@
     export let once : boolean;
     export let copy : any[]
     export let refs : any[]
+    export let captions : any[]
 
     // variable declaration
     const url_fig5 = 'assets/data/fig5.csv'
@@ -78,7 +79,7 @@
             { zKey } 
             formatter={(d) => d.toFixed(2)}
             url={ url_fig5 }
-            caption={'Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption group in the event of watching 2 to 4 videos, or to a control group, if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources.'}
+            caption={captions[0].value}
         />
         {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -91,7 +92,8 @@
             spanCol={6}
             sourceLabel={ 'YouTube' }
             targetLabel={ 'News media' }
-            caption={'Risk ratio of consumption of polical content on YouTube from news content of politcal categories on the web.'}
+            title={''}
+            caption={captions[1].value}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

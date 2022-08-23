@@ -12,7 +12,6 @@
     const dispatch = createEventDispatcher();
 
     function handleMouseOver(e, d) {
-        console.log(e.target)
         dispatch('mousemove', { e, props: d })
         document.querySelectorAll('.group-rect')
             .forEach(el => {
