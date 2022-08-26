@@ -3,8 +3,6 @@
     import { getContext } from 'svelte';
 
     const { custom, padding, xGet } = getContext('LayerCake')
-
-    console.log($custom.get('fR'))
 </script>
 
 <div class='x-title' style="--padding: {$padding.bottom / 2}px">Change in consumption (minutes)</div>

@@ -28,6 +28,7 @@
 	export let zKey : string;
 	export let yDomain : number[] = [0, null];
 	export let formatTickX : Function;
+	export let xTicks : number|Array<number>|Function = 6;
 	export let formatTickY : Function = (d : number) => d.toFixed(0);
 	export let includeCaption : boolean = true;
 	export let spanCol : number
@@ -56,7 +57,7 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				ticks={6}
+				ticks={xTicks}
 				formatTick={formatTickX}
 				snapTicks={false}
 				tickMarks={true}

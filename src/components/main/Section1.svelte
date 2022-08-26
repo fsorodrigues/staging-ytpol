@@ -32,7 +32,7 @@
                         if (d.getMonth() === 0) return timeFormat('%Y')(d)
                         return timeFormat('%b %Y')(d)
                     },
-                    formatTickY: (d, i) => format('.1%')(d).replace(/[.,]0+/, "")
+                    formatTickY: format('.2~%')
                     
                 },
                 {
@@ -48,7 +48,7 @@
                         if (d.getMonth() === 0) return timeFormat('%Y')(d)
                         return timeFormat('%b %Y')(d)
                     },
-                    formatTickY: (d) => format('.2%')(d).replace(/[.,]0+/, "")
+                    formatTickY: format('.2~%')
                 }
             ]}
             title='Community engagement'

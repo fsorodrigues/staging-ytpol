@@ -20,6 +20,7 @@
     // property declaration
     export let config : ChartConfig[]|ChartConfig;
     export let spanCol : number = 12;
+    export let xTicks : number = 6;
     export let title : string;
 
     // variable declaration
@@ -82,6 +83,7 @@
             includeCaption={ activeFig.includeCaption }
             caption={ activeFig.caption }
             formatTickX={ activeFig.formatTickX }
+            xTicks={ activeFig.xTicks || xTicks }
             formatTickY={ activeFig.formatTickY }
             { spanCol }
         />

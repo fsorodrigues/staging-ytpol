@@ -46,17 +46,7 @@
           .sort((a, b) => b.value - a.value);
       }
       return []
-      // if (Object.keys(result).length === 0) return [];
-      // const rows = Object.keys(result).filter(d => d !== $config.x).map(key => {
-      //   return {
-      //     key,
-      //     value: result[key]
-      //   };
-      // }).sort((a, b) => b.value - a.value);
-  
-      // return rows;
     }
-
 
   </script>
   
@@ -125,5 +115,3 @@
       </div>
     {/if}
   </QuadTree>
-
-  <!-- top:{$yScale(foundSorted[0].value) + offset}px; -->

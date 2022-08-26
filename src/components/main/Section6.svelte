@@ -2,13 +2,8 @@
     // node_modules
     import { onMount } from "svelte";
     import { csv } from "d3-fetch";
-    import { group } from 'd3-array';
     import { autoType } from "d3-dsv";
-    import { flatten } from "layercake";
-
-    // import types
-    import type Node from '../../types/Node'
-    import type Link from '../../types/Link'
+    import { format } from "d3-format";
 
     // actions
     import inView from "../../actions/inView";
@@ -52,7 +47,8 @@
                     xKey: 'index',
                     yKey: 'fraction',
                     zKey: 'cluster',
-                    formatTickX: (d) => d,
+                    formatTickX: (d) => format('.2~f')(d / 14),
+                    xTicks: [0, 14 * 0.25, 14 * 0.5, 14 * 0.75, 14],
                     formatTickY: (d) => d.toFixed(2),
                     includeCaption: true,
                     caption: captions[0].value
@@ -69,7 +65,7 @@
                     includeCaption: true,
                     caption: captions[1].value
                 }
-            ]} 
+            ]}
             spanCol={6}
             title='Session Analysis'
         />
