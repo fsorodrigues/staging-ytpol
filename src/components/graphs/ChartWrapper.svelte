@@ -22,6 +22,7 @@
     export let spanCol : number = 12;
     export let xTicks : number = 6;
     export let title : string;
+    export let markers : string[] = [];
 
     // variable declaration
     let data : {} = {};
@@ -86,6 +87,7 @@
             xTicks={ activeFig.xTicks || xTicks }
             formatTickY={ activeFig.formatTickY }
             { spanCol }
+            { markers }
         />
     </div>
 {/if}

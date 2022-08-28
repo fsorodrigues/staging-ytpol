@@ -13,6 +13,8 @@
 	import Section4 from './components/main/Section4.svelte';
 	import Section5 from './components/main/Section5.svelte';
 	import Section6 from './components/main/Section6.svelte';
+	import Section7 from './components/main/Section7.svelte';
+	import Section8 from './components/main/Section8.svelte';
 	import Supplementary from './components/main/Supplementary.svelte';
 
 	// export let title : string = 'Your title goes here';
@@ -23,12 +25,14 @@
 
 <Header />
 <Main title={ data.title } { authors } standfirst={ data.standfirst } steps={ data.scroller } />
-<Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} captions={data['section-one'].captions} />
+<Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} captions={data['section-one'].captions} markers={data['markers']}/>
 <Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} captions={data['section-two'].captions} />
 <Section3 once={ true } copy={data['section-three'].copy} refs={data['section-three'].references} captions={data['section-three'].captions} />
 <Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} captions={data['section-four'].captions} />
 <Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} captions={data['section-five'].captions} />
 <Section6 once={ true } copy={data['section-six'].copy} refs={data['section-six'].references} captions={data['section-six'].captions} />
+<Section7 once={ true } copy={data['section-seven'].copy} refs={data['section-seven'].references} captions={data['section-seven'].captions} />
+<Section8 once={ true } copy={data['section-eight'].copy} refs={data['section-eight'].references} captions={data['section-eight'].captions} />
 <Supplementary once={ true } copy={data['supplementary'].copy} refs={data['supplementary'].references} captions={data['supplementary'].captions} />
 <Footer />
 

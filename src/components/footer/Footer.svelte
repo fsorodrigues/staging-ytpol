@@ -283,7 +283,7 @@
     .et_pb_divider_2_tb_footer:before, 
     .et_pb_divider_1_tb_footer:before, 
     .et_pb_divider_0_tb_footer:before {
-        border-top-color: #82afd3;
+        border-top-color: $css-lab-light-blue;
         border-top-width: 2px;
         width: auto;
         top: 0px;
@@ -352,7 +352,7 @@
                         width: auto;
                         padding-right: 25px;
                         margin-left: 25px;
-                        border-right: 2pt solid #82afd3;
+                        border-right: 2pt solid $css-lab-light-blue;
                     }
 
                     a:last-of-type {

@@ -53,32 +53,27 @@
                 { yKey }
                 formatTickX={ timeFormat('%b %Y') }
                 formatTickY={ formatThousands }
-                caption={ 'Montly videos crawled.' }
+                caption={ captions[0].value }
                 spanCol={ 12 }
                 stroke={ '#E08A00' }
             />
         {:else} <div class='chart-placeholder'></div>
         {/if}
         <div class='copy copy-part1'>
-            {#each copy.slice(0, Math.floor(copy.length/2)) as d, i}
+            <!-- {#each copy.slice(0, Math.floor(copy.length/2)) as d, i} -->
+            {#each copy as d, i}
                 <p>
                     {d.value}
                 </p>
             {/each}
         </div>
-        {#if loaded}
-            <div class='table-wrapper'>
-                <h3 class="chart-title">All monitored channels</h3>
-                <TableWrapper data={data_channels} pageSize={20} />
-            </div>
-        {/if}
-        <div class='copy copy-part2'>
+        <!-- <div class='copy copy-part2'>
             {#each copy.slice(Math.floor(copy.length/2)) as d, i}
                 <p>
                     {d.value}
                 </p>
             {/each}
-        </div>
+        </div> -->
         <div class='references'>
             {#each refs as d, i}
                 <p>
@@ -97,7 +92,7 @@
     .section-supplementary {
         grid-template-columns: repeat(12, 1fr);
         column-gap: 0;
-        grid-template-rows: auto auto auto 1fr auto auto auto auto;
+        grid-template-rows: auto auto auto 1fr auto auto auto;
 
         @media (min-width: $bp-3) {
             column-gap: 50px;    
@@ -130,7 +125,7 @@
 
     .references {
         grid-column: span 12;
-        grid-row: 8 / span 1;
+        grid-row: 7 / span 1;
 
         @media (min-width: $bp-3) {
             grid-column: span 5;
@@ -141,9 +136,9 @@
         grid-row: 5 / span 1;    
     }
 
-    .copy-part2 {
-        grid-row: 7 / span 1; 
-    }
+    // .copy-part2 {
+    //     grid-row: 7 / span 1; 
+    // }
 
     .table-wrapper {
         grid-row: 6 / span 1;

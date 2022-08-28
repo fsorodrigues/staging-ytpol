@@ -8,12 +8,12 @@ const colorMap : Map<string, string> = new Map([
 ])
 
 const youTubeMap : Map<string, string> = new Map([
-    ["Ext URL", "#FFA10A"],
-    ["HP", "#FFE0AD"],
-    ["Other", "#FFD085"],
-    ["Search", "#FFC05C"],
-    ["User/Channel", "#FFB133"],
-    ["Video", "#E08A00"]
+    ["Ext URL", "#E08A00"],
+    ["HP", "#FFC05C"],
+    ["Other", "#FFA10A"],
+    ["Search", "#E9C46A"],
+    ["User/Channel", "#F4A261"],
+    ["Video", "#E76F51"]
 ])
 
 export default colorMap;

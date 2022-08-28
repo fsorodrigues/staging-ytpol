@@ -3,21 +3,16 @@
     import { onMount } from "svelte";
     import { csv } from "d3-fetch";
     import { autoType } from "d3-dsv";
-    import { flatten } from "layercake";
-
-    // import types
-    import type Node from '../../types/Node'
-    import type Link from '../../types/Link'
     
     // actions
     import inView from "../../actions/inView";
 
     // components
     import StackedBars from "../graphs/StackedBars.svelte";
-    import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
 
     // utils
-    import enforceOrder from "../../utils/order";
+    import { youTubeMap as labelMap } from "../../utils/labels";
+    import { youTubeMap as colorMap } from "../../utils/colors";
     import { formatPct } from '../../utils/format-numbers';
 
     // props
@@ -28,33 +23,33 @@
     export let captions : any[]
 
     // variable declaration
-    let url_fig1 : string = 'assets/data/fig1_pnas_mean.csv'
-    let data_fig1 : any[]
+    let url_table2 : string = 'assets/data/table2.csv'
+    let data_table2 : any[]
     let xKey : number[] = [0,1]
     let yKey : string = 'cluster'
     let zKey : string = 'key'
-    
+
     onMount(async () => {
-        const res_fig1 = await csv(url_fig1, autoType)
-        data_fig1 = res_fig1
+        const res = await csv(url_table2, autoType)
+        data_table2 = res
 	})
 </script>
 
-<div class="section section-3" use:inView={{ once }} on:enter={() => loaded = true }>
-    <!-- <h2 class="section-title">Subtitle 1</h2> -->
-    {#if loaded && data_fig1}
+<div class="section section-8" use:inView={{ once }} on:enter={() => loaded = true }>
+    {#if loaded && data_table2}
         <StackedBars 
-            data={ data_fig1 } 
+            data={ data_table2 } 
             { yKey } 
             { xKey } 
             { zKey } 
             formatter={formatPct(2)}
-            url={ url_fig1 }
+            keyColorMap={ colorMap }
+            keyLabelMap={ labelMap }
+            url={ url_table2 }
             spanCol={12}
-            customClass={'chart-medium'}
-            tooltipType={'community'}
-            caption={captions[0].value}
-            title={'Consumption patterns of individuals strongly align with their clusters'}
+            row={3}
+            title={'Title goes here'}
+            caption={captions[2].value}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -68,14 +63,14 @@
     <div class='references'>
         {#each refs as d, i}
             <p>
-               {d.value}
+                {d.value}
             </p>
         {/each}
     </div>
 </div>
 
 <style lang='scss'>
-    .section-3 {
+    .section-8 {
         grid-template-columns: repeat(12, 1fr);
         column-gap: 0;
         grid-template-rows: auto auto auto 1fr auto auto;

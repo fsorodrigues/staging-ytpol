@@ -15,6 +15,7 @@
     export let copy : any[]
     export let refs : any[]
     export let captions : any[]
+    export let markers : string[]
 </script>
 
 <div class="section section-1" use:inView={{ once }} on:enter={() => loaded = true }>
@@ -52,6 +53,7 @@
                 }
             ]}
             title='Community engagement'
+            { markers }
             />
     {:else} <div class='chart-placeholder'></div>
     {/if}

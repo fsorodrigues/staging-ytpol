@@ -25,7 +25,6 @@
 	// // props declaration
     export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';
     export let includeCaption : boolean = true;
-	// export let activeChart : string;
 	export let data : any[];
 	export let groupedData : any[];
     export let url : string;
@@ -95,7 +94,7 @@
                         <div class="row">Burst length: {tooltipData.scenario} videos</div>
                         {#each ['mean'] as key}
                             {@const value = tooltipData[key]}
-                            <div class="row">Difference in consumption: {formatter(value)}</div>
+                            <div class="row">Difference in consumption: {formatter(value)} minutes</div>
                         {/each}
                     </Tooltip>
                 {/if}
@@ -104,7 +103,7 @@
         </LayerCake>
     </div>
     {#if includeCaption}
-        <Caption { caption } { url} type={'single-cols'}/>
+        <Caption { caption } { url} type={'split-cols'}/>
     {/if}
 </div>
 
@@ -114,7 +113,7 @@
         grid-row: 1 / span 1;
 
         @media (min-width: $bp-3) {
-            grid-column: 1 / span 6;
+            grid-column: 1 / span 12;
         }
     }
 
@@ -127,7 +126,8 @@
         grid-row: 2 / span 1;
         
         @media (min-width: $bp-3) {
-            grid-column: span 6;
+            grid-column: span 12;
+            grid-template-columns: 10fr 2fr;
         }
     }
 

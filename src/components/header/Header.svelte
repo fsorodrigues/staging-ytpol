@@ -1,7 +1,29 @@
+<script lang='ts'>
+    import { onMount } from 'svelte'
+    let navMobile = null;
+    function handleClick(e) {
+        const { classList } = navMobile;
+
+        if (classList.contains('nav-mobile-active')) {
+            classList.remove('nav-mobile-active')
+            classList.add('nav-mobile-hidden')
+        }
+        else {
+            classList.add('nav-mobile-active')
+            classList.remove('nav-mobile-hidden')
+        }
+    }
+
+    onMount(() => {
+        navMobile = document.getElementById('nav-mobile');
+    })
+
+
+</script>
+
 <header id="main-header" data-height-onload="84" data-height-loaded="true" data-fixed-height-onload="84" style="top: 0px;">
     <div class="container clearfix et_menu_container">
         <div class="logo_container">
-            <!-- <span class="logo_helper"></span> -->
             <a class='logo_anchor' href="https://css.seas.upenn.edu/">
                 <img class='logo_img' src="https://css.seas.upenn.edu/wp-content/uploads/2021/09/WEBSITE-LOGO.png" alt="Computational Social Science Lab" id="logo" />
             </a>
@@ -52,6 +74,58 @@
                 </ul>
             </nav>
         </div>
+
+        <div id="et-top-navigation-mobile">
+            <nav id='top-menu-nav-mobile'>
+                <div class='icon' on:click={handleClick}>
+                    <div class='line'></div>
+                    <div class='line'></div>
+                    <div class='line'></div>
+                </div>
+                <ul id='nav-mobile' class="nav-mobile nav-mobile-hidden">
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/about/'>About</a>
+                        <ul class="sub-menu-mobile">
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/about/lab/">The Lab</a>
+                            </li>
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/about/community/">CSS Community</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/people/'>People</a>
+                    </li>
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/research/'>Research</a>
+                        <ul class="sub-menu-mobile">
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/project/penn-map/">PennMAP</a>
+                            </li>
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/project/virtual-lab/">Group Dynamics</a>
+                            </li>
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/project/covid-philadelphia/">COVID-Philadelphia</a>
+                            </li>
+                            <li class="sub-menu-list-mobile">
+                                <a class="sub-item-mobile" href="https://css.seas.upenn.edu/project/common-sense/">Common Sense</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/partnerships/'>Partners</a>
+                    </li>
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/publications/'>Publications</a>
+                    </li>
+                    <li>
+                        <a class="item-mobile" href='https://css.seas.upenn.edu/blog-news-events/'>News</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>
 
@@ -84,15 +158,6 @@
         justify-content: space-between;
     }
 
-    .clearfix:after {
-        visibility: hidden;
-        display: block;
-        font-size: 0;
-        content: " ";
-        clear: both;
-        height: 0;
-    }
-
     .logo_container {
         height: 60%;
         width: auto;
@@ -114,8 +179,11 @@
 
     #et-top-navigation {
         display: none;
-    }
 
+        @media (min-width: $bp-3) {
+            display: block; 
+        }
+    }
     .menu-item, .menu-item-has-children {
         display: inline-block;
         font-size: 14px;
@@ -169,6 +237,66 @@
                 padding: 6px 20px;
             }
         }
+    }
+
+    #et-top-navigation-mobile {
+        display: block;
+        height: 50%;
+
+        @media (min-width: $bp-3) {
+            display: none; 
+        }
+    }
+
+    #top-menu-nav-mobile {
+        height: 100%;
+
+        .icon {
+            width: 25px;
+            height: 100%;
+            padding: 2.5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            box-sizing: border-box;
+
+            .line {
+                height: 2px;
+                background-color: $css-lab-light-blue;
+                flex-grow: 0;
+                flex-shrink: 0;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .nav-mobile {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        left: 0;
+        background-color: $css-lab-dark-blue;
+        margin: 0;
+        padding: 10%;
+        list-style: none;
+
+        li {
+            margin: 15px 0;
+        }
+
+        a {
+            color: $off-white;
+            font-weight: 500;
+            @include fs-base;
+        }
+    }
+
+    .nav-mobile-hidden {
+        display: none;
+    }
+
+    .nav-mobile-active {
+        display: block;
     }
 
 </style>

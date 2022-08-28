@@ -1,5 +1,5 @@
 {
-    "title": "Youtube Politics",
+    "title": "YouTube Politics",
     "standfirst": [
         {
             "type": "text",
@@ -9,6 +9,11 @@
             "type": "text",
             "value": "Here we test this hypothesis using a panel of more than 300,000 Americans and their individual-level browsing behavior, on and off YouTube, from January 2016 to September 2021. The dashboards below present key findings from our analysis."
         }
+    ],
+    "markers": [
+        "2016 Election | 2016-11-08",
+        "2018 Midterms | 2018-11-06",
+        "2020 Election | 2020-11-03"
     ],
     "scroller": [
         {
@@ -21,67 +26,25 @@
         {
             "type": "step-two",
             "value": [
-                "Here are the channels organized by their size, or number of subscribers. With this visualization, we can see that even among the largest channels we studied, far-left and far-right channels tend to have smaller audiences."
+                "Here are the channels organized by their size, or number of subscribers.",
+                "With this visualization, we can see that even among the largest channels we studied, far-left and far-right channels tend to have smaller audiences."
             ]
         },
         {
             "type": "step-three",
             "value": [
-                "And here they are clustered together based on their political leaning."
+                "And here they are grouped together based on their political leaning.",
+                "As you can see, most of the largest channels in YouTube’s news ecosystem are left-leaning or centrist when it comes to their political views. “Anti-woke” channels – a broad category of professedly nonpartisan content that opposes liberal ideology and institutions – are slightly rarer in the top 200, while large far-left and far-right channels are scarce. In fact, data on the far left is so limited that the category is dropped from many of our calculations, since larger sample sizes are needed for reliable estimates."
             ]
         },
         {
             "type": "step-four",
             "value": [
-                "Explore our channel data before we dive deeper into the politics of YouTube. Hovering over a channel gives more information about its size and reach."
+                "Explore our channel data before we dive deeper into YouTube’s political ecosystem. Hovering over a channel gives more information about its size and reach."
             ]
         }
     ],
     "section-one": {
-        "copy": [
-            {
-                "type": "text",
-                "value": "Using our collection of YouTube channel data, we are able to group YouTube viewers into political clusters based on their news consumption habits."
-            },
-            {
-                "type": "text",
-                "value": "The graph above reflects the viewing habits of the average YouTube user from each of the six political clusters, corresponding to the political content categories: far-left, left, center, right, and far-right. Here, we look at how active these clusters are in terms of video watchtime."
-            },
-            {
-                "type": "text",
-                "value": "Selecting “Median video duration” from the dropdown above shows the median total monthly watchtime for YouTube users within each of our six defined viewing clusters; i.e., how many minutes of YouTube content were consumed by, say, a member of the far-left cluster in a given month."
-            },
-            {
-                "type": "text",
-                "value": "Selecting “Median user consumption duration” shows the median monthly watchtime within the political category for viewers in the corresponding cluster; i.e., how many minutes of far-right content were consumed by a member of the far-right cluster."
-            },
-            {
-                "type": "text",
-                "value": "These figures suggest stronger engagement with far-right and anti-woke content compared to other categories. The median monthly watchtime for members of these communities rose to almost twice the engagement of users in the left, center, and right communities. In other words, while the far-right and anti-woke communities remained relatively small in size throughout the observation period (with only anti-woke growing), their user engagement grew to exceed every other category."
-            }
-        ],
-        "references": [
-            {
-                "type": "text",
-                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-            },
-            {
-                "type": "text",
-                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
-            }
-        ],
-        "captions": [
-            {
-                "type": "text",
-                "value": "Median monthly video consumption (minutes) across different channel categories. Lines show the 3-month rolling average."
-            },
-            {
-                "type": "text",
-                "value": "Median monthly user consumption (minutes) within each community. Lines show the 3-month rolling average."
-            }
-        ]
-    },
-    "section-two": {
         "copy": [
             {
                 "type": "text",
@@ -107,149 +70,41 @@
             },
             {
                 "type": "text",
-                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
-            },
-            {
-                "type": "text",
-                "value": "Democracy, 2015"
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
             }
         ],
         "captions": [
             {
                 "type": "text",
-                "value": "Percent of users falling into the six political categories."
+                "value": "Percent of YouTube users falling into the six political categories. In other words, out of all American YouTube viewers, 1.3% were in the left cluster in February 2020. This shows how large YouTube’s political communities are relative to the entire platform."
             },
             {
                 "type": "text",
-                "value": "Consumption share of the six political channel categories."
+                "value": "Consumption share of the six political channel categories. For example, out of the total minutes of content that Americans viewed across the platform in October 2018, 1.76% of those minutes were far-right content. These statistics shed light on the amount of political content being consumed, and not necessarily the communities that consume it."
             }
         ]
     },
-    "section-three": {
+    "section-two": {
         "copy": [
             {
                 "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+                "value": "Using our collection of YouTube channel data, we are able to group YouTube viewers into political clusters based on their news consumption habits."
             },
             {
                 "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+                "value": "The graph above reflects the viewing habits of the average YouTube user from each of the six political clusters, corresponding to the political content categories: far-left, left, center, right, and far-right. Here, we look at how active these clusters are in terms of video watchtime."
             },
             {
                 "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-            }
-        ],
-        "references": [
-            {
-                "type": "text",
-                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+                "value": "Selecting “Median monthly minutes on YouTube (total)” from the dropdown above shows the median total monthly watchtime for YouTube users within each of our six defined viewing clusters; i.e., how many minutes of YouTube content were consumed by, say, a member of the far-left cluster in a given month."
             },
             {
                 "type": "text",
-                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
+                "value": "Selecting “Median monthly minutes on YouTube (within news cluster)” shows the median monthly watchtime within the political category for viewers in the corresponding cluster; i.e., how many minutes of far-right content were consumed by a member of the far-right cluster."
             },
             {
                 "type": "text",
-                "value": "Democracy, 2015"
-            }
-        ],
-        "captions": [
-            {
-                "type": "text",
-                "value": "The archetypes of news consumption behavior on YouTube for each political category."
-            }
-        ]
-    },
-    "section-four": {
-        "copy": [
-            {
-                "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-            }
-        ],
-        "references": [
-            {
-                "type": "text",
-                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-            },
-            {
-                "type": "text",
-                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
-            },
-            {
-                "type": "text",
-                "value": "Democracy, 2015"
-            }
-        ],
-        "captions": [
-            {
-                "type": "text",
-                "value": "Probability of flow from categories between months. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month."
-            }
-        ]
-    },
-    "section-five": {
-        "copy": [
-            {
-                "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-            }
-        ],
-        "references": [
-            {
-                "type": "text",
-                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
-            },
-            {
-                "type": "text",
-                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for"
-            },
-            {
-                "type": "text",
-                "value": "Democracy, 2015"
-            }
-        ],
-        "captions": [
-            {
-                "type": "text",
-                "value": "Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption group in the event of watching 2 to 4 videos, or to a control group, if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources."
-            },
-            {
-                "type": "text",
-                "value": "Risk ratio of consumption of polical content on YouTube from news content of politcal categories on the web."
-            }
-        ]
-    },
-    "section-six": {
-        "copy": [
-            {
-                "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+                "value": "These figures suggest stronger engagement with far-right and anti-woke content compared to other categories. The median monthly watchtime for members of these communities rose to almost twice the engagement of users in the left, center, and right communities. In other words, while the far-right and anti-woke communities remained relatively small in size throughout the observation period (with only anti-woke growing), their user engagement grew to exceed every other category."
             }
         ],
         "references": [
@@ -265,11 +120,223 @@
         "captions": [
             {
                 "type": "text",
-                "value": "Mean fractions of videos as a function of normalized relative indices across session definitions for each political category, for sessions with length 20 or more videos."
+                "value": "Median monthly consumption, in minutes, across all channel categories. Lines show the 3-month rolling average. For example, in March 2021, a typical member of the left political cluster viewed 181 total minutes of YouTube content over the course of the month. This statistic gives insight into users’ engagement with the YouTube platform overall – not necessarily with their preferred category of news – and how this varies across political communities."
             },
             {
                 "type": "text",
-                "value": "Average fraction of videos of a political category by numbers of videos in sessions. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
+                "value": "Median monthly consumption, in minutes, within each political community. Lines show the 3-month rolling average. For example, in October 2018, a typical member of the far-right cluster viewed 17 minutes of far-right YouTube content over the course of the month. This statistic sheds light on how engaged YouTube users are in their own political communities."
+            }
+        ]
+    },
+    "section-three": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "We used a clustering algorithm to assign each individual in our panel to a community, or cluster, of individuals with similar YouTube news diets. Each of these six clusters corresponds closely with our six categories of political content – far left, left, center, right, far right, and anti-woke."
+            },
+            {
+                "type": "text",
+                "value": "The centroid or “archetype member” of each cluster devotes more than 90% of their attention to just one content category, with the remaining 10% distributed roughly evenly among the other categories. In fact, the consumption patterns of cluster members align with their political cluster so strongly that more than 95% of members receive at least 50% of their content from just one content category."
+            },
+            {
+                "type": "text",
+                "value": "This result has an important implication: YouTube users are meaningfully associated with definable “communities” based on their political content consumption. Viewing preferences are fairly homogeneous within each community and relatively distinct between them."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "The archetypes of news consumption behavior on YouTube for each political category. For example, for the archetypical member of the far-right community, 90% of their political content watchtime is made up of far-right content."
+            }
+        ]
+    },
+    "section-four": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "We next analyzed the longevity of YouTube’s political clusters. How does membership in these communities change from month to month? Are moderate or centrist users likely to be pushed to either the far left or far right clusters?"
+            },
+            {
+                "type": "text",
+                "value": "Over the course of our observations, we developed the model above to further examine individual behavior. The diagram shows the probability that, in any given month, a member of any of the political clusters would be a member of any cluster in the following month."
+            },
+            {
+                "type": "text",
+                "value": "Our model shows that political communities on YouTube exhibit a sort of “stickiness” – the most likely behavior is for community members to remain in their communities from month to month. When individuals do switch communities, they are more likely to move from the right side of the political spectrum to the left. We can also see that the anti-woke community gains more of its audience from the right wing than from the center and left wing combined."
+            },
+            {
+                "type": "text",
+                "value": "This model has a major effect on the way we can visualize political communities on the platform. Rather than being static groups of politically siloed users, these communities are continuously shifting – not only do clusters lose their own members and gain members from other clusters, but a user may not fall into any of these communities at all in any given month. (Note: “News consumers” are defined as individuals who, over the course of 1 month, spend a minimum of 1 minute of watch time on any of the political channels in our labeled set.)"
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Probability of flow from communities between months. For example, if a user is a member of the anti-woke cluster, there is a 36% chance that they will also be a member of that cluster the following month, and only a 10% chance that they will move to the left cluster. Each month, users may not fall into any of these communities, if they are not among “news consumers” in that particular month."
+            }
+        ]
+    },
+    "section-five": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "We investigated whether exposure to concentrated “bursts” of content – for example, viewing two, three, or four videos from that political category one after the other – makes it more likely for an individual to watch that content category in the future."
+            },
+            {
+                "type": "text",
+                "value": "For each content category, we considered three “treatment groups” made up of individuals who are exposed to bursts of either two, three, or four videos from a given content category. We then computed the difference in their average daily consumption of the same content category before and after exposure, and compared those values against a control group."
+            },
+            {
+                "type": "text",
+                "value": "As the figure above shows, increases in burst length correspond to higher future consumption relative to the control groups, across all political categories. Individuals exposed to bursts of anti-woke content show the largest effects – nearly twice compared to other content categories – along with larger marginal effects as the number of videos in the burst increases."
+            },
+            {
+                "type": "text",
+                "value": "It is important to note that the exposure shown here can be driven by user, recommendation, or external sources; bursts were observed in natural viewing habits rather than induced by our research team. This is a purely predictive exercise, and the effects should not be interpreted as causal."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "Difference in means of daily consumption change, in the event of bursty consumption from a specific political category. Individuals are assigned either to bursty consumption groups – in the event of watching 2 to 4 videos – or to a control group – if none of their sessions has more than one video from the same category in their lifetime. The exposure can be driven by user, recommendation, or external sources."
+            },
+            {
+                "type": "text",
+                "value": "Risk ratio of consumption of political content on YouTube from news content of political categories on the web."
+            }
+        ]
+    },
+    "section-six": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Based on select anecdotes, there have been concerns that YouTube’s video recommendation algorithm pushes viewers towards more politically extreme content. However, there is little large-scale data to support this. Analyzing consumption habits within viewing sessions can tell us more clearly whether users are radicalized by the algorithm."
+            },
+            {
+                "type": "text",
+                "value": "If the recommendation algorithm were biased, we would expect to see an increased frequency of radical content towards the end of a viewing session, after users have been exposed to more recommended content. However, when we checked whether radical content is more likely to be consumed later in a user’s viewing session, we observed the opposite – all six content categories showed decreasing frequency as sessions progressed. This suggests that longer viewing sessions are increasingly steered towards non-news content."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "The average likelihood of a video at a certain point in a viewing session (i.e. the fourth video in a session) being content from one of the political categories. We assess viewing sessions that are 20 or more videos in length. For example, in a session with at least 20 videos, there is an 8% chance that the first video was far-right content."
+            },
+            {
+                "type": "text",
+                "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
+            },
+            {
+                "type": "text",
+                "value": "Distribution of the entry points of videos within each political category"
+            }
+        ]
+    },
+    "section-seven": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Based on select anecdotes, there have been concerns that YouTube’s video recommendation algorithm pushes viewers towards more politically extreme content. However, there is little large-scale data to support this. Analyzing consumption habits within viewing sessions can tell us more clearly whether users are radicalized by the algorithm."
+            },
+            {
+                "type": "text",
+                "value": "If the recommendation algorithm were biased, we would expect to see an increased frequency of radical content towards the end of a viewing session, after users have been exposed to more recommended content. However, when we checked whether radical content is more likely to be consumed later in a user’s viewing session, we observed the opposite – all six content categories showed decreasing frequency as sessions progressed. This suggests that longer viewing sessions are increasingly steered towards non-news content."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "The average likelihood of a video at a certain point in a viewing session (i.e. the fourth video in a session) being content from one of the political categories. We assess viewing sessions that are 20 or more videos in length. For example, in a session with at least 20 videos, there is an 8% chance that the first video was far-right content."
+            },
+            {
+                "type": "text",
+                "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
+            },
+            {
+                "type": "text",
+                "value": "Distribution of the entry points of videos within each political category"
+            }
+        ]
+    },
+    "section-eight": {
+        "copy": [
+            {
+                "type": "text",
+                "value": "Based on select anecdotes, there have been concerns that YouTube’s video recommendation algorithm pushes viewers towards more politically extreme content. However, there is little large-scale data to support this. Analyzing consumption habits within viewing sessions can tell us more clearly whether users are radicalized by the algorithm."
+            },
+            {
+                "type": "text",
+                "value": "If the recommendation algorithm were biased, we would expect to see an increased frequency of radical content towards the end of a viewing session, after users have been exposed to more recommended content. However, when we checked whether radical content is more likely to be consumed later in a user’s viewing session, we observed the opposite – all six content categories showed decreasing frequency as sessions progressed. This suggests that longer viewing sessions are increasingly steered towards non-news content."
+            }
+        ],
+        "references": [
+            {
+                "type": "text",
+                "value": "Iyengar et al, The origins and consequences of affective polarization in the United States, 2019"
+            },
+            {
+                "type": "text",
+                "value": "Jones, Declining trust in congress: Effects of polarization and consequences for Democracy, 2015"
+            }
+        ],
+        "captions": [
+            {
+                "type": "text",
+                "value": "The average likelihood of a video at a certain point in a viewing session (i.e. the fourth video in a session) being content from one of the political categories. We assess viewing sessions that are 20 or more videos in length. For example, in a session with at least 20 videos, there is an 8% chance that the first video was far-right content."
+            },
+            {
+                "type": "text",
+                "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
             },
             {
                 "type": "text",
@@ -281,39 +348,11 @@
         "copy": [
             {
                 "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
+                "value": "The graph displays the status of the daily YouTube crawler used to collect transcripts and meta data from 13K news channels. It tracks the number of videos crawled per month between January 2021 and October 2021, with the line representing three-month moving averages."
             },
             {
                 "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-            },
-            {
-                "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
-            },
-            {
-                "type": "text",
-                "value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto reprehenderit ipsum harum repellendus consequatur magnam numquam quos dicta sunt cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Cupiditate unde, aperiam delectus debitis ab corrupti hic praesentium?"
-            },
-            {
-                "type": "text",
-                "value": "Reprehenderit ipsum harum repellendus consequatur magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus. Prem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi temporibus architecto architecto."
+                "value": "The filterable chart presents information on all monitored channels used in our dataset."
             }
         ],
         "references": [

@@ -1,24 +1,12 @@
 <script lang="ts">
     // node_modules
-    import { onMount } from "svelte";
-    import { csv } from "d3-fetch";
-    import { autoType } from "d3-dsv";
-    import { flatten } from "layercake";
-
-    // import types
-    import type Node from '../../types/Node'
-    import type Link from '../../types/Link'
+    import { format } from "d3-format";
     
     // actions
     import inView from "../../actions/inView";
 
     // components
-    import StackedBars from "../graphs/StackedBars.svelte";
-    import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
-
-    // utils
-    import enforceOrder from "../../utils/order";
-    import { formatPct } from '../../utils/format-numbers';
+    import ChartWrapper from "../graphs/ChartWrapper.svelte";
 
     // props
     let loaded : boolean = false;
@@ -26,35 +14,39 @@
     export let copy : any[]
     export let refs : any[]
     export let captions : any[]
-
-    // variable declaration
-    let url_fig1 : string = 'assets/data/fig1_pnas_mean.csv'
-    let data_fig1 : any[]
-    let xKey : number[] = [0,1]
-    let yKey : string = 'cluster'
-    let zKey : string = 'key'
-    
-    onMount(async () => {
-        const res_fig1 = await csv(url_fig1, autoType)
-        data_fig1 = res_fig1
-	})
 </script>
 
-<div class="section section-3" use:inView={{ once }} on:enter={() => loaded = true }>
-    <!-- <h2 class="section-title">Subtitle 1</h2> -->
-    {#if loaded && data_fig1}
-        <StackedBars 
-            data={ data_fig1 } 
-            { yKey } 
-            { xKey } 
-            { zKey } 
-            formatter={formatPct(2)}
-            url={ url_fig1 }
-            spanCol={12}
-            customClass={'chart-medium'}
-            tooltipType={'community'}
-            caption={captions[0].value}
-            title={'Consumption patterns of individuals strongly align with their clusters'}
+<div class="section section-7" use:inView={{ once }} on:enter={() => loaded = true }>
+    <!-- <h2 class="section-title">Subtitle 2</h2> -->
+    {#if loaded}
+        <ChartWrapper config={[{
+                url: 'assets/data/fig7a.csv',
+                description: 'Fraction of videos by session length',
+                type: 'line',
+                xKey: 'index',
+                yKey: 'fraction',
+                zKey: 'cluster',
+                formatTickX: (d) => format('.2~f')(d / 14),
+                xTicks: [0, 14 * 0.25, 14 * 0.5, 14 * 0.75, 14],
+                formatTickY: format('.2~%'),
+                includeCaption: true,
+                caption: captions[0].value
+            },
+            {
+                url: 'assets/data/fig7b.csv',
+                description: 'Frequency by session length',
+                type: 'line',
+                xKey: 'length',
+                yKey: 'mean',
+                zKey: 'cluster',
+                formatTickX: (d) => d,
+                formatTickY: (d) => d.toFixed(2),
+                includeCaption: true,
+                caption: captions[1].value
+            }
+        ]}
+        spanCol={12}
+        title='Session Analysis'
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}
@@ -68,14 +60,14 @@
     <div class='references'>
         {#each refs as d, i}
             <p>
-               {d.value}
+                {d.value}
             </p>
         {/each}
     </div>
 </div>
 
 <style lang='scss'>
-    .section-3 {
+    .section-7 {
         grid-template-columns: repeat(12, 1fr);
         column-gap: 0;
         grid-template-rows: auto auto auto 1fr auto auto;

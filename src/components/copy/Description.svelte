@@ -18,13 +18,21 @@
 <style lang='scss'>
 	.standfirst-wrapper {
 		grid-column: 1 / span 12;
-
-		p {
-			margin-bottom: 1em;
-		}
-
+		
 		@media (min-width: $bp-3) {
 			grid-column: 1 / span 8;
 		}
+
+		p {
+			margin-bottom: 1em;
+			@include fs-root;
+
+			@media (min-width: $bp-3) {
+				@include fs-md;
+				line-height: 1.4;
+			}
+		}
+
+		
 	}
 </style>

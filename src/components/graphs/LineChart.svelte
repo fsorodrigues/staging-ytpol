@@ -12,13 +12,14 @@
 	import AxisY from './atoms/AxisY.svelte';
 	import SharedTooltip from './tooltips/SharedTooltip.svelte';
 	import Caption from './atoms/Caption.svelte';
+	import Markers from './atoms/Markers.svelte';
 
 	// import utils
 	import colorMap from '../../utils/colors';
 	import labelMap from '../../utils/labels';
 
-	// // props declaration
-    export let caption : string;
+	// props declaration
+	export let caption : string;
 	export let activeChart : string;
 	export let data : Row[];
 	export let url : string;
@@ -32,6 +33,7 @@
 	export let formatTickY : Function = (d : number) => d.toFixed(0);
 	export let includeCaption : boolean = true;
 	export let spanCol : number
+	export let markers : string[]
 
 	// variable declaration
 	let seriesNames = Array.from(colorMap).map(d => d[0])
@@ -61,11 +63,12 @@
 				formatTick={formatTickX}
 				snapTicks={false}
 				tickMarks={true}
-			/>
+				/>
 			<AxisY
 				ticks={4}
 				formatTick={formatTickY}
 			/>
+			<Markers data={ markers } />
 			<Multiline activeChart={activeChart}/>
 		</Svg>
 

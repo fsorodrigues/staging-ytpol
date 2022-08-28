@@ -22,7 +22,7 @@
 	import { formatPct } from '../../utils/format-numbers';
 
 	// // props declaration
-	export let data : any[];
+	export let data : any[]|any;
 	export let url : string;
 	export let yKey : string;
 	export let xKey : number[];
@@ -33,12 +33,11 @@
 	export let clusterColorMap : Map<string,string> = colorMap
 	export let keyColorMap : Map<string,string> = colorMap
 	export let caption: string = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, tempore?';;
-    export let includeCaption : boolean = true;
+	export let includeCaption : boolean = true;
 	export let spanCol : number = 12;
 	export let row : number = 4;
 	export let customClass : string = 'chart-large';
 	export let tooltipType : string = 'arrow';
-	export let showLegend : boolean = false;
 	export let title : string;
 
 	// // variable declaration
@@ -87,6 +86,7 @@
 					ticks={3}
 					snapTicks={true}
 					tickMarks={true}
+					formatTick={formatter}
 				/>
 				<AxisY gridlines={ false } formatTick={ d => clusterLabelMap.get(d) } />
 				<BarStacked 

@@ -9,5 +9,6 @@ export default interface ChartConfig {
     formatTickY?: Function,
     includeCaption?: boolean,
     caption?: string,
-    xTicks?: number|Array<number>|Function
+    xTicks?: number|Array<number>|Function,
+    markers: string[],
   }
