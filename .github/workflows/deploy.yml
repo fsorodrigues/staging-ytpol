@@ -37,5 +37,5 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: |
-          aws s3 cp "s3://${{ secrets.bucket }}/youtube-paper/processed/" public/assets/data/
+          aws s3 cp "s3://${{ secrets.bucket }}/youtube-paper/processed/" public/assets/data/ --recursive
           aws s3 sync public/ "s3://${{ secrets.bucket }}/youtube-paper/dashboard/"
