@@ -21,7 +21,7 @@
   }
 
   function handleMouseOut() {
-    // dispatch('mouseout')
+    dispatch('mouseout')
   }
 </script>
 
