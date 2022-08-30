@@ -13,6 +13,16 @@
 
   // maps
   import labelMap from '../../../utils/labels';
+
+  const dispatch = createEventDispatcher();
+
+  function handleMouseOver(e) {
+    dispatch('mousemove', e.detail)
+  }
+
+  function handleMouseOut() {
+    // dispatch('mouseout')
+  }
 </script>
 
 <div class='heat-map-wrapper'>
@@ -22,7 +32,10 @@
     {/each}
   </div>
   {#each enforceOrder($data, prefOrder, 'from') as row, i}
-    <HeatMapRow data={ row }/>
+    <HeatMapRow data={ row } 
+      on:mousemove={(event) => handleMouseOver(event)}
+      on:mouseout={() => handleMouseOut()}
+    />
   {/each}
 </div>
 
@@ -32,7 +45,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    gap: 2px;
+    // gap: 2px;
   }
 
   .heat-map-header {

@@ -20,6 +20,7 @@
       transform: translate(-50%, -100%);
       padding: 5px;
       z-index: 15;
+      pointer-events: none;
     }
   </style>
   

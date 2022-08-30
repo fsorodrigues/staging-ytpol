@@ -7,6 +7,11 @@
   import Caption from './atoms/Caption.svelte';
   import HeatMapGrid from './atoms/HeatMapGrid.svelte';
   import ColorLegend from './atoms/ColorLegend.svelte';
+  import Tooltip from './tooltips/Tooltip.svelte';
+
+  // import maps
+  import labelMap from '../../utils/labels';
+  import colorMap from '../../utils/colors';
 
   // props declaration
   export let data : any[];
@@ -15,6 +20,10 @@
   export let includeCaption : boolean = true;
   export let spanCol : number = 12;
   export let title : string;
+
+  // variable declaration
+  let evt;
+  let hideTooltip : boolean|CustomEvent<any> = true;
   
   const scaleColor = scaleDiverging()
     .domain([-1, 1, 3])
@@ -39,7 +48,37 @@
         custom={{ scaleColor }}
     >
         <Html>
-          <HeatMapGrid />
+          <HeatMapGrid 
+            on:mousemove={event => evt = hideTooltip = event}
+            on:mouseout={() => hideTooltip = true}
+          />
+          {#if hideTooltip !== true}
+            <Tooltip
+                {evt}
+                offset={-10}
+                let:detail
+            > 
+                {@const tooltipData = { ...detail.props }}
+                <div>
+                    <span 
+                        class='cluster-label'
+                        style="--color: {colorMap.get(tooltipData.to)}"
+                    >
+                        {labelMap.get(tooltipData.to)}
+                    </span> ➞
+                    <span
+                        class='cluster-label'
+                        style="--color: {colorMap.get(tooltipData.from)}"
+                    >
+                        {labelMap.get(tooltipData.from)}
+                    </span>
+                </div>
+                {#each ['value'] as key}
+                    {@const value = tooltipData[key]}
+                    <div class="row">Risk ratio: {value}</div>
+                {/each}
+            </Tooltip>
+          {/if}
         </Html>
     </LayerCake>
   </div>
@@ -95,10 +134,10 @@
       }
   }
 
-  // .cluster-label {
-  //     color: var(--color);
-  //     font-weight: 700;
-  // }
+  .cluster-label {
+        color: var(--color);
+        font-weight: 700;
+    }
 
   .split-cols {
       grid-template-columns: 1fr;

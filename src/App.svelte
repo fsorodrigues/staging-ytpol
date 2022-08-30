@@ -95,12 +95,16 @@
 		}
 	}
 
-    .link.inactive {
-        stroke-opacity: 0.15 !important;
-    }
+	.link.inactive {
+			stroke-opacity: 0.15 !important;
+	}
 	.link.active {
-        stroke-opacity: 0.5 !important;
-    }
+			stroke-opacity: 0.5 !important;
+	}
+
+	.heat-map-cell.active {
+		border: 1pt solid $black !important;
+	}
 
 	.group-rect.inactive, 
 	.range-circle.inactive {

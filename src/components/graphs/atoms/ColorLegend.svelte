@@ -24,16 +24,16 @@
   <span class='legend-label'>Higher risk</span>
 </div>
 
-<style>
+<style lang='scss'>
   .legend-container{
     display: flex;
     flex-grow: 0;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
   }
 
   .legend-gradient {
-    height: 20px;
+    height: 15px;
     width: 100px;
     flex-grow: 0;
     flex-shrink: 1;
@@ -42,5 +42,9 @@
   .legend-label {
     flex-grow: 1;
     flex-shrink: 0;
+    @include fs-xs;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: $dark-grey;
   }
 </style>
