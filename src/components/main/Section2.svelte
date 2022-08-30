@@ -11,9 +11,10 @@
     // props
     let loaded : boolean = false;
     export let once : boolean;
-    export let copy : any[]
-    export let refs : any[]
-    export let captions : any[]
+    export let copy : any[];
+    export let refs : any[];
+    export let captions : any[];
+    export let markers : string[];
 </script>
 
 <div class="section section-2" use:inView={{ once }} on:enter={() => loaded = true }>
@@ -58,6 +59,7 @@
             }
         ]} 
         title='YouTube consumption'
+        { markers }
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

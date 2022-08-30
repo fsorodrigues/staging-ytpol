@@ -41,7 +41,6 @@
 </script>
 
 <div class="section section-3" use:inView={{ once }} on:enter={() => loaded = true }>
-    <!-- <h2 class="section-title">Subtitle 1</h2> -->
     {#if loaded && data_fig1}
         <StackedBars 
             data={ data_fig1 } 

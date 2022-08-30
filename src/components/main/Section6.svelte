@@ -14,9 +14,11 @@
 
     // components
     import SankeyDiagram from "../graphs/SankeyDiagram.svelte";
-
+    import HeatMap from "../graphs/HeatMap.svelte";
+    
     // utils
     import enforceOrder from "../../utils/order";
+
 
     // props
     let loaded : boolean = false;
@@ -28,8 +30,6 @@
     // variable declaration
     const url_fig6 : string = 'assets/data/fig6.csv'
     let data_fig6 : any[]
-    let nodes : Node[]
-    let links : Link[]
     let cols : string[]
 
     const sankeyTooltipFormatter = d => {
@@ -42,33 +42,18 @@
         const res_fig6 = await csv(url_fig6, autoType)
         data_fig6 = res_fig6
         cols = enforceOrder(data_fig6.columns, ['fR', 'R', 'C', 'L', 'fL'])
-
-        nodes = [ 
-            ...data_fig6.map(d => ({ id: `source_${d.from}` })), 
-            ...cols.map(d => ({ id: `target_${d}` }))
-        ]
-
-        links = flatten(
-            data_fig6.map((d, i) => 
-                cols.map((e, l) => ({ sourceName: d.from, targetName: e, source: i, target: l + 6, value: d[e] }))
-            )
-        )
 	})
 
 </script>
 
 <div class="section section-6" use:inView={{ once }} on:enter={() => loaded = true }>
     {#if loaded && data_fig6}
-        <SankeyDiagram 
-            { nodes } 
-            { links } 
-            formatter={sankeyTooltipFormatter}
+        <HeatMap 
+            data={ data_fig6 }
             url={ url_fig6 }
             spanCol={12}
-            sourceLabel={ 'YouTube' }
-            targetLabel={ 'News media' }
             title={"YouTube consumption is reflective of users news habits"}
-            caption={captions[1].value}
+            caption={captions[0].value}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

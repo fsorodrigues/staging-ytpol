@@ -10,5 +10,4 @@ export default interface ChartConfig {
     includeCaption?: boolean,
     caption?: string,
     xTicks?: number|Array<number>|Function,
-    markers: string[],
   }

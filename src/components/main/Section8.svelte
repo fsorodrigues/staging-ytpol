@@ -48,8 +48,9 @@
             url={ url_table2 }
             spanCol={12}
             row={3}
+            customClass={'chart-medium'}
             title={'Title goes here'}
-            caption={captions[2].value}
+            caption={captions[0].value}
         />
     {:else} <div class='chart-placeholder'></div>
     {/if}

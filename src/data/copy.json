@@ -260,15 +260,7 @@
         "captions": [
             {
                 "type": "text",
-                "value": "The average likelihood of a video at a certain point in a viewing session (i.e. the fourth video in a session) being content from one of the political categories. We assess viewing sessions that are 20 or more videos in length. For example, in a session with at least 20 videos, there is an 8% chance that the first video was far-right content."
-            },
-            {
-                "type": "text",
-                "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
-            },
-            {
-                "type": "text",
-                "value": "Distribution of the entry points of videos within each political category"
+                "value": "CHANGE CAPTION HERE"
             }
         ]
     },
@@ -301,10 +293,6 @@
             {
                 "type": "text",
                 "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
-            },
-            {
-                "type": "text",
-                "value": "Distribution of the entry points of videos within each political category"
             }
         ]
     },
@@ -330,14 +318,6 @@
             }
         ],
         "captions": [
-            {
-                "type": "text",
-                "value": "The average likelihood of a video at a certain point in a viewing session (i.e. the fourth video in a session) being content from one of the political categories. We assess viewing sessions that are 20 or more videos in length. For example, in a session with at least 20 videos, there is an 8% chance that the first video was far-right content."
-            },
-            {
-                "type": "text",
-                "value": "Average fraction of videos of a political category by numbers of videos in sessions. For example, in a typical session where a user viewed nine videos, about 8% of their watchtime was far-right content. Sessions are between 10 and 60 minutes. Sessions with more than 30 videos (2% of sessions) were dropped."
-            },
             {
                 "type": "text",
                 "value": "Distribution of the entry points of videos within each political category"

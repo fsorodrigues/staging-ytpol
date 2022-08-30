@@ -26,7 +26,7 @@
 <Header />
 <Main title={ data.title } { authors } standfirst={ data.standfirst } steps={ data.scroller } />
 <Section1 once={ true } copy={data['section-one'].copy} refs={data['section-one'].references} captions={data['section-one'].captions} markers={data['markers']}/>
-<Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} captions={data['section-two'].captions} />
+<Section2 once={ true } copy={data['section-two'].copy} refs={data['section-two'].references} captions={data['section-two'].captions} markers={data['markers']}/>
 <Section3 once={ true } copy={data['section-three'].copy} refs={data['section-three'].references} captions={data['section-three'].captions} />
 <Section4 once={ true } copy={data['section-four'].copy} refs={data['section-four'].references} captions={data['section-four'].captions} />
 <Section5 once={ true } copy={data['section-five'].copy} refs={data['section-five'].references} captions={data['section-five'].captions} />

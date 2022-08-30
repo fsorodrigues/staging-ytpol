@@ -27,17 +27,12 @@
     // variable declaration
     let videos_url : string = 'assets/data/video_count.csv'
     let data_videos : any[]
-    let channels_url : string = 'assets/data/channels_top250.csv'
-    let data_channels : any[]
     let xKey : string = 'date'
     let yKey : string = 'count'
 
     onMount(async () => {
         const res_videos = await csv(videos_url, autoType)
         data_videos = res_videos
-
-        const res_channels = await csv(channels_url, autoType)
-        data_channels = res_channels
 	})
 
 </script>
@@ -60,20 +55,12 @@
         {:else} <div class='chart-placeholder'></div>
         {/if}
         <div class='copy copy-part1'>
-            <!-- {#each copy.slice(0, Math.floor(copy.length/2)) as d, i} -->
             {#each copy as d, i}
                 <p>
                     {d.value}
                 </p>
             {/each}
         </div>
-        <!-- <div class='copy copy-part2'>
-            {#each copy.slice(Math.floor(copy.length/2)) as d, i}
-                <p>
-                    {d.value}
-                </p>
-            {/each}
-        </div> -->
         <div class='references'>
             {#each refs as d, i}
                 <p>

@@ -1,4 +1,5 @@
 <script lang='ts'>
+    // node_modules
     import { LayerCake, Svg, Html } from 'layercake';
 
     // import types
