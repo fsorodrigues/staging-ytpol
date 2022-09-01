@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
@@ -23,7 +24,19 @@ jobs:
           npm run google
           npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      # - name: Deploy 🚀
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     folder: public # The folder the action should deploy.
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          folder: public # The folder the action should deploy.
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy static site to S3 bucket
+        run: |
+          aws s3 cp "s3://${{ secrets.bucket }}/youtube-paper/processed/" public/assets/data/ --recursive
+          aws s3 sync public/ "s3://${{ secrets.bucket }}/youtube-paper/dashboard/"

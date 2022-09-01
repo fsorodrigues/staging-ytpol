@@ -7,6 +7,7 @@ const colorMap : Map<string, string> = new Map([
     ["fR", "#AC3535"],
 ])
 
+// ffe0ad-ffd085-ffb133-e08a00-ffc05c-f4a261-e9c46a-ffa10a-e76f51
 const youTubeMap : Map<string, string> = new Map([
     ["Ext URL", "#E08A00"],
     ["HP", "#FFC05C"],
@@ -19,3 +20,4 @@ const youTubeMap : Map<string, string> = new Map([
 export default colorMap;
 export { youTubeMap };
   
+

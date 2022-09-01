@@ -52,7 +52,7 @@
             data={ data_fig6 }
             url={ url_fig6 }
             spanCol={12}
-            title={"YouTube consumption is reflective of users news habits"}
+            title={"YouTube consumption is reflective of user news habits"}
             caption={captions[0].value}
         />
     {:else} <div class='chart-placeholder'></div>
