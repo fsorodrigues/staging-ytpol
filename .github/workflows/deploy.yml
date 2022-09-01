@@ -4,8 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '30 */1 * * *' # UTC time
-  workflow_dispatch:
+    - cron: '30 1 15 * *' # 1:30 on every 15th (UTC time)
 
 permissions:
   contents: write
@@ -23,11 +22,6 @@ jobs:
           npm ci
           npm run google
           npm run build
-
-      # - name: Deploy 🚀
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     folder: public # The folder the action should deploy.
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
